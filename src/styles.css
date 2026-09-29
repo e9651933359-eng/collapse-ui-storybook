@@ -267,7 +267,7 @@ button { border: 0; background: none; cursor: pointer; }
 .message__reaction:hover { background: var(--surface-hover); }
 .message__reaction.is-selected { border-color: var(--accent-primary); background: var(--surface-active); color: var(--text-primary); }
 .message__actions { position: absolute; top: -36px; right: var(--space-s); z-index: 3; display: flex; align-items: center; padding: var(--space-xxs); border: var(--collapse-stroke-width-xthin) solid var(--border-light); border-radius: var(--radius-l); background: var(--surface-elevated); box-shadow: var(--shadow-02); opacity: 0; transform: translateY(var(--space-xs)); pointer-events: none; transition: var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard); backdrop-filter: blur(var(--collapse-effect-blur-background-compact)); }
-.message:hover .message__actions, .message:focus-within .message__actions { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.message:hover .message__actions, .message:has(:focus-visible) .message__actions { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .message__actions > button:not(.icon-button) { width: 32px; height: 32px; border-radius: var(--radius-round); font-size: 16px; }
 .message__actions button:hover { background: var(--surface-hover); }
 
