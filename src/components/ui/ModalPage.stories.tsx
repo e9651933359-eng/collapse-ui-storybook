@@ -55,3 +55,17 @@ export const DismissibleByScrim: Story = {
   render: () => <DismissibleModalPage />,
   parameters: { docs: { description: { story: 'Клик по затемнению закрывает модалку. Клик внутри модалки её не закрывает.' } } },
 }
+
+function KeepsFocusModalPage() {
+  const [name, setName] = useState('')
+
+  return (
+    <ModalPage open title="Новая группа" onClose={() => undefined}>
+      <TextField autoFocus label="Название *" value={name} onChange={(event) => setName(event.target.value)} />
+    </ModalPage>
+  )
+}
+export const InputKeepsFocus: Story = {
+  render: () => <KeepsFocusModalPage />,
+  parameters: { docs: { description: { story: 'Регрессия: onClose создаётся заново при каждом вводе, но фокус остаётся в поле — модалка забирает фокус только при открытии.' } } },
+}

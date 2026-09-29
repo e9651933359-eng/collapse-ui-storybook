@@ -21,13 +21,23 @@ export function ModalPage({ actions, children, className = '', footer, height = 
   const titleId = useId()
   const dialogRef = useRef<HTMLElement>(null)
 
+  // onClose приходит из родителя новой функцией на каждый рендер. Держим актуальное значение в ref,
+  // иначе эффект перезапускался бы при каждом вводе и уводил фокус из полей внутри модалки.
+  const onCloseRef = useRef(onClose)
+  useEffect(() => { onCloseRef.current = onClose })
+
   useEffect(() => {
     if (!open) return
-    dialogRef.current?.focus()
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose() }
+    const dialog = dialogRef.current
+    if (dialog && !dialog.contains(document.activeElement)) dialog.focus()
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') onCloseRef.current() }
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [onClose, open])
+  }, [open])
 
   if (!open) return null
 

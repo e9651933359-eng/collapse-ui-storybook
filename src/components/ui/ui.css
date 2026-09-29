@@ -518,11 +518,11 @@
 .collapse-spinner--light { color: var(--collapse-color-icon-solid-base-light-full-static); }
 .collapse-spinner--ai { border-top-color: var(--collapse-color-icon-solid-accent-primary); border-left-color: var(--collapse-color-icon-solid-error-primary); border-bottom-color: var(--collapse-color-icon-solid-success-primary); }
 
-.collapse-progress { position: relative; width: 100%; height: var(--collapse-size-progress); }
-.collapse-progress::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: var(--collapse-size-progress-track); border-radius: var(--collapse-radius-full); background: var(--collapse-color-state-layer-on-base-tertiary); transform: translateY(-50%); }
-.collapse-progress__active { position: absolute; left: var(--collapse-spacing-horizontal-xxs); top: 0; width: var(--progress-value); height: 100%; border-radius: var(--collapse-radius-full); background: var(--collapse-color-border-solid-accent-primary); transition: width var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard); }
-.collapse-progress__stop { position: absolute; right: 0; top: 50%; width: var(--collapse-spacing-horizontal-xs); height: var(--collapse-spacing-horizontal-xs); border-radius: var(--collapse-radius-full); background: var(--collapse-color-icon-opacity-base-disabled); transform: translateY(-50%); }
-.collapse-progress--s { height: var(--collapse-spacing-horizontal-s); }
+.collapse-progress { --progress-track: var(--collapse-size-progress-track); position: relative; width: 100%; height: var(--collapse-size-progress); }
+.collapse-progress::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: var(--progress-track); border-radius: var(--collapse-radius-full); background: var(--collapse-color-state-layer-on-base-tertiary); transform: translateY(-50%); }
+.collapse-progress__active { position: absolute; left: var(--collapse-spacing-horizontal-xxs); top: calc(50% - var(--progress-track) / 2); width: var(--progress-value); height: var(--progress-track); border-radius: var(--collapse-radius-full); background: var(--collapse-color-border-solid-accent-primary); transition: width var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard); }
+.collapse-progress__stop { position: absolute; right: 0; top: 50%; width: var(--progress-track); height: var(--progress-track); border-radius: var(--collapse-radius-full); background: var(--collapse-color-icon-opacity-base-disabled); transform: translateY(-50%); }
+.collapse-progress--s { --progress-track: var(--collapse-size-progress-track-s); height: var(--collapse-spacing-horizontal-s); }
 .collapse-progress.is-indeterminate .collapse-progress__active { width: 40%; animation: collapse-progress var(--collapse-motion-duration-slow) var(--collapse-motion-easing-standard) infinite alternate; }
 
 .collapse-tabs { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-xs); overflow-x: auto; scrollbar-width: none; }

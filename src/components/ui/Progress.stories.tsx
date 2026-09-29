@@ -8,3 +8,4 @@ type Story = StoryObj<typeof meta>
 export const Determinate: Story = {}
 export const Steps: Story = { render: () => <div className="ui-story-grid">{[0, 10, 30, 50, 80, 100].map((value) => <Progress key={value} value={value} label={`${value}%`} />)}</div> }
 export const Indeterminate: Story = { args: { indeterminate: true } }
+export const Sizes: Story = { render: () => <div className="ui-story-grid"><Progress size="m" value={50} label="M 50%" /><Progress size="s" value={50} label="S 50%" /></div> }

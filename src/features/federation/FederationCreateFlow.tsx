@@ -69,7 +69,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
     const chat: Chat = {
       id: `federation-${participant.id}-${crypto.randomUUID()}`,
       title: participant.name,
-      subtitle: external ? `${getFederationOrganization(participant.organizationId)?.name ?? ''} · другая организация` : getFederationOrganization(participant.organizationId)?.name ?? '',
+      subtitle: getFederationOrganization(participant.organizationId)?.name ?? '',
       avatar: participant.initials,
       avatarImage: participant.image,
       avatarColor: participant.color,

@@ -16,13 +16,20 @@ type ConfirmDialogProps = {
 export function ConfirmDialog({ cancelLabel = 'Отмена', confirmLabel, description, onCancel, onConfirm, open, title, intent = 'error' }: ConfirmDialogProps) {
   const confirmRef = useRef<HTMLButtonElement>(null)
 
+  const onCancelRef = useRef(onCancel)
+  useEffect(() => { onCancelRef.current = onCancel })
+
   useEffect(() => {
     if (!open) return
     confirmRef.current?.focus()
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') onCancel() }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') onCancelRef.current() }
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [onCancel, open])
+  }, [open])
 
   if (!open) return null
 

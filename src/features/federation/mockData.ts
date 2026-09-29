@@ -4,7 +4,7 @@ const federationChatSeeds: Chat[] = [
   {
     id: 'federation-albina',
     title: 'Альбина Бахматулина',
-    subtitle: 'Альфа-Банк · другая организация',
+    subtitle: 'Альфа-Банк',
     avatar: 'АБ',
     avatarImage: 'assets/avatars/albina.png',
     avatarColor: 'default',
@@ -80,7 +80,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'mt-1', author: 'other', sender: 'Евгения', avatar: 'ЕВ', text: 'Новая сборка готова для внутреннего тестирования.', time: '09:05' }],
   },
   {
-    id: 'elena-direct', title: 'Елена Левина', subtitle: 'Ozon · другая организация', avatar: 'ЕЛ', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true,
+    id: 'elena-direct', title: 'Елена Левина', subtitle: 'Ozon', avatar: 'ЕЛ', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true,
     messages: [{ id: 'ed-1', author: 'other', sender: 'Елена Левина', avatar: 'ЕЛ', federation: true, text: 'Отправила варианты экранов для совместного сценария.', time: 'Вчера' }],
   },
   {
@@ -108,7 +108,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'mc-1', author: 'other', sender: 'Светлана', avatar: 'СВ', text: 'Обновила медиаплан и сроки запуска.', time: 'Пн' }],
   },
   {
-    id: 'andrey-direct', title: 'Андрей Звонов', subtitle: 'Альфа-Банк · другая организация', avatar: 'АЗ', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, unread: 2,
+    id: 'andrey-direct', title: 'Андрей Звонов', subtitle: 'Альфа-Банк', avatar: 'АЗ', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, unread: 2,
     messages: [{ id: 'az-1', author: 'other', sender: 'Андрей Звонов', avatar: 'АЗ', federation: true, text: 'Подтвердили состав рабочей группы со своей стороны.', time: 'Пн' }],
   },
   {
@@ -140,7 +140,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'qt-1', author: 'other', sender: 'Ольга', avatar: 'ОЛ', text: 'Регресс завершён, критичных ошибок не найдено.', time: 'Ср' }],
   },
   {
-    id: 'boris-direct', title: 'Борис Агафонов', subtitle: 'Альфа-Банк · другая организация', avatar: 'БА', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true, unread: 1,
+    id: 'boris-direct', title: 'Борис Агафонов', subtitle: 'Альфа-Банк', avatar: 'БА', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true, unread: 1,
     messages: [{ id: 'bd-1', author: 'other', sender: 'Борис Агафонов', avatar: 'БА', federation: true, text: 'Готов обсудить результаты пилота сегодня после трёх.', time: 'Ср' }],
   },
 ]
