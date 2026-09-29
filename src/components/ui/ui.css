@@ -837,3 +837,10 @@
 
 /* Признак федерации: тег «Участник из другой организации» (Figma 40000074:62321, 6932:42733). */
 .collapse-federation-tag { width: fit-content; max-width: 100%; padding: var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-s-nudge); display: inline-flex; align-items: center; gap: var(--collapse-spacing-horizontal-s); border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-warning-primary); color: var(--collapse-color-text-solid-warning-accent); font-size: var(--collapse-caption-l-size); font-weight: var(--collapse-caption-l-medium-weight); line-height: var(--collapse-caption-l-line-height); letter-spacing: var(--collapse-caption-l-letter-spacing); white-space: nowrap; }
+
+/* EmptyState — технический компонент, макета в Figma Base нет */
+.collapse-empty-state { width: 100%; padding: var(--collapse-spacing-horizontal-xxxl) var(--collapse-spacing-horizontal-l); display: flex; flex-direction: column; align-items: center; gap: var(--collapse-spacing-horizontal-xs); text-align: center; color: var(--collapse-color-text-opacity-base-secondary); }
+.collapse-empty-state__icon { margin-bottom: var(--collapse-spacing-horizontal-s); display: grid; place-items: center; color: var(--collapse-color-text-opacity-base-secondary); }
+.collapse-empty-state__icon svg { width: var(--collapse-size-icon-l); height: var(--collapse-size-icon-l); }
+.collapse-empty-state strong { color: var(--collapse-color-text-solid-base-primary); font-size: var(--collapse-paragraph-s-size); font-weight: var(--collapse-paragraph-s-semibold-weight); line-height: var(--collapse-paragraph-s-line-height); }
+.collapse-empty-state span:not(.collapse-empty-state__icon) { font-size: var(--collapse-caption-l-size); line-height: var(--collapse-caption-l-line-height); }

@@ -67,6 +67,7 @@ Search также подтверждает семейства `Colors/Solid/{Bra
 
 | Style | Size / line | Weight | Tracking |
 | --- | --- | --- | --- |
+| `Head/S/SemiBold` | `24 / 32 px` | `600` | `0.2 px` |
 | `Title/L/SemiBold` | `20 / 28 px` | `600` | `0.16 px` |
 | `Paragraph/L/SemiBold` | `17 / 22 px` | `600` | `0.1 px` |
 | `Paragraph/M/Medium` | `16 / 22 px` | `500` | `0.14 px` |
