@@ -365,6 +365,7 @@ export function ChatExperience({
             label: chat.title,
             avatar: chat.avatar,
             avatarTone: chat.avatarTone,
+            avatarColor: chat.avatarColor,
             shape: chat.kind === 'channel' ? 'squircle' : 'round',
           }))}
           onClose={() => setFolderModalOpen(false)}
@@ -429,10 +430,10 @@ function FederationPage({ canCreateChat }: { canCreateChat: boolean }) {
   const getFederationMembers = (chat: Chat): ChatMember[] => {
     const external = (findMeta(chat.id)?.externalParticipants ?? []).map((item): ChatMember => {
       const details = federationParticipants.find((participant) => participant.id === item.id)
-      return { id: item.id, name: item.name, initials: details?.initials ?? item.name.slice(0, 2).toUpperCase(), tone: details?.tone ?? '#e8ddff', image: details?.image, email: details?.email, phone: details?.phone, role: details?.role, organization: item.organization, external: true }
+      return { id: item.id, name: item.name, initials: details?.initials ?? item.name.slice(0, 2).toUpperCase(), color: details?.color, image: details?.image, email: details?.email, phone: details?.phone, role: details?.role, organization: item.organization, external: true }
     })
     if (chat.kind === 'direct') return external.length ? external : getChatMembers(chat)
-    const internal = federationParticipants.filter((participant) => participant.organizationId === 'mts').slice(0, Math.max(1, (Number(/^(\d+)\s+участ/.exec(chat.subtitle)?.[1]) || external.length + 4) - external.length)).map((participant, index): ChatMember => ({ id: participant.id, name: participant.name, initials: participant.initials, tone: participant.tone, image: participant.image, email: participant.email, phone: participant.phone, role: participant.role, organization: 'МТС', adminRole: index === 0 ? 'Владелец' : undefined }))
+    const internal = federationParticipants.filter((participant) => participant.organizationId === 'mts').slice(0, Math.max(1, (Number(/^(\d+)\s+участ/.exec(chat.subtitle)?.[1]) || external.length + 4) - external.length)).map((participant, index): ChatMember => ({ id: participant.id, name: participant.name, initials: participant.initials, color: participant.color, image: participant.image, email: participant.email, phone: participant.phone, role: participant.role, organization: 'МТС', adminRole: index === 0 ? 'Владелец' : undefined }))
     return [...internal, ...external]
   }
 

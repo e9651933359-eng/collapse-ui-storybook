@@ -1,3 +1,4 @@
+import type { AvatarColor } from '../components/ui/Avatar'
 import type { DiskRef, LinkPreview } from './disk'
 
 export type MessageReaction = {
@@ -14,6 +15,7 @@ export type Message = {
   sender?: string
   avatar?: string
   avatarTone?: string
+  avatarColor?: AvatarColor
   avatarFilled?: boolean
   avatarImage?: string
   federation?: boolean
@@ -50,7 +52,8 @@ export type Chat = {
   subtitle: string
   avatar: string
   avatarImage?: string
-  avatarTone: string
+  avatarTone?: string
+  avatarColor?: AvatarColor
   avatarFilled?: boolean
   kind?: 'direct' | 'group' | 'channel'
   unread?: number
@@ -65,7 +68,9 @@ export type ChatMember = {
   id: string
   name: string
   initials: string
-  tone: string
+  /** Произвольный фон аватара; перекрывает `color`. */
+  tone?: string
+  color?: AvatarColor
   image?: string
   email?: string
   phone?: string

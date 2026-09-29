@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Avatar } from './Avatar'
+import { Avatar, type AvatarColor } from './Avatar'
 
 const meta = {
   title: 'UI/Avatar',
@@ -40,3 +40,23 @@ export const Statuses: Story = {
 }
 
 export const Uploader: Story = { args: { emoji: 'АИ', uploader: true } }
+
+const paletteColors: AvatarColor[] = ['default', 1, 2, 3, 4, 5, 6, 7, 8]
+
+export const ColorPalette: Story = {
+  name: 'Color 1–8',
+  render: () => (
+    <div style={{ display: 'grid', gap: 16 }}>
+      {([false, true] as const).map((filled) => (
+        <div className="ui-story-row" key={String(filled)} aria-label={filled ? 'Filled' : 'Unfilled'}>
+          {paletteColors.map((color) => <Avatar key={color} label={`Color ${color}`} emoji="АИ" color={color} filled={filled} />)}
+        </div>
+      ))}
+    </div>
+  ),
+}
+
+export const ColorPaletteChannel: Story = {
+  name: 'Color 1–8 / squircle',
+  render: () => <div className="ui-story-row">{paletteColors.map((color) => <Avatar key={color} label={`Color ${color}`} emoji="🎨" color={color} filled={false} shape="squircle" />)}</div>,
+}

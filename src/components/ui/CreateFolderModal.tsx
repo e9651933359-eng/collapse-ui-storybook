@@ -1,7 +1,7 @@
 import { Plus, Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Popover } from '../feedback/Popover'
-import { Avatar } from './Avatar'
+import { Avatar, type AvatarColor } from './Avatar'
 import { Button } from './Button'
 import { CheckBox } from './CheckBox'
 import { EmojiPicker, defaultEmojiCategories } from './EmojiPicker'
@@ -15,6 +15,7 @@ export type FolderCandidate = {
   label: string
   avatar?: string
   avatarTone?: string
+  avatarColor?: AvatarColor
   image?: string
   shape?: 'round' | 'squircle'
 }
@@ -84,7 +85,7 @@ export function CreateFolderModal({ candidates, initialFolder, initialSelectedId
           <div className="folder-picker__list" role="list" aria-label="Чаты и каналы">
             {filteredCandidates.map((candidate) => (
               <label className="folder-picker__row" key={candidate.id}>
-                <Avatar label={candidate.label} emoji={candidate.avatar} image={candidate.image} tone={candidate.avatarTone} shape={candidate.shape} />
+                <Avatar label={candidate.label} emoji={candidate.avatar} image={candidate.image} tone={candidate.avatarTone} color={candidate.avatarColor} shape={candidate.shape} />
                 <span>{candidate.label}</span>
                 <CheckBox
                   aria-label={`Добавить ${candidate.label}`}
@@ -148,7 +149,7 @@ export function CreateFolderModal({ candidates, initialFolder, initialSelectedId
             <div className="folder-create-modal__selected-list">
               {selectedCandidates.map((candidate) => (
                 <div className="folder-create-modal__selected-row" key={candidate.id}>
-                  <Avatar label={candidate.label} emoji={candidate.avatar} image={candidate.image} tone={candidate.avatarTone} shape={candidate.shape} />
+                  <Avatar label={candidate.label} emoji={candidate.avatar} image={candidate.image} tone={candidate.avatarTone} color={candidate.avatarColor} shape={candidate.shape} />
                   <span>{candidate.label}</span>
                 </div>
               ))}

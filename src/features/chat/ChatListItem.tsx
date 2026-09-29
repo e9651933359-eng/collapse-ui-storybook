@@ -187,6 +187,7 @@ export function ChatListItem({
           label={chat.title}
           image={chat.avatarImage}
           tone={chat.avatarTone}
+          color={chat.avatarColor}
           emoji={chat.avatar}
           filled={chat.avatarFilled ?? true}
           shape={chat.kind === 'channel' ? 'squircle' : 'round'}

@@ -103,6 +103,7 @@ export function MessageBubble({ message, onReply, onMore, onReactionChange, onRe
             label={message.sender ?? 'Участник'}
             image={message.avatarImage}
             tone={message.avatarTone}
+            color={message.avatarColor}
             emoji={message.avatar}
             filled={message.avatarFilled ?? false}
           />

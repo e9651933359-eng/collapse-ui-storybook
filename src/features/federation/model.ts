@@ -1,3 +1,5 @@
+import type { AvatarColor } from '../../components/ui/Avatar'
+
 export type FederationAvailabilityContext = {
   featureEnabled: boolean
   organizationEnabled: boolean
@@ -32,7 +34,7 @@ export type FederationParticipant = {
   email: string
   organizationId: string
   initials: string
-  tone: string
+  color: AvatarColor
   image?: string
   phone?: string
   role?: string
@@ -79,51 +81,51 @@ export const federationOrganizations: FederationOrganization[] = [
 const photo = (id: string) => `assets/avatars/people/${id}.jpg`
 
 export const federationParticipants: FederationParticipant[] = [
-  { id: 'marina', name: 'Марина Кузнецова', email: 'm.kuznetsova@mts-link.ru', organizationId: 'mts', initials: 'МК', tone: '#e8ddff', image: photo('marina'), role: 'Продакт-менеджер' },
-  { id: 'igor', name: 'Игорь Смирнов', email: 'i.smirnov@mts-link.ru', organizationId: 'mts', initials: 'ИС', tone: '#d8f1e2', image: photo('igor'), role: 'Разработчик' },
-  { id: 'anna', name: 'Анна Фамильевна', email: 'a.familieva@mts-link.ru', organizationId: 'mts', initials: 'АФ', tone: '#dce8ff', image: photo('anna'), role: 'Дизайнер' },
-  { id: 'orlova', name: 'Екатерина Орлова', email: 'e.orlova@mts-link.ru', organizationId: 'mts', initials: 'ЕО', tone: '#f2ddff', image: photo('orlova'), role: 'Руководитель направления' },
-  { id: 'nikitina', name: 'Ольга Никитина', email: 'o.nikitina@mts-link.ru', organizationId: 'mts', initials: 'ОН', tone: '#e3f7cb', image: photo('nikitina'), role: 'Аналитик' },
-  { id: 'sokolova', name: 'Дарья Соколова', email: 'd.sokolova@mts-link.ru', organizationId: 'mts', initials: 'ДС', tone: '#ffe2d8', image: photo('sokolova'), role: 'UX-исследователь' },
-  { id: 'pavlova', name: 'Юлия Павлова', email: 'y.pavlova@mts-link.ru', organizationId: 'mts', initials: 'ЮП', tone: '#dce8ff', image: photo('pavlova'), role: 'Менеджер проекта' },
-  { id: 'egorova', name: 'Наталья Егорова', email: 'n.egorova@mts-link.ru', organizationId: 'mts', initials: 'НЕ', tone: '#e8ddff', image: photo('egorova'), role: 'HR-партнёр' },
-  { id: 'morozova', name: 'Ксения Морозова', email: 'k.morozova@mts-link.ru', organizationId: 'mts', initials: 'КМ', tone: '#d8f1e2', image: photo('morozova'), role: 'Дизайнер' },
-  { id: 'lebedeva', name: 'Виктория Лебедева', email: 'v.lebedeva@mts-link.ru', organizationId: 'mts', initials: 'ВЛ', tone: '#f1d8ff', image: photo('lebedeva'), role: 'Тестировщик' },
-  { id: 'kozlova', name: 'Алина Козлова', email: 'a.kozlova@mts-link.ru', organizationId: 'mts', initials: 'АК', tone: '#e3f7cb', image: photo('kozlova'), role: 'Маркетолог' },
-  { id: 'popova', name: 'Светлана Попова', email: 's.popova@mts-link.ru', organizationId: 'mts', initials: 'СП', tone: '#ffe2d8', image: photo('popova'), role: 'Бухгалтер' },
-  { id: 'vasilyeva', name: 'Полина Васильева', email: 'p.vasilyeva@mts-link.ru', organizationId: 'mts', initials: 'ПВ', tone: '#dce8ff', image: photo('vasilyeva'), role: 'Разработчик' },
-  { id: 'fedorova', name: 'Татьяна Фёдорова', email: 't.fedorova@mts-link.ru', organizationId: 'mts', initials: 'ТФ', tone: '#e8ddff', image: photo('fedorova'), role: 'Юрист' },
-  { id: 'novikova', name: 'Евгения Новикова', email: 'e.novikova@mts-link.ru', organizationId: 'mts', initials: 'ЕН', tone: '#f2ddff', image: photo('novikova'), role: 'Специалист поддержки' },
-  { id: 'grigorieva', name: 'Мария Григорьева', email: 'm.grigorieva@mts-link.ru', organizationId: 'mts', initials: 'МГ', tone: '#d8f1e2', image: photo('grigorieva'), role: 'Контент-менеджер' },
-  { id: 'ivanov', name: 'Алексей Иванов', email: 'a.ivanov@mts-link.ru', organizationId: 'mts', initials: 'АИ', tone: '#dce8ff', image: photo('ivanov'), role: 'Технический директор' },
-  { id: 'kozlov', name: 'Дмитрий Козлов', email: 'd.kozlov@mts-link.ru', organizationId: 'mts', initials: 'ДК', tone: '#e3f7cb', image: photo('kozlov'), role: 'Разработчик' },
-  { id: 'petrov', name: 'Сергей Петров', email: 's.petrov@mts-link.ru', organizationId: 'mts', initials: 'СП', tone: '#e8ddff', image: photo('petrov'), role: 'DevOps-инженер' },
-  { id: 'volkov', name: 'Андрей Волков', email: 'a.volkov@mts-link.ru', organizationId: 'mts', initials: 'АВ', tone: '#ffe2d8', image: photo('volkov'), role: 'Архитектор' },
-  { id: 'zaytsev', name: 'Павел Зайцев', email: 'p.zaytsev@mts-link.ru', organizationId: 'mts', initials: 'ПЗ', tone: '#f1d8ff', image: photo('zaytsev'), role: 'Аналитик данных' },
-  { id: 'belov', name: 'Николай Белов', email: 'n.belov@mts-link.ru', organizationId: 'mts', initials: 'НБ', tone: '#d8f1e2', image: photo('belov'), role: 'Руководитель релизов' },
-  { id: 'tarasov', name: 'Роман Тарасов', email: 'r.tarasov@mts-link.ru', organizationId: 'mts', initials: 'РТ', tone: '#dce8ff', image: photo('tarasov'), role: 'Backend-разработчик' },
-  { id: 'medvedev', name: 'Артём Медведев', email: 'a.medvedev@mts-link.ru', organizationId: 'mts', initials: 'АМ', tone: '#e8ddff', image: photo('medvedev'), role: 'Frontend-разработчик' },
-  { id: 'romanov', name: 'Кирилл Романов', email: 'k.romanov@mts-link.ru', organizationId: 'mts', initials: 'КР', tone: '#e3f7cb', image: photo('romanov'), role: 'Продакт-менеджер' },
-  { id: 'korolev', name: 'Максим Королёв', email: 'm.korolev@mts-link.ru', organizationId: 'mts', initials: 'МК', tone: '#ffe2d8', image: photo('korolev'), role: 'Специалист по безопасности' },
-  { id: 'gusev', name: 'Илья Гусев', email: 'i.gusev@mts-link.ru', organizationId: 'mts', initials: 'ИГ', tone: '#f2ddff', image: photo('gusev'), role: 'Мобильный разработчик' },
-  { id: 'titov', name: 'Владимир Титов', email: 'v.titov@mts-link.ru', organizationId: 'mts', initials: 'ВТ', tone: '#d8f1e2', image: photo('titov'), role: 'Руководитель отдела продаж' },
-  { id: 'makarov', name: 'Евгений Макаров', email: 'e.makarov@mts-link.ru', organizationId: 'mts', initials: 'ЕМ', tone: '#dce8ff', image: photo('makarov'), role: 'Инженер по качеству' },
-  { id: 'abramov', name: 'Георгий Абрамов', email: 'g.abramov@mts-link.ru', organizationId: 'mts', initials: 'ГА', tone: '#e8ddff', image: photo('abramov'), role: 'Системный аналитик' },
-  { id: 'albina', name: 'Альбина Бахматулина', email: 'user_name@alfabank.ru', organizationId: 'alfa', initials: 'АБ', tone: '#e8ddff', image: 'assets/avatars/albina.png', phone: '+7 920 123-45-67', role: 'Ведущий специалист технической поддержки' },
-  { id: 'andrey', name: 'Андрей Звонов', email: 'a.zvonov@alfabank.ru', organizationId: 'alfa', initials: 'АЗ', tone: '#e6e0ff', image: photo('andrey'), role: 'Руководитель проекта' },
-  { id: 'anton', name: 'Антон Вершинин', email: 'a.vershinin@alfabank.ru', organizationId: 'alfa', initials: 'АВ', tone: '#e7dcff', image: photo('anton'), role: 'Аналитик' },
-  { id: 'shats', name: 'Антон Шац', email: 'a.shats@alfabank.ru', organizationId: 'alfa', initials: 'АШ', tone: '#ded6ff', image: photo('shats'), role: 'Разработчик' },
-  { id: 'boris', name: 'Борис Агафонов', email: 'b.agafonov@alfabank.ru', organizationId: 'alfa', initials: 'БА', tone: '#f1d8ff', image: photo('boris'), role: 'Эксперт по клиентскому опыту' },
-  { id: 'bulychev', name: 'Борис Булычев', email: 'b.bulychev@alfabank.ru', organizationId: 'alfa', initials: 'ББ', tone: '#e3f7cb', image: photo('bulychev'), role: 'Ведущий специалист' },
-  { id: 'stepan', name: 'Степан Васта', email: 's.vasta@alfabank.ru', organizationId: 'alfa', initials: 'СВ', tone: '#eadcff', image: photo('stepan'), role: 'Руководитель продукта' },
-  { id: 'oleg', name: 'Олег Морозов', email: 'o.morozov@alfabank.ru', organizationId: 'alfa', initials: 'ОМ', tone: '#dbe8ff', image: photo('oleg'), role: 'Аналитик' },
-  { id: 'maxim', name: 'Максим Орлов', email: 'm.orlov@ozon.ru', organizationId: 'ozon', initials: 'МО', tone: '#dce8ff', image: photo('maxim'), role: 'Руководитель проекта' },
-  { id: 'elena', name: 'Елена Левина', email: 'e.levina@ozon.ru', organizationId: 'ozon', initials: 'ЕЛ', tone: '#f2ddff', image: photo('elena'), role: 'Дизайнер' },
-  { id: 'dmitry', name: 'Дмитрий Серов', email: 'd.serov@ozon.ru', organizationId: 'ozon', initials: 'ДС', tone: '#e3f7cb', image: photo('dmitry'), role: 'Разработчик' },
-  { id: 'ira', name: 'Ирина Волкова', email: 'i.volkova@ozon.ru', organizationId: 'ozon', initials: 'ИВ', tone: '#ffe2d8', image: photo('ira'), role: 'Аналитик' },
-  { id: 'anton-ozon', name: 'Антон Беляев', email: 'a.belyaev@ozon.ru', organizationId: 'ozon', initials: 'АБ', tone: '#dce8ff', image: photo('anton-ozon'), role: 'Продакт-менеджер' },
-  { id: 'irina', name: 'Ирина Смирнова', email: 'i.smirnova@vk.com', organizationId: 'vk', initials: 'ИС', tone: '#d8f1e2', image: photo('irina'), role: 'Специалист поддержки' },
-  { id: 'maria', name: 'Мария Лебедева', email: 'm.lebedeva@vk.com', organizationId: 'vk', initials: 'МЛ', tone: '#f1d8ff', image: photo('maria'), role: 'Менеджер по работе с партнёрами' },
+  { id: 'marina', name: 'Марина Кузнецова', email: 'm.kuznetsova@mts-link.ru', organizationId: 'mts', initials: 'МК', color: 'default', image: photo('marina'), role: 'Продакт-менеджер' },
+  { id: 'igor', name: 'Игорь Смирнов', email: 'i.smirnov@mts-link.ru', organizationId: 'mts', initials: 'ИС', color: 2, image: photo('igor'), role: 'Разработчик' },
+  { id: 'anna', name: 'Анна Фамильевна', email: 'a.familieva@mts-link.ru', organizationId: 'mts', initials: 'АФ', color: 3, image: photo('anna'), role: 'Дизайнер' },
+  { id: 'orlova', name: 'Екатерина Орлова', email: 'e.orlova@mts-link.ru', organizationId: 'mts', initials: 'ЕО', color: 5, image: photo('orlova'), role: 'Руководитель направления' },
+  { id: 'nikitina', name: 'Ольга Никитина', email: 'o.nikitina@mts-link.ru', organizationId: 'mts', initials: 'ОН', color: 1, image: photo('nikitina'), role: 'Аналитик' },
+  { id: 'sokolova', name: 'Дарья Соколова', email: 'd.sokolova@mts-link.ru', organizationId: 'mts', initials: 'ДС', color: 8, image: photo('sokolova'), role: 'UX-исследователь' },
+  { id: 'pavlova', name: 'Юлия Павлова', email: 'y.pavlova@mts-link.ru', organizationId: 'mts', initials: 'ЮП', color: 3, image: photo('pavlova'), role: 'Менеджер проекта' },
+  { id: 'egorova', name: 'Наталья Егорова', email: 'n.egorova@mts-link.ru', organizationId: 'mts', initials: 'НЕ', color: 'default', image: photo('egorova'), role: 'HR-партнёр' },
+  { id: 'morozova', name: 'Ксения Морозова', email: 'k.morozova@mts-link.ru', organizationId: 'mts', initials: 'КМ', color: 2, image: photo('morozova'), role: 'Дизайнер' },
+  { id: 'lebedeva', name: 'Виктория Лебедева', email: 'v.lebedeva@mts-link.ru', organizationId: 'mts', initials: 'ВЛ', color: 5, image: photo('lebedeva'), role: 'Тестировщик' },
+  { id: 'kozlova', name: 'Алина Козлова', email: 'a.kozlova@mts-link.ru', organizationId: 'mts', initials: 'АК', color: 1, image: photo('kozlova'), role: 'Маркетолог' },
+  { id: 'popova', name: 'Светлана Попова', email: 's.popova@mts-link.ru', organizationId: 'mts', initials: 'СП', color: 8, image: photo('popova'), role: 'Бухгалтер' },
+  { id: 'vasilyeva', name: 'Полина Васильева', email: 'p.vasilyeva@mts-link.ru', organizationId: 'mts', initials: 'ПВ', color: 3, image: photo('vasilyeva'), role: 'Разработчик' },
+  { id: 'fedorova', name: 'Татьяна Фёдорова', email: 't.fedorova@mts-link.ru', organizationId: 'mts', initials: 'ТФ', color: 'default', image: photo('fedorova'), role: 'Юрист' },
+  { id: 'novikova', name: 'Евгения Новикова', email: 'e.novikova@mts-link.ru', organizationId: 'mts', initials: 'ЕН', color: 5, image: photo('novikova'), role: 'Специалист поддержки' },
+  { id: 'grigorieva', name: 'Мария Григорьева', email: 'm.grigorieva@mts-link.ru', organizationId: 'mts', initials: 'МГ', color: 2, image: photo('grigorieva'), role: 'Контент-менеджер' },
+  { id: 'ivanov', name: 'Алексей Иванов', email: 'a.ivanov@mts-link.ru', organizationId: 'mts', initials: 'АИ', color: 3, image: photo('ivanov'), role: 'Технический директор' },
+  { id: 'kozlov', name: 'Дмитрий Козлов', email: 'd.kozlov@mts-link.ru', organizationId: 'mts', initials: 'ДК', color: 1, image: photo('kozlov'), role: 'Разработчик' },
+  { id: 'petrov', name: 'Сергей Петров', email: 's.petrov@mts-link.ru', organizationId: 'mts', initials: 'СП', color: 'default', image: photo('petrov'), role: 'DevOps-инженер' },
+  { id: 'volkov', name: 'Андрей Волков', email: 'a.volkov@mts-link.ru', organizationId: 'mts', initials: 'АВ', color: 8, image: photo('volkov'), role: 'Архитектор' },
+  { id: 'zaytsev', name: 'Павел Зайцев', email: 'p.zaytsev@mts-link.ru', organizationId: 'mts', initials: 'ПЗ', color: 5, image: photo('zaytsev'), role: 'Аналитик данных' },
+  { id: 'belov', name: 'Николай Белов', email: 'n.belov@mts-link.ru', organizationId: 'mts', initials: 'НБ', color: 2, image: photo('belov'), role: 'Руководитель релизов' },
+  { id: 'tarasov', name: 'Роман Тарасов', email: 'r.tarasov@mts-link.ru', organizationId: 'mts', initials: 'РТ', color: 3, image: photo('tarasov'), role: 'Backend-разработчик' },
+  { id: 'medvedev', name: 'Артём Медведев', email: 'a.medvedev@mts-link.ru', organizationId: 'mts', initials: 'АМ', color: 'default', image: photo('medvedev'), role: 'Frontend-разработчик' },
+  { id: 'romanov', name: 'Кирилл Романов', email: 'k.romanov@mts-link.ru', organizationId: 'mts', initials: 'КР', color: 1, image: photo('romanov'), role: 'Продакт-менеджер' },
+  { id: 'korolev', name: 'Максим Королёв', email: 'm.korolev@mts-link.ru', organizationId: 'mts', initials: 'МК', color: 8, image: photo('korolev'), role: 'Специалист по безопасности' },
+  { id: 'gusev', name: 'Илья Гусев', email: 'i.gusev@mts-link.ru', organizationId: 'mts', initials: 'ИГ', color: 5, image: photo('gusev'), role: 'Мобильный разработчик' },
+  { id: 'titov', name: 'Владимир Титов', email: 'v.titov@mts-link.ru', organizationId: 'mts', initials: 'ВТ', color: 2, image: photo('titov'), role: 'Руководитель отдела продаж' },
+  { id: 'makarov', name: 'Евгений Макаров', email: 'e.makarov@mts-link.ru', organizationId: 'mts', initials: 'ЕМ', color: 3, image: photo('makarov'), role: 'Инженер по качеству' },
+  { id: 'abramov', name: 'Георгий Абрамов', email: 'g.abramov@mts-link.ru', organizationId: 'mts', initials: 'ГА', color: 'default', image: photo('abramov'), role: 'Системный аналитик' },
+  { id: 'albina', name: 'Альбина Бахматулина', email: 'user_name@alfabank.ru', organizationId: 'alfa', initials: 'АБ', color: 'default', image: 'assets/avatars/albina.png', phone: '+7 920 123-45-67', role: 'Ведущий специалист технической поддержки' },
+  { id: 'andrey', name: 'Андрей Звонов', email: 'a.zvonov@alfabank.ru', organizationId: 'alfa', initials: 'АЗ', color: 'default', image: photo('andrey'), role: 'Руководитель проекта' },
+  { id: 'anton', name: 'Антон Вершинин', email: 'a.vershinin@alfabank.ru', organizationId: 'alfa', initials: 'АВ', color: 'default', image: photo('anton'), role: 'Аналитик' },
+  { id: 'shats', name: 'Антон Шац', email: 'a.shats@alfabank.ru', organizationId: 'alfa', initials: 'АШ', color: 'default', image: photo('shats'), role: 'Разработчик' },
+  { id: 'boris', name: 'Борис Агафонов', email: 'b.agafonov@alfabank.ru', organizationId: 'alfa', initials: 'БА', color: 5, image: photo('boris'), role: 'Эксперт по клиентскому опыту' },
+  { id: 'bulychev', name: 'Борис Булычев', email: 'b.bulychev@alfabank.ru', organizationId: 'alfa', initials: 'ББ', color: 1, image: photo('bulychev'), role: 'Ведущий специалист' },
+  { id: 'stepan', name: 'Степан Васта', email: 's.vasta@alfabank.ru', organizationId: 'alfa', initials: 'СВ', color: 'default', image: photo('stepan'), role: 'Руководитель продукта' },
+  { id: 'oleg', name: 'Олег Морозов', email: 'o.morozov@alfabank.ru', organizationId: 'alfa', initials: 'ОМ', color: 3, image: photo('oleg'), role: 'Аналитик' },
+  { id: 'maxim', name: 'Максим Орлов', email: 'm.orlov@ozon.ru', organizationId: 'ozon', initials: 'МО', color: 3, image: photo('maxim'), role: 'Руководитель проекта' },
+  { id: 'elena', name: 'Елена Левина', email: 'e.levina@ozon.ru', organizationId: 'ozon', initials: 'ЕЛ', color: 5, image: photo('elena'), role: 'Дизайнер' },
+  { id: 'dmitry', name: 'Дмитрий Серов', email: 'd.serov@ozon.ru', organizationId: 'ozon', initials: 'ДС', color: 1, image: photo('dmitry'), role: 'Разработчик' },
+  { id: 'ira', name: 'Ирина Волкова', email: 'i.volkova@ozon.ru', organizationId: 'ozon', initials: 'ИВ', color: 8, image: photo('ira'), role: 'Аналитик' },
+  { id: 'anton-ozon', name: 'Антон Беляев', email: 'a.belyaev@ozon.ru', organizationId: 'ozon', initials: 'АБ', color: 3, image: photo('anton-ozon'), role: 'Продакт-менеджер' },
+  { id: 'irina', name: 'Ирина Смирнова', email: 'i.smirnova@vk.com', organizationId: 'vk', initials: 'ИС', color: 2, image: photo('irina'), role: 'Специалист поддержки' },
+  { id: 'maria', name: 'Мария Лебедева', email: 'm.lebedeva@vk.com', organizationId: 'vk', initials: 'МЛ', color: 5, image: photo('maria'), role: 'Менеджер по работе с партнёрами' },
 ]
 
 export function getFederationOrganization(organizationId: string) {

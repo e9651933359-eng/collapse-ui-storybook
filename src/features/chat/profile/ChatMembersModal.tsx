@@ -52,7 +52,7 @@ export function ChatMembersModal({ members, onAddParticipants, onBack, onClose, 
                     federationIconPosition="start"
                     federationIconSize="xs"
                     label={member.name}
-                    leadingElement={<Avatar label={member.name} image={member.image} emoji={member.initials} tone={member.tone} filled={false} />}
+                    leadingElement={<Avatar label={member.name} image={member.image} emoji={member.initials} tone={member.tone} color={member.color} filled={false} />}
                     trailingElement={member.adminRole ? <span className="chat-members-modal__role">{member.adminRole}</span> : undefined}
                     onClick={() => onMemberSelect?.(member.id)}
                   />

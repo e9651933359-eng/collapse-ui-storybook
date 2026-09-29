@@ -30,7 +30,7 @@
 | SegmentControls | [1114:513](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-513) | `ui/SegmentControls` | переключение/settings, counters, меню папки, fixed item, DnD и keyboard reorder | P0 | готов |
 | Tabs | [12622:647](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=12622-647) | `ui/Tabs` | Accent/Default (плашки) и Line (подчёркивание, 14589:3328), states, overflow, keyboard | P0 | готов |
 | Table | [19031:5188](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=19031-5188) | `ui/Table` | Default/Radio/CheckBox, selected/disabled, header/cell; custom SLOT через render | P2 | готов |
-| Avatar | [1114:526](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-526) | `ui/Avatar` | round/squircle, Filled true/false, photo border, status/uploader; color matrix partial | P0 | частично готов |
+| Avatar | [1114:526](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-526) | `ui/Avatar` | round/squircle, Filled true/false, photo border, status/uploader; Color default и 1–8 (AI не реализован — нет значений градиента) | P0 | частично готов |
 | Bubble | [3953:21293](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=3953-21293) | `features/chat/MessageBubble` | текст, ответ, реакции, закреп, статусы, удалённое, комментарии, голосовое, звонок; Forwarded и Media Image grid не реализованы | P0 | частично готов |
 | Message status | [10092:121775](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10092-121775) | `chat/MessageStatus` | Sent/Read/Loading/Error, Light | P0 | готов |
 | Comments / Deleted / System message | [10092:108369](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10092-108369), [10227:75515](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10227-75515), [10100:73473](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10100-73473) | `chat/CommentsLink`, `chat/DeletedMessage`, `chat/SystemMessage` | своё/чужое, группа, Call/Bot/без кнопки, реакции, комментарии | P0 | готов |
@@ -55,7 +55,7 @@
 
 ## Оставшаяся очередь
 
-1. Полная Avatar Color 1–8/AI matrix и 16 файловых пиктограмм — после отдельного чтения Assets/variable mapping.
+1. Avatar Color=AI (градиент `LinkAI/Default`) и 16 файловых пиктограмм — после отдельного чтения Assets/variable mapping.
 2. Редкие SLOT-комбинации TextArea/ListItem/Chips — по мере появления продуктовых сценариев.
 3. Slider, Pagination, Breadcrumbs, Tag, отдельный Progress и Action bar — после появления читаемых компонентов на пустых страницах Figma. Breadcrumbs опубликован в библиотеке (экземпляр `I2197:25880;9722:16448` в файле `4oIceSwgxmkADQYLhOoXF0`) — можно прочитать отдельно.
 4. Media Image (сетка), Forwarded, Files container, Buttons container, мобильные сообщения; Core-эффекты (Shadows 04/32/64, Blur Layer/Background) — значения не прочитаны.

@@ -56,7 +56,10 @@
 - User monogram поддерживает подтверждённые `Filled=false` и `Filled=true`. Unfilled: accent tint-dim фон и тёмный accent-текст; filled: accent primary фон и белый текст. Типографика — `Paragraph/M/Medium` 16/22.
 - Сообщения используют тот же `Avatar`: светлая монограмма для пользователя без фото и фото с полупрозрачной обводкой. Отдельного локального avatar-стиля у `MessageBubble` нет.
 - Цвет монограммы задаёт только вариант `Avatar`; текстовые стили родительской композиции не должны переопределять его. Поэтому один avatar в списке и шапке выглядит одинаково.
-- Полная палитра Color 1–8 и AI ещё не сопоставлена с публичным API React.
+- Палитра Color: prop `color` (`'default' | 1…8`) — единственный способ задать цвет аватара по правилам Base. Источник: Figma `Avatar/User`, свойство `Color` ([1114:526](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-526)). `Filled=true` — фон `Background/Solid/Secondary/Type{N}` + `Text/Solid/Base/Light/FullStatic` (белый); `Filled=false` — фон `Background/Solid/Secondary/Type{N}Tint` + `Text/Solid/Accent/Accent`. Токены: `--collapse-color-background-solid-secondary-type{N}` и `…-type{N}-tint`; значения — в [`CORE.md`](CORE.md). `default` — accent primary / accent tint-dim.
+- Prop `tone` оставлен для совместимости (произвольный фон, градиенты в данных обычных чатов) и перекрывает `color`; в новых сценариях и в Федерации не используется.
+- Значение `Color=AI` не реализовано: Figma MCP не вернул значения градиента `LinkAI/Default`; не подставляем догадкой.
+- Storybook: `UI/Avatar / Color 1–8`, `Color 1–8 / squircle`.
 
 ### MessageBubble media
 

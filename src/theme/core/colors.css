@@ -38,6 +38,23 @@
   --collapse-color-background-solid-base-accent-strong: #0f0f0f;
   --collapse-color-background-solid-accent-primary: #7047fe;
   --collapse-color-background-solid-accent-tint-dim: #e7e0ff;
+  /* Avatar palette: Figma my-Base, Avatar/User Color 1–8 (1114:526). Solid — Filled=true, Tint — Filled=false. */
+  --collapse-color-background-solid-secondary-type1: #78be3d;
+  --collapse-color-background-solid-secondary-type1-tint: #e3f7cb;
+  --collapse-color-background-solid-secondary-type2: #41b297;
+  --collapse-color-background-solid-secondary-type2-tint: #cdf1e7;
+  --collapse-color-background-solid-secondary-type3: #44a2ca;
+  --collapse-color-background-solid-secondary-type3-tint: #d7f6fb;
+  --collapse-color-background-solid-secondary-type4: #7553ed;
+  --collapse-color-background-solid-secondary-type4-tint: #dcd9fa;
+  --collapse-color-background-solid-secondary-type5: #bc46e7;
+  --collapse-color-background-solid-secondary-type5-tint: #f5daff;
+  --collapse-color-background-solid-secondary-type6: #d74ab0;
+  --collapse-color-background-solid-secondary-type6-tint: #f7e4f4;
+  --collapse-color-background-solid-secondary-type7: #df4460;
+  --collapse-color-background-solid-secondary-type7-tint: #fae1e5;
+  --collapse-color-background-solid-secondary-type8: #e94a24;
+  --collapse-color-background-solid-secondary-type8-tint: #fae3d1;
   --collapse-color-background-solid-error-primary: #fe4f45;
   --collapse-color-background-solid-error-tint: #fff3f3;
   --collapse-color-background-solid-success-primary: #0dc268;

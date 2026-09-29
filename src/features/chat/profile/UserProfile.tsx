@@ -46,7 +46,7 @@ export function UserProfile({ member, onBack, onClose, onOpenChat, open, organiz
     <ModalPage open={open} title="Профиль участника" onBack={onBack} onClose={onClose} className="user-profile">
       <div className="user-profile__content">
         <div className="user-profile__identity">
-          <Avatar label={member.name} image={member.image} emoji={member.initials} tone={member.tone} size={124} filled={false} />
+          <Avatar label={member.name} image={member.image} emoji={member.initials} tone={member.tone} color={member.color} size={124} filled={false} />
           <div className="user-profile__info">
             <div className="user-profile__name"><h3>{member.name}</h3>{username && <span>{username}</span>}</div>
             {tag}

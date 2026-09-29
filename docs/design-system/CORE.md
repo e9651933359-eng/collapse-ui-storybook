@@ -49,6 +49,8 @@ Figma MCP видит canvas `Atoms` и опубликованную библио
 | `Background/Opacity/Base/Light/Primary` | `#ffffffa3` |
 | `Background/Opacity/Base/Light/PrimaryDim` | `#ffffffe0` |
 | `Background/Opacity/Scrim/Default` | `#28263529` |
+| `Background/Solid/Secondary/Type1` … `Type8` (аватары Color 1–8, Filled) | `#78be3d`, `#41b297`, `#44a2ca`, `#7553ed`, `#bc46e7`, `#d74ab0`, `#df4460`, `#e94a24` |
+| `Background/Solid/Secondary/Type1Tint` … `Type8Tint` (аватары Color 1–8, Unfilled) | `#e3f7cb`, `#cdf1e7`, `#d7f6fb`, `#dcd9fa`, `#f5daff`, `#f7e4f4`, `#fae1e5`, `#fae3d1` |
 | `Border/Opacity/Base/Tertiary` | `#28263514` |
 | `Border/Opacity/Base/TertiaryDim` | `#28263529` |
 | `Border/Opacity/Base/SecondaryDimVariant` | `#28263566` |

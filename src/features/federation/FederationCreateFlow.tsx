@@ -72,7 +72,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
       subtitle: external ? `${getFederationOrganization(participant.organizationId)?.name ?? ''} · другая организация` : getFederationOrganization(participant.organizationId)?.name ?? '',
       avatar: participant.initials,
       avatarImage: participant.image,
-      avatarTone: participant.tone,
+      avatarColor: participant.color,
       kind: 'direct',
       federation: external,
       messages: [],
@@ -89,7 +89,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
       title: name.trim() || (kind === 'channel' ? 'Новый канал' : 'Новая группа'),
       subtitle: `${total} ${getParticipantWord(total)}`,
       avatar: (name.trim() || (kind === 'channel' ? 'НК' : 'НГ')).slice(0, 2).toUpperCase(),
-      avatarTone: kind === 'channel' ? '#7047fe' : '#e8ddff',
+      avatarColor: 'default',
       avatarFilled: kind !== 'group',
       kind,
       federation: externalSelected.length > 0,
@@ -158,7 +158,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
             <SearchField value={query} onChange={(event) => setQuery(event.target.value)} />
             <DropField className="federation-flow__organization" label="" value={organizationId} options={organizationOptions} onChange={setOrganizationId} />
             <div className="federation-flow__list" aria-label={`Участники: ${organization.name}`}>
-              {participants.map((participant) => <ListItem key={participant.id} federation={organization.external} label={participant.name} supporting={organization.external ? participant.email : undefined} leadingElement={<Avatar label={participant.name} image={participant.image} emoji={participant.initials} tone={participant.tone} filled={false} status={organization.external ? undefined : 'online'} />} onClick={() => selectParticipant(participant)} />)}
+              {participants.map((participant) => <ListItem key={participant.id} federation={organization.external} label={participant.name} supporting={organization.external ? participant.email : undefined} leadingElement={<Avatar label={participant.name} image={participant.image} emoji={participant.initials} color={participant.color} filled={false} status={organization.external ? undefined : 'online'} />} onClick={() => selectParticipant(participant)} />)}
             </div>
           </div>
         )}
@@ -194,7 +194,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
                     federation={organization.external}
                     label={participant.name}
                     supporting={participant.email}
-                    leadingElement={<Avatar label={participant.name} image={participant.image} emoji={participant.initials} tone={participant.tone} filled={false} />}
+                    leadingElement={<Avatar label={participant.name} image={participant.image} emoji={participant.initials} color={participant.color} filled={false} />}
                     trailingElement={<CheckBox size="s" visualOnly checked={selected} />}
                     role="checkbox"
                     aria-checked={selected}

@@ -25,7 +25,7 @@ export function sortMembersByName(members: ChatMember[]) {
 export function getChatMembers(chat: Chat): ChatMember[] {
   if (chat.kind === 'direct') {
     const login = `user_${hash(chat.id) % 900 + 100}`
-    return [{ id: chat.id, name: chat.title, initials: chat.avatar, tone: chat.avatarTone, image: chat.avatarImage, email: `${login}@mts-link.ru`, phone: `+7 900 ${String(hash(chat.id) % 900 + 100)}-${String(hash(chat.title) % 90 + 10)}-${String(hash(chat.subtitle) % 90 + 10)}` }]
+    return [{ id: chat.id, name: chat.title, initials: chat.avatar, tone: chat.avatarTone, color: chat.avatarColor, image: chat.avatarImage, email: `${login}@mts-link.ru`, phone: `+7 900 ${String(hash(chat.id) % 900 + 100)}-${String(hash(chat.title) % 90 + 10)}-${String(hash(chat.subtitle) % 90 + 10)}` }]
   }
   const declared = Number(/^(\d+)\s+участ/.exec(chat.subtitle)?.[1])
   const count = declared || 4 + (hash(chat.id) % 9)

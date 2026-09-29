@@ -45,7 +45,7 @@ export function FederationParticipantsModal({ onClose, onParticipantSelect, open
               federationIconPosition="start"
               federationIconSize="xs"
               label={participant.name}
-              leadingElement={<Avatar label={participant.name} image={participant.details?.image} emoji={participant.details?.initials ?? participant.name.slice(0, 2).toUpperCase()} tone={participant.details?.tone} filled={false} />}
+              leadingElement={<Avatar label={participant.name} image={participant.details?.image} emoji={participant.details?.initials ?? participant.name.slice(0, 2).toUpperCase()} color={participant.details?.color} filled={false} />}
               supporting={participant.details?.email ?? participant.organization}
               onClick={() => { onClose(); onParticipantSelect?.(participant.id) }}
             />
