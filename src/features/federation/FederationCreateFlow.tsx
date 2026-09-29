@@ -1,5 +1,5 @@
 import { Camera, UserPlus } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { DropField } from '../../components/option-menu'
 import { Avatar, Button, CheckBox, ConfirmDialog, IconButton, ListItem, ModalPage, SearchField, Switch, TextArea, TextField, Uploader } from '../../components/ui'
 import type { Chat } from '../../types/chat'
@@ -38,6 +38,25 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [channelAccess, setChannelAccess] = useState<'private' | 'public'>('private')
   const [adminsOnly, setAdminsOnly] = useState(true)
+  const [avatarUrl, setAvatarUrl] = useState<string>()
+  const [avatarError, setAvatarError] = useState(false)
+  // Картинка живёт только в браузере (в прототипе нет сервера). Ссылку освобождаем, пока чат её не забрал.
+  const avatarUrlRef = useRef<string | undefined>(undefined)
+  const avatarUsedRef = useRef(false)
+
+  const replaceAvatar = (url?: string) => {
+    if (avatarUrlRef.current && !avatarUsedRef.current) URL.revokeObjectURL(avatarUrlRef.current)
+    avatarUrlRef.current = url
+    avatarUsedRef.current = false
+    setAvatarUrl(url)
+  }
+
+  const selectAvatar = (files: FileList) => {
+    const file = files[0]
+    if (!file || !file.type.startsWith('image/')) { setAvatarError(true); return }
+    setAvatarError(false)
+    replaceAvatar(URL.createObjectURL(file))
+  }
 
   useEffect(() => {
     if (!open) return
@@ -50,6 +69,8 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
     setSelectedIds([])
     setChannelAccess('private')
     setAdminsOnly(true)
+    replaceAvatar(undefined)
+    setAvatarError(false)
   }, [mode, open])
 
   const organization = getFederationOrganization(organizationId) ?? federationOrganizations[0]
@@ -89,6 +110,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
       title: name.trim() || (kind === 'channel' ? 'Новый канал' : 'Новая группа'),
       subtitle: `${total} ${getParticipantWord(total)}`,
       avatar: (name.trim() || (kind === 'channel' ? 'НК' : 'НГ')).slice(0, 2).toUpperCase(),
+      avatarImage: avatarUrl,
       avatarColor: 'default',
       avatarFilled: kind !== 'group',
       kind,
@@ -101,6 +123,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
       externalParticipantCount: externalSelected.length,
       externalParticipants: externalSelected.map((participant) => ({ id: participant.id, name: participant.name, organization: getFederationOrganization(participant.organizationId)?.name ?? '' })),
     } : undefined
+    if (avatarUrl) avatarUsedRef.current = true
     onCreate({ chat, meta })
     close()
   }
@@ -165,7 +188,7 @@ export function FederationCreateFlow({ existingMeta, mode, onAddParticipants, on
 
         {view === 'details' && (
           <div className="federation-flow__details">
-            <Uploader className="federation-flow__uploader" accept="image/*"><Camera aria-hidden="true" /></Uploader>
+            <Uploader className="federation-flow__uploader" accept="image/*" error={avatarError} aria-label="Загрузить изображение" onFiles={selectAvatar}>{avatarUrl ? <img className="federation-flow__uploader-preview" src={avatarUrl} alt="Выбранное изображение" /> : <Camera aria-hidden="true" />}</Uploader>
             <TextField autoFocus label="Название *" value={name} onChange={(event) => setName(event.target.value)} />
             {kind === 'channel' && <TextArea label="Описание" placeholder="Анонсы релизов" value={description} counter="Количество знаков" onChange={(event) => setDescription(event.target.value)} />}
             {kind === 'channel' && (

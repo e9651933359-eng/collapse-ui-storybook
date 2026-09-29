@@ -83,6 +83,9 @@
   border-radius: var(--collapse-radius-container);
 }
 .collapse-uploader.federation-flow__uploader .collapse-uploader__trigger { min-height: var(--collapse-size-modal-page-uploader); padding: var(--collapse-spacing-horizontal-none); }
+.federation-flow__uploader .collapse-uploader__trigger { position: relative; }
+.federation-flow__uploader-preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.federation-flow__uploader small { display: none; }
 .federation-flow__uploader .collapse-uploader__trigger svg { width: var(--collapse-size-icon-l); height: var(--collapse-size-icon-l); }
 .federation-flow__settings { display: flex; flex-direction: column; gap: var(--collapse-spacing-horizontal-s); }
 .federation-flow__settings h3 { margin: var(--collapse-spacing-horizontal-s) var(--collapse-spacing-horizontal-l) var(--collapse-spacing-horizontal-none); font-size: var(--collapse-paragraph-s-size); font-weight: var(--collapse-paragraph-s-medium-weight); line-height: var(--collapse-paragraph-s-line-height); }
