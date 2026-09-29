@@ -7,10 +7,10 @@ import { countActiveUnreadChats } from '../../features/chat/unread'
 import { ChatList } from './ChatList'
 
 const chats: Chat[] = [
-  { id: 'direct', title: 'Альбина Бахматулина', subtitle: 'Личный чат', avatar: 'АБ', avatarTone: '#e8ddff', kind: 'direct', messages: [] },
-  { id: 'pinned', title: 'Запуск общего продукта', subtitle: '8 участников', avatar: 'ЗП', avatarTone: '#f1d8ff', kind: 'group', pinned: true, unread: 4, messages: [] },
-  { id: 'pinned-design', title: 'Дизайн платформы', subtitle: '6 участников', avatar: 'ДП', avatarTone: '#dff4ff', kind: 'group', pinned: true, messages: [] },
-  { id: 'delivery', title: 'Интеграция доставки', subtitle: '12 участников', avatar: 'ИД', avatarTone: '#dce8ff', kind: 'group', unread: 2, messages: [] },
+  { id: 'direct', title: 'Альбина Бахматулина', subtitle: 'Личный чат', avatar: 'АБ', avatarColor: 'default', avatarFilled: false, kind: 'direct', messages: [] },
+  { id: 'pinned', title: 'Запуск общего продукта', subtitle: '8 участников', avatar: 'ЗП', avatarColor: 5, avatarFilled: false, kind: 'group', pinned: true, unread: 4, messages: [] },
+  { id: 'pinned-design', title: 'Дизайн платформы', subtitle: '6 участников', avatar: 'ДП', avatarColor: 3, avatarFilled: false, kind: 'group', pinned: true, messages: [] },
+  { id: 'delivery', title: 'Интеграция доставки', subtitle: '12 участников', avatar: 'ИД', avatarColor: 'default', avatarFilled: false, kind: 'group', unread: 2, messages: [] },
 ]
 
 function PinnedFirstStory() {
@@ -93,9 +93,9 @@ function LongMixedListStory() {
 }
 
 const folderCounterChats: Chat[] = [
-  { id: 'active-unread', title: 'Активный непрочитанный', subtitle: 'Новое сообщение', avatar: 'АН', avatarTone: '#e8ddff', kind: 'group', unread: 12, messages: [] },
-  { id: 'muted-unread', title: 'Muted непрочитанный', subtitle: 'Уведомления выключены', avatar: 'МН', avatarTone: '#dce8ff', kind: 'group', unread: 27, muted: true, messages: [] },
-  { id: 'read', title: 'Прочитанный', subtitle: 'Нет новых сообщений', avatar: 'П', avatarTone: '#d8f1e2', kind: 'group', messages: [] },
+  { id: 'active-unread', title: 'Активный непрочитанный', subtitle: 'Новое сообщение', avatar: 'АН', avatarColor: 'default', avatarFilled: false, kind: 'group', unread: 12, messages: [] },
+  { id: 'muted-unread', title: 'Muted непрочитанный', subtitle: 'Уведомления выключены', avatar: 'МН', avatarColor: 'default', avatarFilled: false, kind: 'group', unread: 27, muted: true, messages: [] },
+  { id: 'read', title: 'Прочитанный', subtitle: 'Нет новых сообщений', avatar: 'П', avatarColor: 2, avatarFilled: false, kind: 'group', messages: [] },
 ]
 
 function FolderCounterRulesStory() {
@@ -125,9 +125,9 @@ function FolderCounterRulesStory() {
 
 function NewFolderKeepsSelectedStory() {
   const [items, setItems] = useState<Chat[]>([
-    { id: 'new-chat', title: 'Новый чат', subtitle: 'Непрочитанное сообщение', avatar: 'НЧ', avatarTone: '#e8ddff', kind: 'group', unread: 2, messages: [] },
-    { id: 'another-new-chat', title: 'Ещё один новый чат', subtitle: 'Непрочитанное сообщение', avatar: 'ЕН', avatarTone: '#dce8ff', kind: 'group', unread: 1, messages: [] },
-    { id: 'read-chat', title: 'Прочитанный чат', subtitle: 'Нет новых сообщений', avatar: 'ПЧ', avatarTone: '#d8f1e2', kind: 'group', messages: [] },
+    { id: 'new-chat', title: 'Новый чат', subtitle: 'Непрочитанное сообщение', avatar: 'НЧ', avatarColor: 'default', avatarFilled: false, kind: 'group', unread: 2, messages: [] },
+    { id: 'another-new-chat', title: 'Ещё один новый чат', subtitle: 'Непрочитанное сообщение', avatar: 'ЕН', avatarColor: 'default', avatarFilled: false, kind: 'group', unread: 1, messages: [] },
+    { id: 'read-chat', title: 'Прочитанный чат', subtitle: 'Нет новых сообщений', avatar: 'ПЧ', avatarColor: 2, avatarFilled: false, kind: 'group', messages: [] },
   ])
   const [selectedId, setSelectedId] = useState('read-chat')
   const [segment, setSegment] = useState('new')

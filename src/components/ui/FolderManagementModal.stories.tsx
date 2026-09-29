@@ -6,10 +6,10 @@ import type { ManagedFolder, SystemFolder } from './FolderManagementModal'
 import type { SegmentDisplayMode } from './SegmentControls'
 
 const candidates = [
-  { id: 'design', label: 'Дизайн', avatar: '🎨', avatarTone: 'linear-gradient(145deg,#007fff,#ffce4a)', shape: 'squircle' as const },
-  { id: 'team', label: 'Команда', avatar: '◒', avatarTone: 'linear-gradient(145deg,#ff215d,#ff7c47 35%,#7047fe 68%,#00c8ff)' },
-  { id: 'mts', label: 'МТС', avatar: 'М Т С', avatarTone: '#e93347' },
-  { id: 'updates', label: 'Обновления продукта', avatar: '👀', avatarTone: '#53c985', shape: 'squircle' as const },
+  { id: 'design', label: 'Дизайн', avatar: '🎨', avatarColor: 4 as const, shape: 'squircle' as const },
+  { id: 'team', label: 'Команда', avatar: '◒', avatarColor: 7 as const },
+  { id: 'mts', label: 'МТС', avatar: 'М Т С', avatarColor: 7 as const },
+  { id: 'updates', label: 'Обновления продукта', avatar: '👀', avatarColor: 2 as const, shape: 'squircle' as const },
 ]
 
 function ModalDemo() {

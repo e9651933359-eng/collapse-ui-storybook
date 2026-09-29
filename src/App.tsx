@@ -375,6 +375,7 @@ export function ChatExperience({
             avatar: chat.avatar,
             avatarTone: chat.avatarTone,
             avatarColor: chat.avatarColor,
+            image: chat.avatarImage,
             shape: chat.kind === 'channel' ? 'squircle' : 'round',
           }))}
           onClose={() => setFolderModalOpen(false)}

@@ -3,7 +3,7 @@ import type { Chat } from '../../types/chat'
 const chatSeeds: Chat[] = [
   {
     id: 'design', title: 'Дизайн', subtitle: 'Ольга: передала макеты в разработку', avatar: '🎨', kind: 'channel',
-    avatarTone: 'linear-gradient(145deg,#007fff,#ffce4a)', pinned: true, unread: 3,
+    avatarColor: 4, pinned: true, unread: 3,
     messages: [
       { id: 'd1', author: 'other', sender: 'Ольга', avatar: 'ОК', text: 'Доброе утро! Обновила состояния списка чатов и собрала отдельный экран для пустой папки.', time: '09:16' },
       { id: 'd2', author: 'other', sender: 'Антон', avatar: 'АВ', text: 'Посмотрел. В узком списке длинные названия корректно уходят в многоточие 👍', time: '09:24' },
@@ -16,7 +16,7 @@ const chatSeeds: Chat[] = [
   },
   {
     id: 'team', title: 'Команда', subtitle: '15 участников', avatar: '◒', kind: 'group',
-    avatarTone: 'linear-gradient(145deg,#ff215d,#ff7c47 35%,#7047fe 68%,#00c8ff)', pinned: true,
+    avatarColor: 7, pinned: true,
     messages: [
       { id: 't1', author: 'other', sender: 'Анна Иванова', avatar: 'АИ', text: 'Коллеги, привет! Уже можно посмотреть первый вариант навигации по папкам.', time: '10:05' },
       { id: 't2', author: 'other', sender: 'Михаил', avatarImage: 'assets/figma/message-avatar-photo.png', text: 'Открыл на большом экране. Перетягивание границы списка работает ожидаемо.', time: '10:12' },
@@ -28,7 +28,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'mts', title: 'МТС', subtitle: 'Мария: презентация готова', avatar: 'М Т С', avatarTone: '#e93347', kind: 'group', unread: 10, muted: true,
+    id: 'mts', title: 'МТС', subtitle: 'Мария: презентация готова', avatar: 'М Т С', avatarColor: 7, kind: 'group', unread: 10, muted: true,
     messages: [
       { id: 'm1', author: 'other', sender: 'Мария', avatar: 'МА', text: 'Коллеги, собрала материалы к ежемесячному обзору продукта.', time: '08:42' },
       { id: 'm2', author: 'other', sender: 'Игорь', avatar: 'ИП', text: 'Добавил цифры по активным командам и использованию видеовстреч.', time: '08:55' },
@@ -39,7 +39,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'updates', title: 'Обновления продукта', subtitle: 'Сегодня, 09:40', avatar: '👀', avatarTone: '#53c985', kind: 'channel', unread: 33,
+    id: 'updates', title: 'Обновления продукта', subtitle: 'Сегодня, 09:40', avatar: '👀', avatarColor: 2, kind: 'channel', unread: 33,
     messages: [
       { id: 'u1', author: 'other', sender: 'Команда продукта', avatar: 'КП', text: '**Обновление чатов уже доступно.** Теперь системные и пользовательские папки можно настраивать в одном окне.', time: '09:40', pinned: true },
       { id: 'u2', author: 'other', sender: 'Команда продукта', avatar: 'КП', text: 'Список чатов адаптируется по ширине: потяните за правую границу панели, чтобы освободить больше места для названий.', time: '09:41' },
@@ -50,7 +50,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'ops', title: 'Операционные вопросы', subtitle: 'Алексей: встреча в 16:00', avatar: '✏️', avatarTone: '#ffd154', kind: 'group', unread: 11,
+    id: 'ops', title: 'Операционные вопросы', subtitle: 'Алексей: встреча в 16:00', avatar: '✏️', avatarColor: 1, kind: 'group', unread: 11,
     messages: [
       { id: 'o1', author: 'other', sender: 'Алексей', avatar: 'АК', text: 'Доброе утро. Сегодняшнюю рабочую встречу перенесли на 16:00.', time: '09:18', pinned: true },
       { id: 'o2', author: 'other', sender: 'Светлана', avatar: 'СН', text: 'Переговорная на пятом этаже свободна, поставила бронь на час.', time: '09:22' },
@@ -61,7 +61,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'project', title: 'Проектная группа', subtitle: '5 участников', avatar: '🖊️', avatarTone: '#fb4a3f', kind: 'group',
+    id: 'project', title: 'Проектная группа', subtitle: '5 участников', avatar: '🖊️', avatarColor: 8, kind: 'group',
     messages: [
       { id: 'p1', author: 'other', sender: 'Ирина', avatar: 'ИК', text: 'План работ на эту неделю закрепила в чате.', time: '09:05', pinned: true },
       { id: 'p2', author: 'other', sender: 'Денис', avatar: 'ДС', text: 'Я беру интеграцию поиска и проверку пустых результатов.', time: '09:14' },
@@ -72,7 +72,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'news', title: 'Новости компании', subtitle: 'Редакция: итоги месяца', avatar: '🔔', avatarTone: '#ffd154', kind: 'channel',
+    id: 'news', title: 'Новости компании', subtitle: 'Редакция: итоги месяца', avatar: '🔔', avatarColor: 1, kind: 'channel',
     messages: [
       { id: 'n1', author: 'other', sender: 'Редакция', avatar: 'РК', text: 'Доброе утро! Опубликовали итоги месяца и главные новости команд.', time: '09:00', pinned: true },
       { id: 'n2', author: 'other', sender: 'Редакция', avatar: 'РК', text: 'В новом выпуске: обновление продукта, интервью с командой поддержки и календарь внутренних событий.', time: '09:01' },
@@ -82,7 +82,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'dev', title: 'Разработка', subtitle: 'Сергей: сборка готова к проверке', avatar: '⚙️', avatarTone: '#438ce8', kind: 'group',
+    id: 'dev', title: 'Разработка', subtitle: 'Сергей: сборка готова к проверке', avatar: '⚙️', avatarColor: 3, kind: 'group',
     messages: [
       { id: 'r1', author: 'other', sender: 'Сергей', avatar: 'СЕ', text: 'Утреннюю сборку выложил. В ней уже есть изменение ширины списка чатов.', time: '09:32' },
       { id: 'r2', author: 'other', sender: 'Павел', avatar: 'ПН', text: 'Проверил в Chrome и Safari — граница двигается плавно, ошибок в консоли нет.', time: '09:48' },
@@ -94,7 +94,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'dev-chats', title: 'dev_chats_navigation_team', subtitle: 'Команда навигации', avatar: '🦖', avatarTone: 'linear-gradient(145deg,#342f45,#b43f45)', kind: 'group',
+    id: 'dev-chats', title: 'dev_chats_navigation_team', subtitle: 'Команда навигации', avatar: '🦖', avatarColor: 3, kind: 'group',
     messages: [
       { id: 'dc1', author: 'other', sender: 'Вадим', avatar: 'ВК', text: 'Предлагаю сегодня закрыть поведение системных папок и больше не менять порядок сегментов.', time: '10:08' },
       { id: 'dc2', author: 'other', sender: 'Настя', avatar: 'НА', text: 'Согласна. После включения папка должна сразу появляться в конце списка.', time: '10:13' },
@@ -105,7 +105,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'ideas', title: 'Идеи', subtitle: 'Лена: быстрые реакции', avatar: '📝', avatarTone: '#5fcf80', kind: 'channel',
+    id: 'ideas', title: 'Идеи', subtitle: 'Лена: быстрые реакции', avatar: '📝', avatarColor: 1, kind: 'channel',
     messages: [
       { id: 'i1', author: 'other', sender: 'Лена', avatar: 'ЛМ', text: 'Идея: показывать несколько последних реакций прямо над полем ввода.', time: '09:34' },
       { id: 'i2', author: 'other', sender: 'Роман', avatar: 'РТ', text: 'Полезно для небольших команд, но в крупных каналах панель может стать слишком шумной.', time: '09:46' },
@@ -116,7 +116,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'bugs', title: 'Баги', subtitle: 'QA: открыто 7', avatar: '🐞', avatarTone: '#ffc64c', kind: 'channel',
+    id: 'bugs', title: 'Баги', subtitle: 'QA: открыто 7', avatar: '🐞', avatarColor: 1, kind: 'channel',
     messages: [
       { id: 'b1', author: 'other', sender: 'QA', avatar: 'QA', text: 'Нашли проблему: после быстрого переключения папок иногда сохранялся предыдущий список чатов.', time: '09:12' },
       { id: 'b2', author: 'other', sender: 'Сергей', avatar: 'СЕ', text: 'Воспроизвёл. Причина в состоянии фильтра, исправление уже в работе.', time: '09:28' },
@@ -128,7 +128,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'marketing', title: 'Маркетинг', subtitle: 'Кампания стартует в понедельник', avatar: '📣', avatarTone: '#ff7a59', kind: 'group', unread: 6,
+    id: 'marketing', title: 'Маркетинг', subtitle: 'Кампания стартует в понедельник', avatar: '📣', avatarColor: 8, kind: 'group', unread: 6,
     messages: [
       { id: 'mk1', author: 'other', sender: 'Алина', avatar: 'АЛ', text: 'Финальные баннеры согласованы, можно готовить размещения.', time: '09:10' },
       { id: 'mk2', author: 'other', sender: 'Кирилл', avatar: 'КН', text: 'Медиаплан обновил. Основной запуск поставил на понедельник, 10:00.', time: '09:22' },
@@ -137,7 +137,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'support-team', title: 'Команда поддержки', subtitle: 'Наталья: обновили шаблоны ответов', avatar: '🛟', avatarTone: '#36b7a5', kind: 'group', unread: 4,
+    id: 'support-team', title: 'Команда поддержки', subtitle: 'Наталья: обновили шаблоны ответов', avatar: '🛟', avatarColor: 2, kind: 'group', unread: 4,
     messages: [
       { id: 'sp1', author: 'other', sender: 'Наталья', avatar: 'НВ', text: 'Обновили шаблоны ответов по папкам и переносу чатов.', time: '09:44' },
       { id: 'sp2', author: 'other', sender: 'Олег', avatar: 'ОС', text: 'Добавил пример для ситуации, когда пользователь случайно скрыл системную папку.', time: '09:51' },
@@ -146,7 +146,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'alexey-smirnov', title: 'Алексей Смирнов', subtitle: 'Договорились созвониться после обеда', avatar: 'АС', avatarTone: '#8b6cf6', kind: 'direct',
+    id: 'alexey-smirnov', title: 'Алексей Смирнов', subtitle: 'Договорились созвониться после обеда', avatar: 'АС', avatarColor: 4, kind: 'direct',
     messages: [
       { id: 'as1', author: 'other', sender: 'Алексей Смирнов', avatar: 'АС', text: 'Привет! Посмотрел прототип, есть пара вопросов по поведению каналов.', time: '10:11' },
       { id: 'as2', author: 'me', text: 'Привет! Давай разберём. Могу подключиться после 14:00.', time: '10:15' },
@@ -155,7 +155,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'hr-questions', title: 'HR-вопросы', subtitle: 'Светлана: встреча для новичков', avatar: '👥', avatarTone: '#ee6b9c', kind: 'group', muted: true,
+    id: 'hr-questions', title: 'HR-вопросы', subtitle: 'Светлана: встреча для новичков', avatar: '👥', avatarColor: 7, kind: 'group', muted: true,
     messages: [
       { id: 'hr1', author: 'other', sender: 'Светлана', avatar: 'СН', text: 'В четверг проведём короткую встречу для новых коллег.', time: '10:26' },
       { id: 'hr2', author: 'other', sender: 'Роман', avatar: 'РТ', text: 'Добавьте, пожалуйста, блок про внутренние сервисы и доступы.', time: '10:34' },
@@ -164,7 +164,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'mobile-app', title: 'Мобильное приложение', subtitle: '8 участников', avatar: '📱', avatarTone: '#4d8cff', kind: 'group', unread: 2,
+    id: 'mobile-app', title: 'Мобильное приложение', subtitle: '8 участников', avatar: '📱', avatarColor: 4, kind: 'group', unread: 2,
     messages: [
       { id: 'ma1', author: 'other', sender: 'Виктор', avatar: 'ВЛ', text: 'Собрал тестовую версию с новой навигацией по чатам.', time: '11:02' },
       { id: 'ma2', author: 'other', sender: 'Юлия', avatar: 'ЮК', text: 'На небольшом экране список выглядит хорошо, но нужно проверить длинные названия.', time: '11:09' },
@@ -173,7 +173,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'research', title: 'Исследование навигации', subtitle: 'Полина: готовы первые выводы', avatar: '🔍', avatarTone: '#6f73d9', kind: 'group', unread: 5,
+    id: 'research', title: 'Исследование навигации', subtitle: 'Полина: готовы первые выводы', avatar: '🔍', avatarColor: 4, kind: 'group', unread: 5,
     messages: [
       { id: 'rs1', author: 'other', sender: 'Полина', avatar: 'ПГ', text: 'Провели первые пять интервью по навигации в чатах.', time: '11:24' },
       { id: 'rs2', author: 'other', sender: 'Глеб', avatar: 'ГМ', text: 'Пользователи быстро находят папки, но не сразу замечают возможность менять их порядок.', time: '11:32' },
@@ -182,7 +182,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'partner-launch', title: 'Запуск с партнёром', subtitle: 'Статус: подготовка демо', avatar: '🚀', avatarTone: '#ef5b5b', kind: 'group', unread: 7,
+    id: 'partner-launch', title: 'Запуск с партнёром', subtitle: 'Статус: подготовка демо', avatar: '🚀', avatarColor: 7, kind: 'group', unread: 7,
     messages: [
       { id: 'pl1', author: 'other', sender: 'Тимур', avatar: 'ТБ', text: 'Демо для партнёра запланировали на среду.', time: '11:50' },
       { id: 'pl2', author: 'other', sender: 'Вера', avatar: 'ВР', text: 'Я подготовлю сценарий: создание канала, приглашение участников и обмен файлами.', time: '11:58' },
@@ -191,7 +191,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'finance-planning', title: 'Финансовое планирование', subtitle: 'Ирина: таблица обновлена', avatar: '📊', avatarTone: '#28a879', kind: 'group', muted: true,
+    id: 'finance-planning', title: 'Финансовое планирование', subtitle: 'Ирина: таблица обновлена', avatar: '📊', avatarColor: 2, kind: 'group', muted: true,
     messages: [
       { id: 'fp1', author: 'other', sender: 'Ирина', avatar: 'ИК', text: 'Обновила прогноз расходов на следующий квартал.', time: '12:16' },
       { id: 'fp2', author: 'other', sender: 'Максим', avatar: 'МЛ', text: 'Вижу изменения. По исследованиям оставил резерв на два дополнительных теста.', time: '12:23' },
@@ -200,7 +200,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'content-team', title: 'Контент-команда', subtitle: 'Новый гайд готов к публикации', avatar: '✍️', avatarTone: '#d96fa8', kind: 'group', unread: 3,
+    id: 'content-team', title: 'Контент-команда', subtitle: 'Новый гайд готов к публикации', avatar: '✍️', avatarColor: 6, kind: 'group', unread: 3,
     messages: [
       { id: 'ct1', author: 'other', sender: 'Елена', avatar: 'ЕА', text: 'Гайд по работе с каналами прошёл редактуру.', time: '12:38' },
       { id: 'ct2', author: 'other', sender: 'Артур', avatar: 'АО', text: 'Добавил снимки экрана и подписи к основным действиям.', time: '12:44' },
@@ -209,7 +209,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'daria-petrova', title: 'Дарья Петрова', subtitle: 'Дарья: спасибо за помощь!', avatar: 'ДП', avatarTone: '#f18a4f', kind: 'direct',
+    id: 'daria-petrova', title: 'Дарья Петрова', subtitle: 'Дарья: спасибо за помощь!', avatar: 'ДП', avatarColor: 8, kind: 'direct',
     messages: [
       { id: 'dp1', author: 'other', sender: 'Дарья Петрова', avatar: 'ДП', text: 'Привет! Подскажи, как вернуть папку «Новые», если я её скрыла?', time: '13:03' },
       { id: 'dp2', author: 'me', text: 'Открой настройки папок через иконку рядом с сегментами и включи «Новые».', time: '13:06' },
@@ -218,7 +218,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'release-notes', title: 'Релизы', subtitle: 'Версия 2.18 опубликована', avatar: '📦', avatarTone: '#5f7ae8', kind: 'channel', unread: 12,
+    id: 'release-notes', title: 'Релизы', subtitle: 'Версия 2.18 опубликована', avatar: '📦', avatarColor: 4, kind: 'channel', unread: 12,
     messages: [
       { id: 'rl1', author: 'other', sender: 'Release Bot', avatar: 'RB', text: '**Версия 2.18 опубликована.** В неё вошли папки чатов и обновлённый редактор сообщений.', time: '09:05', pinned: true },
       { id: 'rl2', author: 'other', sender: 'Release Bot', avatar: 'RB', text: 'Также исправили поиск, счётчики непрочитанных и отображение длинных названий.', time: '09:06' },
@@ -227,7 +227,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'design-system', title: 'Дизайн-система', subtitle: 'Новый компонент добавлен в Storybook', avatar: '🧩', avatarTone: '#7958d8', kind: 'channel', unread: 8,
+    id: 'design-system', title: 'Дизайн-система', subtitle: 'Новый компонент добавлен в Storybook', avatar: '🧩', avatarColor: 4, kind: 'channel', unread: 8,
     messages: [
       { id: 'ds1', author: 'other', sender: 'DS Team', avatar: 'DS', text: 'В Storybook добавили варианты списка файлов и состояния загрузки.', time: '09:30' },
       { id: 'ds2', author: 'other', sender: 'Ольга', avatar: 'ОК', text: 'Проверила размеры и токены — локальных значений в компоненте нет.', time: '09:41' },
@@ -236,7 +236,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'analytics', title: 'Аналитика', subtitle: 'Отчёт за неделю готов', avatar: '📈', avatarTone: '#2ea78d', kind: 'channel', unread: 15,
+    id: 'analytics', title: 'Аналитика', subtitle: 'Отчёт за неделю готов', avatar: '📈', avatarColor: 2, kind: 'channel', unread: 15,
     messages: [
       { id: 'an1', author: 'other', sender: 'Команда аналитики', avatar: 'КА', text: 'Готов еженедельный отчёт по активности в чатах.', time: '10:00' },
       { id: 'an2', author: 'other', sender: 'Команда аналитики', avatar: 'КА', text: 'Чаще всего пользователи создают папки для проектов, команд и важных каналов.', time: '10:01' },
@@ -245,7 +245,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'user-research', title: 'Исследования пользователей', subtitle: 'Набор на интервью открыт', avatar: '🎧', avatarTone: '#cc6f9f', kind: 'channel',
+    id: 'user-research', title: 'Исследования пользователей', subtitle: 'Набор на интервью открыт', avatar: '🎧', avatarColor: 6, kind: 'channel',
     messages: [
       { id: 'ur1', author: 'other', sender: 'Research Team', avatar: 'RT', text: 'Открыли набор на интервью по ежедневной работе с чатами.', time: '10:24' },
       { id: 'ur2', author: 'other', sender: 'Полина', avatar: 'ПГ', text: 'Ищем пользователей, у которых больше двадцати активных переписок.', time: '10:31' },
@@ -254,7 +254,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'backend-status', title: 'Статус сервисов', subtitle: 'Все системы работают штатно', avatar: '🛠️', avatarTone: '#4d7c9f', kind: 'channel', muted: true,
+    id: 'backend-status', title: 'Статус сервисов', subtitle: 'Все системы работают штатно', avatar: '🛠️', avatarColor: 3, kind: 'channel', muted: true,
     messages: [
       { id: 'bs1', author: 'other', sender: 'Status Bot', avatar: 'SB', text: 'Плановые работы завершены.', time: '10:50' },
       { id: 'bs2', author: 'other', sender: 'Status Bot', avatar: 'SB', text: 'Доставка сообщений, файлы и уведомления работают штатно.', time: '10:51' },
@@ -263,7 +263,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'events', title: 'События и митапы', subtitle: 'Регистрация на встречу открыта', avatar: '🎟️', avatarTone: '#e56c5b', kind: 'channel', unread: 9,
+    id: 'events', title: 'События и митапы', subtitle: 'Регистрация на встречу открыта', avatar: '🎟️', avatarColor: 7, kind: 'channel', unread: 9,
     messages: [
       { id: 'ev1', author: 'other', sender: 'Оргкомитет', avatar: 'ОР', text: 'Открыли регистрацию на продуктовый митап в следующую среду.', time: '11:12' },
       { id: 'ev2', author: 'other', sender: 'Оргкомитет', avatar: 'ОР', text: 'В программе три коротких доклада и открытая сессия вопросов.', time: '11:13' },
@@ -272,7 +272,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'education', title: 'Обучение', subtitle: 'Новый курс уже доступен', avatar: '🎓', avatarTone: '#8768d6', kind: 'channel', unread: 5,
+    id: 'education', title: 'Обучение', subtitle: 'Новый курс уже доступен', avatar: '🎓', avatarColor: 4, kind: 'channel', unread: 5,
     messages: [
       { id: 'ed1', author: 'other', sender: 'Команда обучения', avatar: 'КО', text: 'Опубликовали короткий курс по организации коммуникаций в команде.', time: '11:36' },
       { id: 'ed2', author: 'other', sender: 'Команда обучения', avatar: 'КО', text: 'Внутри есть уроки про папки, каналы, упоминания и уведомления.', time: '11:37' },
@@ -281,7 +281,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'knowledge-base', title: 'База знаний', subtitle: 'Обновлён раздел про чаты', avatar: '📚', avatarTone: '#3f91b8', kind: 'channel',
+    id: 'knowledge-base', title: 'База знаний', subtitle: 'Обновлён раздел про чаты', avatar: '📚', avatarColor: 3, kind: 'channel',
     messages: [
       { id: 'kb1', author: 'other', sender: 'Редакция базы знаний', avatar: 'БЗ', text: 'Обновили раздел про чаты и каналы.', time: '12:02' },
       { id: 'kb2', author: 'other', sender: 'Редакция базы знаний', avatar: 'БЗ', text: 'Добавили пошаговые инструкции для папок и контекстных меню.', time: '12:03' },
@@ -290,7 +290,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'integrations', title: 'Интеграции', subtitle: 'Календарь снова доступен', avatar: '🔌', avatarTone: '#287fa8', kind: 'channel', unread: 4,
+    id: 'integrations', title: 'Интеграции', subtitle: 'Календарь снова доступен', avatar: '🔌', avatarColor: 3, kind: 'channel', unread: 4,
     messages: [
       { id: 'in1', author: 'other', sender: 'Integration Bot', avatar: 'IB', text: 'Обновили подключение к календарю.', time: '12:25' },
       { id: 'in2', author: 'other', sender: 'Integration Bot', avatar: 'IB', text: 'Создание встреч из чата снова доступно всем пользователям.', time: '12:26' },
@@ -299,7 +299,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'random', title: 'Обо всём', subtitle: 'Кофейная пауза в 15:00', avatar: '☕', avatarTone: '#ad744b', kind: 'channel', unread: 18,
+    id: 'random', title: 'Обо всём', subtitle: 'Кофейная пауза в 15:00', avatar: '☕', avatarColor: 7, kind: 'channel', unread: 18,
     messages: [
       { id: 'rd1', author: 'other', sender: 'Лиза', avatar: 'ЛА', text: 'Кто сегодня идёт на кофейную паузу?', time: '12:48' },
       { id: 'rd2', author: 'other', sender: 'Макс', avatar: 'МХ', text: 'Я буду. Предлагаю встретиться у кухни в 15:00.', time: '12:51' },

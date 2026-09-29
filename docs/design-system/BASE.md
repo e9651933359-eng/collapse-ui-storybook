@@ -57,7 +57,7 @@
 - Сообщения используют тот же `Avatar`: светлая монограмма для пользователя без фото и фото с полупрозрачной обводкой. Отдельного локального avatar-стиля у `MessageBubble` нет.
 - Цвет монограммы задаёт только вариант `Avatar`; текстовые стили родительской композиции не должны переопределять его. Поэтому один avatar в списке и шапке выглядит одинаково.
 - Палитра Color: prop `color` (`'default' | 1…8`) — единственный способ задать цвет аватара по правилам Base. Источник: Figma `Avatar/User`, свойство `Color` ([1114:526](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-526)). `Filled=true` — фон `Background/Solid/Secondary/Type{N}` + `Text/Solid/Base/Light/FullStatic` (белый); `Filled=false` — фон `Background/Solid/Secondary/Type{N}Tint` + `Text/Solid/Accent/Accent`. Токены: `--collapse-color-background-solid-secondary-type{N}` и `…-type{N}-tint`; значения — в [`CORE.md`](CORE.md). `default` — accent primary / accent tint-dim.
-- Prop `tone` оставлен для совместимости (произвольный фон, градиенты в данных обычных чатов) и перекрывает `color`; в новых сценариях и в Федерации не используется.
+- Prop `tone` (`avatarTone` в данных) оставлен только для совместимости: произвольный фон перекрывает `color`. Демо-данные обычных чатов, Федерации и stories переведены на `avatarColor` (значения по ближайшему цвету палитры в Lab; градиенты — по первому цвету), поэтому аватары в списках, шапках и выборе чатов для папок берут цвет и цвет текста из палитры.
 - Значение `Color=AI` не реализовано: Figma MCP не вернул значения градиента `LinkAI/Default`; не подставляем догадкой.
 - Storybook: `UI/Avatar / Color 1–8`, `Color 1–8 / squircle`.
 
@@ -98,6 +98,7 @@
 - В форме выбора сначала показана категория «Папки» с базовым набором; остальные категории общего пикера остаются доступными. Storybook: `UI/SegmentControls / DefaultFolderEmoji`, `UI/FolderManagementModal / Interactive` (папка без выбранной эмодзи).
 - Форма создания использует основное действие «Создать папку», форма редактирования — «Сохранить». Storybook: `UI/FolderManagementModal / EditExistingFolder`.
 - Пустая пользовательская папка показывает подтверждённый текст и действие «Выбрать чаты и каналы», которое открывает тот же экран редактирования: [8611:35248](https://www.figma.com/design/XjoKr5oZ1vXrB2TuYY7ydZ/?node-id=8611-35248), [8614:35830](https://www.figma.com/design/XjoKr5oZ1vXrB2TuYY7ydZ/?node-id=8614-35830).
+- В выборе чатов и каналов для папки аватар чата показывается так же, как в списке чатов: фото (`avatarImage`), если оно есть, иначе монограмма палитры Avatar.
 - Список выбора чатов и каналов: сначала идут выбранные на момент открытия списка, затем остальные; обе группы — по алфавиту (`ru`, без учёта регистра). Порядок фиксируется при открытии и не меняется при переключении чекбоксов, поиск сохраняет порядок. Правило общее для создания и редактирования папки. Storybook: `UI/FolderManagementModal / EditFolderWithSelection`.
 - Удаление подтверждается общей композицией `ConfirmDialog`; Storybook: `UI/ConfirmDialog / DeleteFolder`.
 

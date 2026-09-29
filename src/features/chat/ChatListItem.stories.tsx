@@ -8,7 +8,7 @@ const chat: Chat = {
   title: 'Обновления продукта',
   subtitle: 'Сегодня, 09:40',
   avatar: '👀',
-  avatarTone: '#53c985',
+  avatarColor: 2,
   kind: 'channel',
   unread: 33,
   messages: [],
@@ -56,12 +56,12 @@ export const HoverAndContextMenu: Story = {
 }
 
 export const Federation: Story = {
-  args: { chat: { ...chat, federation: true, title: 'Альбина Бахматулина', avatar: 'АБ', avatarTone: '#e8ddff', avatarFilled: false, kind: 'direct' }, federation: true, onSelect: () => undefined },
+  args: { chat: { ...chat, federation: true, title: 'Альбина Бахматулина', avatar: 'АБ', avatarColor: 'default', avatarFilled: false, kind: 'direct' }, federation: true, onSelect: () => undefined },
   render: (args) => <div className="chat-list-item-story"><ChatListItem {...args} /></div>,
 }
 
 export const GroupMonogram: Story = {
-  args: { chat: { ...chat, title: 'АБ команда', avatar: 'АБ', avatarTone: '#e8ddff', avatarFilled: false, kind: 'group' }, onSelect: () => undefined },
+  args: { chat: { ...chat, title: 'АБ команда', avatar: 'АБ', avatarColor: 'default', avatarFilled: false, kind: 'group' }, onSelect: () => undefined },
   render: (args) => <div className="chat-list-item-story"><ChatListItem {...args} /></div>,
 }
 
