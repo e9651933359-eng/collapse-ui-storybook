@@ -15,6 +15,13 @@
   --collapse-title-l-semibold-weight: 600;
   --collapse-title-l-bold-weight: 700;
 
+  /* Head/S/SemiBold — Figma ModalPage chanel 6863:29880 (24/32, tracking 0.2px). */
+  --collapse-head-s-font: var(--collapse-font-family-base);
+  --collapse-head-s-size: 24px;
+  --collapse-head-s-line-height: 32px;
+  --collapse-head-s-letter-spacing: 0.2px;
+  --collapse-head-s-semibold-weight: 600;
+
   --collapse-paragraph-l-font: var(--collapse-font-family-base);
   --collapse-paragraph-l-size: 17px;
   --collapse-paragraph-l-line-height: 22px;

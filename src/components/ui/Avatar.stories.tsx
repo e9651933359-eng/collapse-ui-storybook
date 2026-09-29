@@ -39,6 +39,7 @@ export const Statuses: Story = {
   render: () => <div className="ui-story-row"><Avatar label="Онлайн" emoji="АИ" filled={false} status="online" /><Avatar label="Занят" emoji="МИ" filled={false} status="busy" /><Avatar label="Не в сети" emoji="ОП" filled={false} status="offline" /></div>,
 }
 
+export const ProfileSize: Story = { args: { emoji: 'АИ', size: 124, filled: false }, parameters: { docs: { description: { story: 'Размер 124 px для профиля — Figma 6974:66545. Кегль монограммы Head/S — техническое допущение: в макете фото.' } } } }
 export const Uploader: Story = { args: { emoji: 'АИ', uploader: true } }
 
 const paletteColors: AvatarColor[] = ['default', 1, 2, 3, 4, 5, 6, 7, 8]

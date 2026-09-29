@@ -52,6 +52,7 @@
 Источник: [Avatar, 1114:526](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-526).
 
 - User/ORG, icon/monogram/image, default/expressive shapes, uploader overlay и status.
+- Размеры: 28, 40, 44 и 124 (`--collapse-size-avatar-profile`, профиль — Figma 6974:66545; монограмма 124 использует Head/S как техническое допущение, в макете фото). Storybook: `Avatar / ProfileSize`.
 - Сохранено правило чатов: user/group — круг, channel — squircle 16; border только у фотографии.
 - User monogram поддерживает подтверждённые `Filled=false` и `Filled=true`. Unfilled: accent tint-dim фон и тёмный accent-текст; filled: accent primary фон и белый текст. Типографика — `Paragraph/M/Medium` 16/22.
 - Сообщения используют тот же `Avatar`: светлая монограмма для пользователя без фото и фото с полупрозрачной обводкой. Отдельного локального avatar-стиля у `MessageBubble` нет.

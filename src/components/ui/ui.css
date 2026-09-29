@@ -375,6 +375,7 @@
 .avatar--size-40 { width: var(--collapse-size-avatar-m); height: var(--collapse-size-avatar-m); }
 .avatar--size-124 { width: var(--collapse-size-avatar-profile); height: var(--collapse-size-avatar-profile); font-size: var(--collapse-head-s-size); }
 .avatar--size-44 { width: var(--collapse-size-avatar-l); height: var(--collapse-size-avatar-l); }
+.avatar--size-124 { width: var(--collapse-size-avatar-profile); height: var(--collapse-size-avatar-profile); font-family: var(--collapse-head-s-font); font-size: var(--collapse-head-s-size); line-height: var(--collapse-head-s-line-height); letter-spacing: var(--collapse-head-s-letter-spacing); }
 .avatar--round { border-radius: var(--collapse-radius-full); }
 .avatar--squircle { border-radius: var(--collapse-radius-squircle); }
 .avatar--image { border: var(--collapse-stroke-width-xthin) solid var(--collapse-color-border-opacity-base-tertiary-dim); }
