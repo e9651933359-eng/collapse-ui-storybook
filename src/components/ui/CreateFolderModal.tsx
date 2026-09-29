@@ -47,16 +47,24 @@ export function CreateFolderModal({ candidates, initialFolder, initialSelectedId
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [selectedIds, setSelectedIds] = useState<string[]>(initialFolder?.chatIds ?? [...initialSelectedIds])
   const [pickerIds, setPickerIds] = useState<string[]>([])
+  // Выбранные на момент открытия списка: идут первыми. Порядок не меняется, пока список открыт, чтобы строки не прыгали при переключении.
+  const [initiallySelectedIds, setInitiallySelectedIds] = useState<string[]>([])
   const [query, setQuery] = useState('')
   const invalidName = name.length > maxFolderNameLength
   const canCreate = name.trim().length > 0 && !invalidName
   const filteredCandidates = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase('ru')
-    return candidates.filter((candidate) => !needle || candidate.label.toLocaleLowerCase('ru').includes(needle))
-  }, [candidates, query])
+    const byLabel = (a: FolderCandidate, b: FolderCandidate) => a.label.localeCompare(b.label, 'ru', { sensitivity: 'base', numeric: true })
+    const matched = candidates.filter((candidate) => !needle || candidate.label.toLocaleLowerCase('ru').includes(needle))
+    return [
+      ...matched.filter((candidate) => initiallySelectedIds.includes(candidate.id)).sort(byLabel),
+      ...matched.filter((candidate) => !initiallySelectedIds.includes(candidate.id)).sort(byLabel),
+    ]
+  }, [candidates, initiallySelectedIds, query])
 
   const openPicker = () => {
     setPickerIds(selectedIds)
+    setInitiallySelectedIds(selectedIds)
     setQuery('')
     setView('picker')
   }

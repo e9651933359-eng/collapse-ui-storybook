@@ -88,3 +88,14 @@ export const EditExistingFolder: Story = {
     onClose: () => undefined,
   },
 }
+
+export const EditFolderWithSelection: Story = {
+  args: {
+    ...EditExistingFolder.args,
+    initialFolderId: 'folder-product',
+    customFolders: [
+      { id: 'folder-product', label: 'Продукт', emoji: '🔥', chatIds: ['updates', 'team'] },
+    ],
+  },
+  parameters: { docs: { description: { story: 'В списке выбора сначала идут ранее выбранные («Команда», «Обновления продукта»), затем остальные — обе группы по алфавиту.' } } },
+}

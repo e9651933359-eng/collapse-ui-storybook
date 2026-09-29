@@ -98,6 +98,7 @@
 - В форме выбора сначала показана категория «Папки» с базовым набором; остальные категории общего пикера остаются доступными. Storybook: `UI/SegmentControls / DefaultFolderEmoji`, `UI/FolderManagementModal / Interactive` (папка без выбранной эмодзи).
 - Форма создания использует основное действие «Создать папку», форма редактирования — «Сохранить». Storybook: `UI/FolderManagementModal / EditExistingFolder`.
 - Пустая пользовательская папка показывает подтверждённый текст и действие «Выбрать чаты и каналы», которое открывает тот же экран редактирования: [8611:35248](https://www.figma.com/design/XjoKr5oZ1vXrB2TuYY7ydZ/?node-id=8611-35248), [8614:35830](https://www.figma.com/design/XjoKr5oZ1vXrB2TuYY7ydZ/?node-id=8614-35830).
+- Список выбора чатов и каналов: сначала идут выбранные на момент открытия списка, затем остальные; обе группы — по алфавиту (`ru`, без учёта регистра). Порядок фиксируется при открытии и не меняется при переключении чекбоксов, поиск сохраняет порядок. Правило общее для создания и редактирования папки. Storybook: `UI/FolderManagementModal / EditFolderWithSelection`.
 - Удаление подтверждается общей композицией `ConfirmDialog`; Storybook: `UI/ConfirmDialog / DeleteFolder`.
 
 ### Message Editor
