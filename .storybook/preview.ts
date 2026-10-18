@@ -9,6 +9,9 @@ const preview: Preview = {
   parameters: {
     layout: 'centered',
     controls: { expanded: true },
+    options: {
+      storySort: { order: ['Collapse UI', 'Core', 'UI', 'Option Menu', 'Feedback', 'Shell', 'Base', 'Chat', 'Federation', 'Disk'] },
+    },
     backgrounds: { default: 'collapse', values: [{ name: 'collapse', value: '#f9fafc' }] },
   },
   globalTypes: {
