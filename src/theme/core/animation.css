@@ -5,6 +5,9 @@
   --collapse-motion-duration-default: 160ms;
   --collapse-motion-duration-slow: 180ms;
   --collapse-motion-duration-spinner: 800ms;
+  /* Бесконечная анимация индетерминированного Progress: должна читаться как плавное движение,
+     а не мелькание. Figma не кодирует тайминг анимации — техническое допущение. */
+  --collapse-motion-duration-progress: 1400ms;
   --collapse-motion-easing-standard: ease;
 }
 
