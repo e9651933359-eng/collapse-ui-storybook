@@ -8,5 +8,18 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Interactive: Story = { render: () => <InteractiveRate /> }
-export const Sizes: Story = { render: () => <div className="ui-story-row">{(['s', 'm', 'l'] as const).map((size) => <Rate key={size} value={4} size={size} />)}</div> }
+const rateSizeLabels = { s: 'Small · 16', m: 'Medium · 24', l: 'Large · 32' } as const
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="ui-story-grid">
+      {(['s', 'm', 'l'] as const).map((size) => (
+        <div className="ui-story-row-labeled" key={size}>
+          <span className="ui-story-row-label">{rateSizeLabels[size]}</span>
+          <Rate value={4} size={size} />
+        </div>
+      ))}
+    </div>
+  ),
+}
 export const Disabled: Story = { args: { disabled: true } }
