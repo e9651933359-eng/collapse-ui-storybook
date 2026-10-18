@@ -72,7 +72,6 @@
   /* Progress linear-determinate: Figma 4388:13103. Дорожка, активная полоса и stop — M 4, S 2; контейнер 12. */
   --collapse-size-progress-track: 4px;
   --collapse-size-progress-track-s: 2px;
-  --collapse-size-poll-progress: 2px; /* Figma Poll 17198:26124: линия результата и трек, измерено по скриншоту (допущение) */
   --collapse-size-uploader: 124px;
   --collapse-size-list-item-m: 72px;
   --collapse-size-list-item-l: 80px;

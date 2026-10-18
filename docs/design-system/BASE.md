@@ -222,7 +222,7 @@
 - `Message` получил необязательные поля `status`, `deleted`, `comments`, `voice`, `call`; `MessageBubble` принимает `onOpenComments`. Всё выключено по умолчанию, обычные чаты и Федерация не затронуты.
 - Статус исходящих берётся из `MessageStatus`; прежний `CheckCheck` 14 px заменён иконкой 16 px по Figma. Цвет статуса теперь задаёт сам компонент, а не правило `.message--mine .message__meta svg:last-child`.
 - Бабл с комментариями получает «шов»: верхний блок с радиусом 4 px снизу, блок комментариев — 4 px сверху и 24 px снизу; хвост переносится на блок комментариев (`--collapse-radius-bubble-seam`).
-- Новые токены: `--collapse-size-message-status`, `--collapse-size-voice-*`, `--collapse-size-call-message-width`, `--collapse-size-media-button-l/m`, `--collapse-size-media-label-height`, `--collapse-size-poll-progress`, `--collapse-radius-bubble-seam`, цвета `--collapse-color-background-opacity-accent-primary` (13782:22407) и `--collapse-color-background-opacity-base-dark-static-accent-tint` (10098:69414), `--collapse-caption-m-semibold-weight` (19261:27095). Каждый токен подписан узлом Figma.
+- Новые токены: `--collapse-size-message-status`, `--collapse-size-voice-*`, `--collapse-size-call-message-width`, `--collapse-size-media-button-l/m`, `--collapse-size-media-label-height`, `--collapse-radius-bubble-seam`, цвета `--collapse-color-background-opacity-accent-primary` (13782:22407) и `--collapse-color-background-opacity-base-dark-static-accent-tint` (10098:69414), `--collapse-caption-m-semibold-weight` (19261:27095). Каждый токен подписан узлом Figma.
 - Исправлена общая ошибка CheckBox/Radio: CSS `:indeterminate` срабатывает на группе radio без выбранного значения и рисовал «−» во всех radio. Теперь indeterminate-стили не применяются к `choice-control--radio`.
 - Исправлен hover у отключённого ChipsField: chips внутри `is-disabled` больше не реагируют на указатель.
 
@@ -230,7 +230,7 @@
 
 - SVG-иконки Figma недоступны для скачивания, поэтому Phone/Info/Play/Pause/X/ArrowDown/ChevronRight/Pin — приближения `lucide-react`; иконка расшифровки «→T» нарисована вручную по скриншоту.
 - VoiceMessage: `Default` и `Not listened` визуально совпадают в MCP, индикатор «не прослушано» не показан. Состояние `Not loading` трактуется как «файл ещё не скачан» (кнопка скачивания).
-- Толщина линии и трека результатов опроса 2 px измерена по скриншоту узла 17198:26124; общий `Progress` (4 px) не меняется.
+- Результаты опроса используют `Progress size="s"`: линия и трек 2 px по Figma 4388:13103 (подтверждено веткой federation-fixes).
 - Форма волны (`s/m/l` = 4/12/24 px) взята с узла Record 13870:22087; для реальных записей волна — данные продукта.
 - Не найдено в Figma или недоступно через MCP, поэтому не реализовано: сетка Media Image (несколько изображений), вариант Forwarded, контейнеры Files и Buttons, SliderThumb/Record как отдельные компоненты, мобильные варианты сообщений.
 - Расхождение, не исправленное: стиль `.message__reaction` в чатах отличается от Figma Reactions (плашка 55×28 с подкрашенным фоном); SystemMessage и PollMessage используют существующий стиль для единообразия с чатами.

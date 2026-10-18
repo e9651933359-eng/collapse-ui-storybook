@@ -214,9 +214,6 @@
 /* Полоса результата: отступ слева = целевая область контрола 32px + gap 6px, как в Figma (38px) */
 .poll-list__progress { width: auto; margin-left: calc(var(--collapse-size-choice-target-s) + var(--collapse-spacing-horizontal-s-nudge)); margin-right: var(--collapse-spacing-horizontal-m); }
 .poll-list--answer .poll-list__item { padding-bottom: var(--collapse-spacing-horizontal-xs); }
-/* В опросе линия результата и трек тонкие (2px) — по измерению Figma «Poll» 17198:26124; общий Progress не меняем */
-.poll-list__progress::before { height: var(--collapse-size-poll-progress); }
-.poll-list__progress .collapse-progress__active { top: 50%; height: var(--collapse-size-poll-progress); transform: translateY(-50%); }
 .poll-list--answer .choice-control { opacity: .4; }
 .poll-status { min-height: var(--collapse-size-control-s); padding: 0 var(--collapse-spacing-horizontal-m); display: flex; align-items: center; justify-content: center; }
 .poll-status--text span { color: var(--collapse-color-text-solid-base-primary); font-size: var(--caption-l-size); line-height: var(--caption-l-line); letter-spacing: var(--collapse-caption-l-letter-spacing); opacity: .38; }
