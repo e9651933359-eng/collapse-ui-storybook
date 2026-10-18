@@ -320,12 +320,12 @@
 .choice-control--s .choice-control__indicator { width: var(--collapse-size-choice-indicator-s); height: var(--collapse-size-choice-indicator-s); }
 .choice-control--m .choice-control__indicator { width: var(--collapse-size-choice-indicator-m); height: var(--collapse-size-choice-indicator-m); }
 .choice-control input:checked + .choice-control__target .choice-control__indicator,
-.choice-control input:indeterminate + .choice-control__target .choice-control__indicator,
+.choice-control:not(.choice-control--radio) input:indeterminate + .choice-control__target .choice-control__indicator,
 .choice-control--visual.is-selected .choice-control__indicator,
 .choice-control--visual.is-indeterminate .choice-control__indicator { border-color: var(--collapse-color-background-solid-accent-primary); background: var(--collapse-color-background-solid-accent-primary); }
 .choice-control:not(.choice-control--radio) input:checked + .choice-control__target .choice-control__indicator::after,
 .choice-control--visual.is-selected .choice-control__indicator::after { content: '✓'; font-size: var(--collapse-size-icon-xs); line-height: 1; }
-.choice-control input:indeterminate + .choice-control__target .choice-control__indicator::after,
+.choice-control:not(.choice-control--radio) input:indeterminate + .choice-control__target .choice-control__indicator::after,
 .choice-control--visual.is-indeterminate .choice-control__indicator::after { content: '−'; font-size: var(--collapse-size-icon-xs); line-height: 1; }
 .choice-control--radio input:checked + .choice-control__target .choice-control__indicator::after { content: ''; width: var(--collapse-spacing-horizontal-m-nudge); height: var(--collapse-spacing-horizontal-m-nudge); border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-base-light-accent); }
 .choice-control:hover .choice-control__target { background: var(--collapse-color-state-layer-on-base-tertiary); }
@@ -753,6 +753,8 @@
 .collapse-chips-field.is-error .collapse-chips-field__support { color: var(--collapse-color-text-solid-error-primary-dim); }
 .collapse-chips-field.is-disabled { color: var(--collapse-color-text-opacity-base-disabled); }
 .collapse-chips-field.is-disabled .collapse-chips-field__surface { background: var(--collapse-color-background-opacity-base-disabled); }
+/* В disabled-поле чипы статичны: без hover-подложки (чип там не интерактивен) */
+.collapse-chips-field.is-disabled .collapse-chip { pointer-events: none; }
 
 .collapse-emoji-picker { width: var(--collapse-size-emoji-picker-width); height: var(--collapse-size-emoji-picker-height); padding: var(--collapse-spacing-horizontal-s); display: grid; grid-template-rows: var(--collapse-size-emoji-search) minmax(0, 1fr) var(--collapse-size-control-s); overflow: hidden; border: var(--collapse-stroke-width-xthin) solid var(--collapse-color-border-opacity-base-light-tertiary); border-radius: var(--collapse-radius-control); background: var(--collapse-color-background-opacity-light-secondary); box-shadow: var(--collapse-effect-shadow-02); backdrop-filter: blur(calc(var(--collapse-effect-blur-background-default) / 2)); }
 .collapse-emoji-picker__search { height: var(--collapse-size-emoji-search); padding: var(--collapse-spacing-horizontal-none) var(--collapse-spacing-horizontal-l); display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-m); border-radius: var(--collapse-radius-control); background: var(--collapse-color-background-opacity-base-secondary-tint); color: var(--collapse-color-icon-opacity-base-accent-tint); }

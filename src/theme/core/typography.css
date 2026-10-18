@@ -48,6 +48,7 @@
   --collapse-caption-m-letter-spacing: 0.15px;
   --collapse-caption-m-regular-weight: 400;
   --collapse-caption-m-medium-weight: 500;
+  --collapse-caption-m-semibold-weight: 600; /* Figma 19261:27095 «Poll», Caption/M/SemiBold */
   --collapse-counter-line-height-s: 12px;
   --collapse-counter-line-height-m: 16px;
 

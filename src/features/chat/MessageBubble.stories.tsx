@@ -103,3 +103,56 @@ export const LongThread: Story = {
     ))}
   </>,
 }
+
+export const OutgoingStatuses: Story = {
+  args: { message: { id: 'outgoingstatuses', author: 'me', text: '', time: '12:32' } },
+  render: () => (
+    <>
+      {(['sent', 'read', 'loading', 'error'] as const).map((status) => (
+        <MessageBubble key={status} message={{ id: `status-${status}`, author: 'me', text: `Статус: ${status}`, time: '12:32', status }} />
+      ))}
+    </>
+  ),
+  parameters: { docs: { description: { story: 'Отправлено, прочитано, отправляется, ошибка — Figma «Message status». Без поля status исходящее сообщение считается прочитанным.' } } },
+}
+
+export const Deleted: Story = {
+  args: { message: { id: 'deleted', author: 'me', text: '', time: '12:32' } },
+  render: () => (
+    <>
+      <MessageBubble message={{ id: 'del-other', author: 'other', sender: 'Анна Иванова', avatar: 'АИ', text: '', time: '12:32', deleted: true }} />
+      <MessageBubble message={{ id: 'del-me', author: 'me', text: '', time: '12:33', deleted: true }} />
+    </>
+  ),
+}
+
+export const WithComments: Story = {
+  args: { message: { id: 'withcomments', author: 'me', text: '', time: '12:32' } },
+  render: () => (
+    <>
+      <MessageBubble message={{ id: 'com-other', author: 'other', sender: 'Редакция', avatar: 'Р', text: 'Публикация канала: итоги недели.', time: '12:32', comments: 3 }} />
+      <MessageBubble message={{ id: 'com-me', author: 'me', text: 'Моя публикация в канале.', time: '12:33', comments: 1 }} />
+    </>
+  ),
+}
+
+export const Voice: Story = {
+  args: { message: { id: 'voice', author: 'me', text: '', time: '12:32' } },
+  render: () => (
+    <>
+      <MessageBubble message={{ id: 'voice-other', author: 'other', sender: 'Михаил', avatar: 'МИ', text: '', time: '12:32', voice: { duration: '00:06' } }} />
+      <MessageBubble message={{ id: 'voice-me', author: 'me', text: '', time: '12:33', voice: { duration: '00:14' } }} />
+    </>
+  ),
+}
+
+export const Call: Story = {
+  args: { message: { id: 'call', author: 'me', text: '', time: '12:32' } },
+  render: () => (
+    <>
+      <MessageBubble message={{ id: 'call-ended', author: 'me', text: '', time: '12:32', call: { state: 'ended' } }} />
+      <MessageBubble message={{ id: 'call-started', author: 'other', sender: 'Анна Иванова', avatar: 'АИ', text: '', time: '12:35', call: { state: 'started' } }} />
+    </>
+  ),
+}
+

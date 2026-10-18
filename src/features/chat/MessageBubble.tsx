@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
-import { CheckCheck, MoreHorizontal, MessageCircle, Pin, SmilePlus } from 'lucide-react'
+import { MoreHorizontal, MessageCircle, Pin, SmilePlus } from 'lucide-react'
 import type { Message, MessageReaction } from '../../types/chat'
 import { Avatar } from '../../components/ui/Avatar'
 import { IconButton } from '../../components/ui/IconButton'
 import { ListItemFile } from '../../components/ui/ListItemFile'
 import { FederationLabel } from '../../components/ui/FederationLabel'
 import { DiskAttachmentRow, LinkPreviewCard } from '../disk/DiskMessageItems'
+import { CallMessage } from './message-parts/CallMessage'
+import { CommentsLink } from './message-parts/CommentsLink'
+import { DeletedMessage } from './message-parts/DeletedMessage'
+import { MessageStatus } from './message-parts/MessageStatus'
+import { VoiceMessage } from './message-parts/VoiceMessage'
 
 export type MessageBubbleProps = {
   message: Message
@@ -15,6 +20,7 @@ export type MessageBubbleProps = {
   onReactionChange?: (reactions: MessageReaction[]) => void
   /** Удаление файла или предпросмотра ссылки из чата (меню «Удалить из чата»). */
   onRemoveItem?: (messageId: string, itemId: string) => void
+  onOpenComments?: (message: Message) => void
   federation?: boolean
 }
 
@@ -60,9 +66,11 @@ function FormattedMessageText({ value }: { value: string }) {
     : <span key={`text-${index}`}>{renderInlineMarkup(part, `part-${index}`)}</span>)}</div>
 }
 
-export function MessageBubble({ message, onReply, onMore, onReactionChange, onRemoveItem, federation = message.federation ?? false }: MessageBubbleProps) {
+export function MessageBubble({ message, onReply, onMore, onReactionChange, onRemoveItem, onOpenComments, federation = message.federation ?? false }: MessageBubbleProps) {
   const mine = message.author === 'me'
   const [reactions, setReactions] = useState(message.reactions ?? [])
+  const hasComments = (message.comments ?? 0) > 0
+  const [voicePlaying, setVoicePlaying] = useState(false)
 
   const toggleReaction = (emoji: string) => {
     setReactions((current) => {
@@ -80,6 +88,10 @@ export function MessageBubble({ message, onReply, onMore, onReactionChange, onRe
     })
   }
 
+  if (message.deleted) {
+    return <DeletedMessage type={mine ? 'my' : message.sender ? 'other-group' : 'other'} comments={message.comments} onOpenComments={() => onOpenComments?.(message)} />
+  }
+
   return (
     <article
       className={`message ${mine ? 'message--mine' : 'message--other'}`}
@@ -95,7 +107,7 @@ export function MessageBubble({ message, onReply, onMore, onReactionChange, onRe
             filled={message.avatarFilled ?? false}
           />
         )}
-        <div className="message__stack">
+        <div className={`message__stack ${hasComments ? 'has-comments' : ''}`}>
           <div className="message__bubble">
             {!mine && message.sender && <div className="message__sender">{federation ? <FederationLabel iconPosition="start">{message.sender}</FederationLabel> : message.sender}</div>}
             {message.reply && (
@@ -124,6 +136,15 @@ export function MessageBubble({ message, onReply, onMore, onReactionChange, onRe
                 <LinkPreviewCard preview={message.linkPreview} onRemove={onRemoveItem ? () => onRemoveItem(message.id, message.linkPreview!.id) : undefined} />
               </div>
             ) : null}
+            {message.call && <CallMessage state={message.call.state} description={message.call.description} />}
+            {message.voice && (
+              <VoiceMessage
+                state={voicePlaying ? 'playback' : 'default'}
+                time={message.voice.duration}
+                progress={voicePlaying ? 0.2 : undefined}
+                onToggle={() => setVoicePlaying((current) => !current)}
+              />
+            )}
             {message.images?.length ? (
               <div className="message__images" aria-label="Изображения в сообщении">
                 {message.images.map((image) => <img key={image.src} src={image.src} alt={image.alt} loading="lazy" />)}
@@ -134,11 +155,13 @@ export function MessageBubble({ message, onReply, onMore, onReactionChange, onRe
               <span className="message__meta">
                 {message.pinned && <Pin aria-label="Закреплено" />}
                 {message.time}
-                {mine && <CheckCheck aria-label="Прочитано" />}
+                {mine && <MessageStatus status={message.status ?? 'read'} />}
               </span>
             </div>
-            {!mine && <img className="message__tail" src="assets/figma/bubble-tail-incoming.svg" alt="" aria-hidden="true" />}
+            {!mine && !hasComments && <img className="message__tail" src="assets/figma/bubble-tail-incoming.svg" alt="" aria-hidden="true" />}
           </div>
+          {hasComments && <CommentsLink count={message.comments!} mine={mine} onClick={() => onOpenComments?.(message)} />}
+          {!mine && hasComments && <img className="message__tail message__tail--stack" src="assets/figma/bubble-tail-incoming.svg" alt="" aria-hidden="true" />}
 
           {reactions.length > 0 && (
             <div className="message__reactions" aria-label="Реакции на сообщение">

@@ -70,6 +70,7 @@
   --collapse-size-counter-default-m: 20px;
   --collapse-size-progress: 12px;
   --collapse-size-progress-track: 4px;
+  --collapse-size-poll-progress: 2px; /* Figma Poll 17198:26124: линия результата и трек, измерено по скриншоту (допущение) */
   --collapse-size-uploader: 124px;
   --collapse-size-list-item-m: 72px;
   --collapse-size-list-item-l: 80px;
@@ -95,6 +96,20 @@
   /* Technical demo assumption: a media Bubble variant was not available in the inspected Figma sources. */
   --collapse-size-message-media-width: 320px;
   --collapse-size-message-media-height: 220px;
+  /* Message family: Figma my-Base «Bubble» 3953:21293 (Desktop section) */
+  --collapse-radius-bubble-seam: 4px; /* шов бабла с блоком комментариев, 12498:78042 */
+  --collapse-size-message-status: 20px; /* Message status 10092:121775 */
+  --collapse-size-voice-message-width: 350px; /* Voice message 10115:69887 */
+  --collapse-size-voice-waveform: 40px; /* Record 13870:22184 */
+  --collapse-size-voice-bar-s: 4px;
+  --collapse-size-voice-bar-m: 12px;
+  --collapse-size-voice-bar-l: 24px;
+  --collapse-size-voice-transcription-width: 44px; /* Transcription button 13782:22407 */
+  --collapse-size-voice-transcription-height: 28px;
+  --collapse-size-call-message-width: 345px; /* Call 11719:74105 */
+  --collapse-size-media-button-l: 44px; /* Buttons (media) Large 10092:125388: padding 12 + иконка 20 */
+  --collapse-size-media-button-m: 32px; /* Buttons (media) Medium 10092:125424: padding 8 + иконка 16 */
+  --collapse-size-media-label-height: 22px; /* Label (media) 10098:69404 */
   --collapse-size-action-card: 198px;
   --collapse-size-action-card-m: 88px;
   --collapse-size-action-card-s: 72px;

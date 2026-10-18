@@ -20,6 +20,16 @@ export type Message = {
   reply?: { sender: string; text: string }
   pinned?: boolean
   reactions?: MessageReaction[]
+  /** Статус исходящего сообщения (Figma Message status). Без поля — «прочитано», как раньше. */
+  status?: 'sent' | 'read' | 'loading' | 'error'
+  /** Сообщение удалено: показывается плашка «Сообщение удалено». */
+  deleted?: boolean
+  /** Число комментариев под сообщением канала. */
+  comments?: number
+  /** Голосовое сообщение. */
+  voice?: { duration: string }
+  /** Звонок: итог или идущий звонок с кнопкой присоединения. */
+  call?: { state: 'ended' | 'started'; description?: string }
   attachments?: Array<{
     id: string
     name: string

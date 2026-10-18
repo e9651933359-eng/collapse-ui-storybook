@@ -61,7 +61,7 @@
 ### MessageBubble media
 
 - Bubble поддерживает необязательные изображения перед текстом. Для демо используются локальные ассеты, lazy loading и размеры из `--collapse-size-message-media-*`.
-- Точный media-вариант Bubble в доступной Figma-документации не найден. Ограничение изображения 320×220 px — техническое допущение для прокручиваемой демо-переписки, а не правило Collapse.
+- Точная сетка Media Image на странице Bubble не прочитана. Ограничение изображения 320×220 px — техническое допущение для прокручиваемой демо-переписки, а не правило Collapse. Кнопки и подпись поверх медиа — `MediaButton` и `MediaLabel` (партия 6).
 - Storybook: `Chat/MessageBubble / WithImage`.
 
 ### SegmentControls и системные папки
@@ -193,6 +193,39 @@
 - [ChipsField, 1114:470](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-470): добавление Enter/запятая, независимое удаление, Backspace, error/disabled/focus.
 - [Hyper-link, 1940:2001](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1940-2001): S/M/L, Accent/Default/Secondary, regular/medium, enabled/hovered/visited/disabled.
 
+## Партия 6: семейство сообщений (страница Bubble)
+
+Источник: my-Base, страница [Bubble, 3953:21293](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=3953-21293). Код: `src/features/chat/message-parts/`, Storybook — группы `Chat/…` ниже. Для существующих сообщений без новых полей `Message` вид не меняется (кроме иконки статуса, см. ниже).
+
+| Компонент | Figma | Storybook | Что покрыто |
+|---|---|---|---|
+| MessageStatus | [10092:121775](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10092-121775) | `Chat/Message status` | Sent / Read / Loading / Error, `light` для тёмных подложек; иконка 16 px |
+| CommentsLink | [10092:108369](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10092-108369) | `Chat/CommentsLink` | своё/чужое, склонение «комментарий/комментария/комментариев», hover/pressed/focus |
+| DeletedMessage | [10227:75515](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10227-75515) | `Chat/DeletedMessage` | Other (Group) / Other / My, с комментариями и без, без хвоста |
+| SystemMessage | [10100:73473](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10100-73473) | `Chat/SystemMessage` | без кнопки, Call (success), Bot (Assistive chips), реакции, закреп, комментарии |
+| CallMessage | [11696:71972](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=11696-71972) | `Chat/CallMessage` | Ended, Started horizontal / vertical |
+| VoiceMessage | [10115:69192](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10115-69192) | `Chat/VoiceMessage` | default, loading, not-loaded, playback, pause, disabled; интерактивная story |
+| PollMessage / PollList / PollStatusBar | [17198:25566](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=17198-25566), [17198:26142](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=17198-26142), [18791:34863](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=18791-34863) | `Chat/Poll` | голосование (Single/Multiple), результаты, мой опрос, реакции и комментарии, статус-бар Text/Button |
+| MediaButton / MediaLabel | [10092:125388](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10092-125388), [10092:125424](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10092-125424), [10098:69404](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=10098-69404) | `Chat/Media controls` | Loading / Download / Send, Large / Medium, Default / Accent, hover; подпись размера файла |
+
+Правила и интеграция:
+
+- `Message` получил необязательные поля `status`, `deleted`, `comments`, `voice`, `call`; `MessageBubble` принимает `onOpenComments`. Всё выключено по умолчанию, обычные чаты и Федерация не затронуты.
+- Статус исходящих берётся из `MessageStatus`; прежний `CheckCheck` 14 px заменён иконкой 16 px по Figma. Цвет статуса теперь задаёт сам компонент, а не правило `.message--mine .message__meta svg:last-child`.
+- Бабл с комментариями получает «шов»: верхний блок с радиусом 4 px снизу, блок комментариев — 4 px сверху и 24 px снизу; хвост переносится на блок комментариев (`--collapse-radius-bubble-seam`).
+- Новые токены: `--collapse-size-message-status`, `--collapse-size-voice-*`, `--collapse-size-call-message-width`, `--collapse-size-media-button-l/m`, `--collapse-size-media-label-height`, `--collapse-size-poll-progress`, `--collapse-radius-bubble-seam`, цвета `--collapse-color-background-opacity-accent-primary` (13782:22407) и `--collapse-color-background-opacity-base-dark-static-accent-tint` (10098:69414), `--collapse-caption-m-semibold-weight` (19261:27095). Каждый токен подписан узлом Figma.
+- Исправлена общая ошибка CheckBox/Radio: CSS `:indeterminate` срабатывает на группе radio без выбранного значения и рисовал «−» во всех radio. Теперь indeterminate-стили не применяются к `choice-control--radio`.
+- Исправлен hover у отключённого ChipsField: chips внутри `is-disabled` больше не реагируют на указатель.
+
+Технические допущения (в Figma MCP не подтверждены):
+
+- SVG-иконки Figma недоступны для скачивания, поэтому Phone/Info/Play/Pause/X/ArrowDown/ChevronRight/Pin — приближения `lucide-react`; иконка расшифровки «→T» нарисована вручную по скриншоту.
+- VoiceMessage: `Default` и `Not listened` визуально совпадают в MCP, индикатор «не прослушано» не показан. Состояние `Not loading` трактуется как «файл ещё не скачан» (кнопка скачивания).
+- Толщина линии и трека результатов опроса 2 px измерена по скриншоту узла 17198:26124; общий `Progress` (4 px) не меняется.
+- Форма волны (`s/m/l` = 4/12/24 px) взята с узла Record 13870:22087; для реальных записей волна — данные продукта.
+- Не найдено в Figma или недоступно через MCP, поэтому не реализовано: сетка Media Image (несколько изображений), вариант Forwarded, контейнеры Files и Buttons, SliderThumb/Record как отдельные компоненты, мобильные варианты сообщений.
+- Расхождение, не исправленное: стиль `.message__reaction` в чатах отличается от Figma Reactions (плашка 55×28 с подкрашенным фоном); SystemMessage и PollMessage используют существующий стиль для единообразия с чатами.
+
 ## Hover-состояния
 
 Ревью hover в Storybook: наведение на каждый интерактивный элемент всех stories и сравнение «до/после».
@@ -205,7 +238,7 @@
 - Техническое допущение: у выбранных элементов (selected tab, chip, segment, NavListItem, реакция, emoji-сегмент, selected IconButton) hover вид не меняет; в Figma это не подтверждено.
 - Стиль `cursor: grab` у перетаскиваемых сегментов и чатов — намеренный.
 
-Исправлено в этом ревью: ComboBox (поле), DropField (error-состояние и локальные стили Федерации), Uploader в error, ссылка действия InfoBar, плашка `FederationNotice` с действием, иконка папки в окне создания папки, сортировка в выборе файлов Диска; hover убран у disabled/loading в Tabs, Rate, NavListItem, ChipsField, Button и IconButton.
+Исправлено в этом ревью: ComboBox (поле), DropField (error-состояние и локальные стили Федерации), Uploader в error, ссылка действия InfoBar, плашка `FederationNotice` с действием, иконка папки в окне создания папки, сортировка в выборе файлов Диска; hover убран у disabled/loading в Tabs, Rate, NavListItem, ChipsField (включая chips внутри отключённого поля), Button и IconButton. Новые компоненты семейства сообщений (CommentsLink, VoiceMessage, MediaButton, PollStatusBar, IconButton звонка) проверены тем же способом: disabled-элементы hover не получают.
 
 Не покрыто Storybook: кнопка профиля в шапке чата (`chat-header__identity--action`) не имеет hover и не представлена ни в одной story.
 

@@ -1,0 +1,267 @@
+/*
+ * Message family: статус, комментарии, удалённое, системное, звонок, голосовое.
+ * Источник: Figma my-Base, страница «Bubble» 3953:21293 (Desktop). Размеры — токены core/dimensions.css.
+ * Структуру бабла (.message, .message__bubble, .message__tail) переиспользуем из styles.css.
+ */
+
+/* ---------- Message status (10092:121775) ---------- */
+.message-status {
+  width: var(--collapse-size-message-status);
+  height: var(--collapse-size-message-status);
+  flex: 0 0 var(--collapse-size-message-status);
+  display: inline-grid;
+  place-items: center;
+}
+/* :where() — нулевая специфичность, чтобы размер иконки внутри .message__meta остался прежним */
+.message-status :where(svg) { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); }
+.message-status--read { color: var(--collapse-color-icon-solid-accent-primary); }
+.message-status--sent { color: var(--collapse-color-icon-opacity-base-accent-tint); }
+.message-status--error { color: var(--collapse-color-icon-solid-error-primary); }
+.message-status.is-light { color: var(--collapse-color-icon-solid-base-light-full-static); }
+.message-status.is-light.message-status--error { color: var(--collapse-color-icon-solid-error-primary); }
+
+/* Внутри мета-строки бабла статус не занимает лишнюю высоту */
+.message__meta .message-status { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); flex-basis: var(--collapse-size-icon-xs); }
+
+/* ---------- Удалённое сообщение / шов с комментариями ---------- */
+.message--deleted .message__stack { width: auto; }
+.message--deleted .message__bubble { width: auto; min-width: 0; padding-block: var(--collapse-spacing-horizontal-xs); }
+.message--deleted .message__content { padding-block: var(--collapse-spacing-horizontal-s-nudge); }
+.message--deleted .message__text { flex: 0 1 auto; color: var(--collapse-color-text-solid-base-tertiary); white-space: nowrap; }
+.message__deleted-avatar {
+  width: var(--collapse-size-avatar-m);
+  height: var(--collapse-size-avatar-m);
+  flex: 0 0 var(--collapse-size-avatar-m);
+  display: grid;
+  place-items: center;
+  border-radius: var(--collapse-radius-full);
+  background: var(--collapse-color-background-opacity-base-secondary-tint);
+  color: var(--collapse-color-icon-opacity-base-accent-tint);
+}
+.message__deleted-avatar svg { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
+
+/* Бабл с блоком комментариев: между ними шов 2px, радиусы 24 сверху/снизу и 4 на шве; хвостик — у нижнего блока */
+.message__stack.has-comments { position: relative; gap: var(--collapse-spacing-horizontal-xxs); }
+.message__stack.has-comments > .message__bubble { border-radius: var(--radius-l) var(--radius-l) var(--collapse-radius-bubble-seam) var(--collapse-radius-bubble-seam); }
+.message--mine .message__stack.has-comments > .message__bubble::after { display: none; }
+.message__tail--stack { bottom: var(--collapse-spacing-horizontal-xxs); }
+
+/* ---------- Comments (10092:108369) ---------- */
+.message__comments {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  padding: var(--collapse-spacing-horizontal-m-nudge) var(--collapse-spacing-horizontal-m);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--collapse-spacing-horizontal-s);
+  border: 0;
+  border-radius: var(--collapse-radius-bubble-seam) var(--collapse-radius-bubble-seam) var(--radius-l) var(--radius-l);
+  background: var(--background-tertiary);
+  color: var(--collapse-color-text-opacity-base-secondary);
+  font-family: var(--paragraph-s-font);
+  font-size: var(--paragraph-s-size);
+  line-height: var(--paragraph-s-line);
+  letter-spacing: var(--collapse-paragraph-s-letter-spacing);
+  text-align: left;
+  cursor: pointer;
+  isolation: isolate;
+  background-origin: border-box;
+  transition: background-color var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard);
+}
+.message__comments svg { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); flex: 0 0 var(--collapse-size-icon-xs); }
+.message__comments.is-mine { background: linear-gradient(26deg, var(--bubble-my-start) 16.6%, var(--bubble-my-end) 93.2%); }
+.message__comments:hover:where(:not(:disabled)) {
+  background-image: linear-gradient(var(--collapse-color-state-layer-on-base-tertiary), var(--collapse-color-state-layer-on-base-tertiary)), var(--comments-base-image, none);
+}
+.message__comments.is-mine:hover:where(:not(:disabled)) {
+  --comments-base-image: linear-gradient(26deg, var(--bubble-my-start) 16.6%, var(--bubble-my-end) 93.2%);
+}
+.message__comments:active:where(:not(:disabled)) { background-image: linear-gradient(var(--collapse-color-state-layer-on-base-secondary), var(--collapse-color-state-layer-on-base-secondary)), var(--comments-base-image, none); }
+.message__comments:focus-visible { outline: var(--collapse-stroke-width-thick) solid var(--collapse-color-border-solid-accent-primary); outline-offset: var(--collapse-spacing-horizontal-xxs); }
+.message--mine .message__stack.has-comments > .message__comments::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: -5px;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--bubble-my-end);
+  clip-path: polygon(0 0, 60% 0, 100% 100%, 0 100%);
+}
+
+/* ---------- Системное сообщение (10100:73473) ---------- */
+.message--system .message__stack { width: auto; }
+.message--system .message__bubble { width: auto; min-width: 0; max-width: 480px; padding-top: var(--collapse-spacing-horizontal-m-nudge); padding-bottom: var(--collapse-spacing-horizontal-xs); }
+.system-message__title {
+  padding: 0 var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-xs);
+  color: var(--text-primary);
+  font-family: var(--paragraph-s-font);
+  font-size: var(--paragraph-s-size);
+  line-height: var(--paragraph-s-line);
+  font-weight: var(--collapse-paragraph-s-medium-weight);
+  letter-spacing: var(--collapse-paragraph-s-letter-spacing);
+}
+.system-message__text {
+  padding: var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-s-nudge);
+  color: var(--text-primary);
+  font-family: var(--paragraph-s-font);
+  font-size: var(--paragraph-s-size);
+  line-height: var(--paragraph-s-line);
+  letter-spacing: var(--collapse-paragraph-s-letter-spacing);
+}
+.system-message__button { padding: var(--collapse-spacing-horizontal-xs) var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-s); display: flex; flex-direction: column; align-items: flex-start; }
+.system-message__bot-actions { padding: var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-s); display: flex; flex-wrap: wrap; gap: var(--collapse-spacing-horizontal-s); }
+.system-message__bot-actions .collapse-chip { background: var(--collapse-color-background-opacity-base-secondary-tint); border-color: transparent; }
+.system-message__footer { padding: var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-s-nudge); display: flex; align-items: flex-end; gap: var(--collapse-spacing-horizontal-s); }
+.system-message__reactions { min-width: 0; flex: 1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--collapse-spacing-horizontal-s); }
+.message--system .message__meta { margin-left: auto; }
+
+/* ---------- Call (11696:71972) ---------- */
+.call-message { padding: 0 var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-s); display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-s); }
+.call-message--ended { min-width: var(--collapse-size-call-message-width); }
+.call-message--started.call-message--horizontal { width: var(--collapse-size-call-message-width); }
+.call-message--started.call-message--vertical { width: var(--collapse-size-call-message-width); flex-direction: column; align-items: flex-start; justify-content: center; }
+.call-message__icon { width: var(--collapse-size-icon-l); height: var(--collapse-size-icon-l); flex: 0 0 var(--collapse-size-icon-l); display: grid; place-items: center; color: var(--collapse-color-icon-solid-base-accent); }
+/* Трубка «положена» (Figma IcPhoneOldFilled 21091:42788): lucide Phone повёрнут и закрашен */
+.call-message__icon svg { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); fill: currentColor; transform: rotate(135deg); }
+.call-message__text { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.call-message--started .call-message__text { flex: 0 1 auto; }
+.call-message__title { color: var(--text-primary); font-size: var(--paragraph-s-size); line-height: var(--paragraph-s-line); letter-spacing: var(--collapse-paragraph-s-letter-spacing); }
+.call-message__description { color: var(--text-tertiary); font-size: var(--caption-l-size); line-height: var(--caption-l-line); letter-spacing: var(--collapse-caption-l-letter-spacing); }
+
+/* ---------- Voice message (10115:69192) ---------- */
+.voice-message {
+  width: var(--collapse-size-voice-message-width);
+  max-width: 100%;
+  padding: var(--collapse-spacing-horizontal-xs) var(--collapse-spacing-horizontal-m);
+  display: flex;
+  align-items: center;
+  gap: var(--collapse-spacing-horizontal-s);
+}
+.voice-message__button {
+  position: relative;
+  width: var(--collapse-size-control-s);
+  height: var(--collapse-size-control-s);
+  flex: 0 0 var(--collapse-size-control-s);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--collapse-radius-full);
+  background: var(--collapse-color-background-solid-accent-primary);
+  color: var(--collapse-color-icon-solid-base-light-full-static);
+  cursor: pointer;
+  transition: background-color var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard), opacity var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard);
+}
+.voice-message__button svg { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); fill: currentColor; stroke: currentColor; }
+.voice-message--loading .voice-message__button svg,
+.voice-message--not-loaded .voice-message__button svg { fill: none; }
+.voice-message__button:hover:where(:not(:disabled)) { background-image: linear-gradient(var(--collapse-color-state-layer-on-base-secondary), var(--collapse-color-state-layer-on-base-secondary)); }
+.voice-message__button:active:where(:not(:disabled)) { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-dim-primary), var(--collapse-color-state-layer-on-accent-dim-primary)); }
+.voice-message__button:focus-visible,
+.voice-message__transcription:focus-visible { outline: var(--collapse-stroke-width-thick) solid var(--collapse-color-border-solid-accent-primary); outline-offset: var(--collapse-spacing-horizontal-xxs); }
+.voice-message__button:disabled { cursor: default; opacity: .5; }
+.voice-message__ring { position: absolute; inset: var(--collapse-spacing-horizontal-xxs); width: auto; height: auto; }
+.voice-message__time { flex: 0 0 auto; color: var(--text-tertiary); font-size: var(--caption-m-size); line-height: var(--caption-m-line); letter-spacing: var(--collapse-caption-m-letter-spacing); font-variant-numeric: tabular-nums; }
+.voice-message--disabled .voice-message__time { opacity: .5; }
+.voice-message__wave { min-width: 0; height: var(--collapse-size-voice-waveform); flex: 1; display: flex; align-items: center; gap: var(--collapse-stroke-width-xthin); overflow: hidden; }
+.voice-message--disabled .voice-message__wave { opacity: .5; }
+.voice-message__bar { width: var(--collapse-stroke-width-thick); flex: 0 0 var(--collapse-stroke-width-thick); border-radius: var(--collapse-radius-full); background: var(--collapse-color-icon-solid-accent-primary); opacity: .5; }
+.voice-message__bar.is-played { opacity: 1; }
+.voice-message__bar[data-height='s'] { height: var(--collapse-size-voice-bar-s); }
+.voice-message__bar[data-height='m'] { height: var(--collapse-size-voice-bar-m); }
+.voice-message__bar[data-height='l'] { height: var(--collapse-size-voice-bar-l); }
+.voice-message__transcription {
+  width: var(--collapse-size-voice-transcription-width);
+  height: var(--collapse-size-voice-transcription-height);
+  flex: 0 0 var(--collapse-size-voice-transcription-width);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--collapse-radius-full);
+  background: var(--collapse-color-background-opacity-accent-primary);
+  color: var(--collapse-color-icon-solid-accent-primary);
+  cursor: pointer;
+  transition: background-color var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard), opacity var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard);
+}
+.voice-message__transcription svg { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
+.voice-message__transcription:hover:where(:not(:disabled)) { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-secondary), var(--collapse-color-state-layer-on-accent-secondary)); }
+.voice-message__transcription:active:where(:not(:disabled)) { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-primary), var(--collapse-color-state-layer-on-accent-primary)); }
+.voice-message__transcription:disabled { cursor: default; opacity: .5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .message__comments,
+  .voice-message__button,
+  .voice-message__transcription { transition: none; }
+}
+
+/* ---------- Poll (17198:26124 / 17198:26142 / 18791:34863) ---------- */
+.message--poll .message__stack { width: auto; }
+.message--poll .message__bubble { width: 100%; min-width: min(360px, 100%); max-width: 480px; padding-top: var(--collapse-spacing-horizontal-m-nudge); padding-bottom: var(--collapse-spacing-horizontal-xs); }
+.poll-message__header { padding: 0 var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-xs); display: flex; flex-direction: column; }
+.poll-message__question { color: var(--text-primary); font-size: var(--paragraph-s-size); line-height: var(--paragraph-s-line); font-weight: var(--collapse-paragraph-s-medium-weight); letter-spacing: var(--collapse-paragraph-s-letter-spacing); }
+.poll-message__kind { color: var(--text-tertiary); font-size: var(--caption-l-size); line-height: var(--caption-l-line); letter-spacing: var(--collapse-caption-l-letter-spacing); }
+.poll-message__options { padding: 0 var(--collapse-spacing-horizontal-xs); }
+.poll-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.poll-list__item { display: flex; flex-direction: column; }
+.poll-list__row { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-s-nudge); }
+.poll-list__row .choice-control { flex: 0 0 auto; }
+.poll-list__label { min-width: 0; flex: 1; color: var(--collapse-color-text-solid-base-primary); font-size: var(--paragraph-s-size); line-height: var(--paragraph-s-line); letter-spacing: var(--collapse-paragraph-s-letter-spacing); overflow-wrap: anywhere; }
+.poll-list__value { flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: var(--collapse-spacing-horizontal-xxs); color: var(--text-tertiary); font-size: var(--caption-m-size); line-height: var(--caption-m-line); letter-spacing: var(--collapse-caption-m-letter-spacing); }
+.poll-list__value strong { font-weight: var(--collapse-caption-m-semibold-weight); }
+/* Полоса результата: отступ слева = целевая область контрола 32px + gap 6px, как в Figma (38px) */
+.poll-list__progress { width: auto; margin-left: calc(var(--collapse-size-choice-target-s) + var(--collapse-spacing-horizontal-s-nudge)); margin-right: var(--collapse-spacing-horizontal-m); }
+.poll-list--answer .poll-list__item { padding-bottom: var(--collapse-spacing-horizontal-xs); }
+/* В опросе линия результата и трек тонкие (2px) — по измерению Figma «Poll» 17198:26124; общий Progress не меняем */
+.poll-list__progress::before { height: var(--collapse-size-poll-progress); }
+.poll-list__progress .collapse-progress__active { top: 50%; height: var(--collapse-size-poll-progress); transform: translateY(-50%); }
+.poll-list--answer .choice-control { opacity: .4; }
+.poll-status { min-height: var(--collapse-size-control-s); padding: 0 var(--collapse-spacing-horizontal-m); display: flex; align-items: center; justify-content: center; }
+.poll-status--text span { color: var(--collapse-color-text-solid-base-primary); font-size: var(--caption-l-size); line-height: var(--caption-l-line); letter-spacing: var(--collapse-caption-l-letter-spacing); opacity: .38; }
+.poll-status--button { align-items: flex-end; }
+.poll-status--button .collapse-text-button { width: 100%; height: var(--collapse-size-control-s); }
+
+/* ---------- Media buttons (10092:125388 / 10092:125424) и Media label (10098:69404) ---------- */
+.media-button {
+  position: relative;
+  width: var(--collapse-size-media-button-l);
+  height: var(--collapse-size-media-button-l);
+  flex: 0 0 var(--collapse-size-media-button-l);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--collapse-radius-full);
+  color: var(--collapse-color-icon-solid-base-light-full-static);
+  cursor: pointer;
+  transition: background-color var(--collapse-motion-duration-default) var(--collapse-motion-easing-standard);
+}
+.media-button--medium { width: var(--collapse-size-media-button-m); height: var(--collapse-size-media-button-m); flex-basis: var(--collapse-size-media-button-m); }
+.media-button--default { background-color: var(--collapse-color-background-opacity-base-dark-static-accent-tint); }
+.media-button--accent { background-color: var(--collapse-color-background-solid-accent-primary); }
+.media-button svg { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
+.media-button--medium svg { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); }
+.media-button:hover:where(:not(:disabled)),
+.media-button.is-hovered { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-dim-primary), var(--collapse-color-state-layer-on-accent-dim-primary)); }
+.media-button:focus-visible { outline: var(--collapse-stroke-width-thick) solid var(--collapse-color-border-solid-accent-primary); outline-offset: var(--collapse-spacing-horizontal-xxs); }
+/* Кольцо загрузки: дуга по контуру кнопки (Figma «Load») */
+.media-button__ring { position: absolute; inset: var(--collapse-spacing-horizontal-xxs); border: var(--collapse-stroke-width-xthin) solid transparent; border-top-color: var(--collapse-color-icon-solid-base-light-full-static); border-radius: var(--collapse-radius-full); animation: collapse-spin var(--collapse-motion-duration-slow) linear infinite; }
+.media-label {
+  height: var(--collapse-size-media-label-height);
+  padding: var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-s-nudge);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--collapse-spacing-horizontal-xs);
+  border: var(--collapse-stroke-width-xthin) solid var(--collapse-color-border-opacity-base-light-tertiary);
+  border-radius: var(--collapse-radius-full);
+  background: var(--collapse-color-background-opacity-base-dark-static-accent-tint);
+  color: var(--collapse-color-text-solid-base-light-full-static);
+  font-size: var(--caption-l-size);
+  line-height: var(--caption-l-line);
+  letter-spacing: var(--collapse-caption-l-letter-spacing);
+  white-space: nowrap;
+}
+.media-label--error { padding-left: var(--collapse-spacing-horizontal-xs); }
+.media-label svg { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); fill: var(--collapse-color-icon-solid-error-primary); stroke: var(--collapse-color-icon-solid-base-light-full-static); }

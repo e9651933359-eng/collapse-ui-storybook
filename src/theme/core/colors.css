@@ -54,11 +54,13 @@
   --collapse-color-background-opacity-base-disabled: #2826350a;
   --collapse-color-background-opacity-base-primary: #28263529;
   --collapse-color-background-opacity-base-accent: #282635b8;
+  --collapse-color-background-opacity-base-dark-static-accent-tint: #282635b8; /* Figma 10098:69414 «Label (media)», rgba(40,38,53,0.72) */
   --collapse-color-background-opacity-scrim-default: #28263529;
   --collapse-color-background-opacity-error-secondary: #fe4f451a;
   --collapse-color-background-opacity-warning-primary: #ff914c29; /* Figma 40000074:62321, rgba(255,145,76,0.16) */
   --collapse-color-background-opacity-warning-secondary: #ff914c1f;
   --collapse-color-background-opacity-success-secondary: #0dc2681f;
+  --collapse-color-background-opacity-accent-primary: #7047fe29; /* Figma 13782:22407, rgba(112,71,254,0.16) */
   --collapse-color-background-opacity-accent-secondary: #7047fe1a;
   --collapse-color-background-opacity-light-primary: #fffffff5;
   --collapse-color-background-opacity-light-tertiary: #ffffffa3;

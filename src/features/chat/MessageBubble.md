@@ -17,6 +17,18 @@
 
 Аватар входящего сообщения задаётся через `avatar`, `avatarTone` или `avatarImage`. Обводка автоматически появляется только у `avatarImage`. Основные правила аватаров и типографики зафиксированы в [`CORE.md`](../../../docs/design-system/CORE.md).
 
-## Неподтверждённые варианты
+## Расширенные варианты сообщения (страница Bubble)
 
-Figma MCP находит в BASE отдельные компоненты `Image`, `Files container`, `Voice message`, `Call`, `Poll list`, `Comments` и `*ItemsBot`. Точная связь этих компонентов с набором `message`, их свойства и визуальные состояния недоступны без чтения опубликованного component set. Поэтому они пока не включены в React API.
+Все поля необязательны; без них сообщение выглядит как раньше.
+
+- `status`: `sent | read | loading | error` — статус исходящего сообщения (`MessageStatus`), по умолчанию `read`.
+- `deleted` — удалённое сообщение (`DeletedMessage`: Other / Other (Group) / My).
+- `comments` — число комментариев; бабл получает «шов» и блок `CommentsLink`, клик — `onOpenComments(message)`.
+- `voice: { duration }` — голосовое сообщение (`VoiceMessage`), состояние воспроизведения хранится внутри `MessageBubble`.
+- `call: { state: 'ended' | 'started'; description? }` — звонок (`CallMessage`).
+
+Отдельные композиции без `Message`: `SystemMessage`, `PollMessage`, `MediaButton`, `MediaLabel` — см. [`BASE.md`](../../../docs/design-system/BASE.md), партия 6. Компоненты лежат в `message-parts/`, Storybook: `Chat/MessageBubble`, `Chat/Message status`, `Chat/CommentsLink`, `Chat/DeletedMessage`, `Chat/SystemMessage`, `Chat/CallMessage`, `Chat/VoiceMessage`, `Chat/Poll`, `Chat/Media controls`.
+
+## Не реализовано
+
+Сетка Media Image, вариант Forwarded, контейнеры Files и Buttons, мобильные варианты: на странице Bubble они не прочитаны через Figma MCP или не найдены. Иконки звонка и голосового сообщения — приближения `lucide-react`.

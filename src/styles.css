@@ -261,8 +261,7 @@ button { border: 0; background: none; cursor: pointer; }
 .message__text pre { max-width: 100%; margin: var(--collapse-spacing-horizontal-xs) 0; padding: var(--collapse-spacing-horizontal-s); overflow-x: auto; border-radius: var(--collapse-radius-squircle); background: var(--collapse-color-background-opacity-base-secondary); white-space: pre-wrap; }
 .message__text pre code { padding: 0; background: transparent; }
 .message__meta { margin-left: auto; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; color: var(--text-tertiary); font-size: var(--caption-m-size); line-height: var(--caption-m-line); }
-.message__meta svg { width: 14px; height: 14px; }
-.message--mine .message__meta svg:last-child { color: var(--accent-primary); }
+.message__meta > svg { width: 14px; height: 14px; }
 .message__reactions { max-width: 100%; margin-top: var(--space-xs); padding: 0 var(--space-m); display: flex; flex-wrap: wrap; gap: var(--space-xs); }
 .message__reaction { min-width: 40px; height: 24px; padding: 0 var(--space-s); display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); border: var(--collapse-stroke-width-xthin) solid var(--border-tertiary); border-radius: var(--radius-round); background: var(--surface-elevated); color: var(--text-secondary); font-size: var(--caption-m-size); line-height: var(--caption-m-line); }
 .message__reaction:hover { background: var(--surface-hover); }
