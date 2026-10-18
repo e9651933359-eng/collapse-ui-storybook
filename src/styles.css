@@ -1,4 +1,4 @@
-body { min-height: 100vh; min-height: 100dvh; overflow: hidden; background: var(--surface-foundation); }
+body { min-height: 100vh; min-height: 100dvh; overflow: hidden; background: var(--shell-backdrop); }
 button { border: 0; background: none; cursor: pointer; }
 
 .app-stage {
@@ -7,7 +7,7 @@ button { border: 0; background: none; cursor: pointer; }
   height: 100dvh;
   min-height: 0;
   padding: 0;
-  background: var(--surface-foundation);
+  background: var(--shell-backdrop);
 }
 
 .chat-shell {
@@ -25,7 +25,7 @@ button { border: 0; background: none; cursor: pointer; }
   padding-left: 0;
   overflow: hidden;
   border-radius: 0;
-  background: var(--surface-foundation);
+  background: var(--shell-backdrop);
 }
 
 .icon-button:focus-visible, .collapse-button:focus-visible, .combo-box__field:focus-visible, .chat-row__select:focus-visible, .segment-controls button:focus-visible, .message-editor textarea:focus-visible, .message__reaction:focus-visible, .message__actions > button:focus-visible, .folder-modal button:focus-visible {
@@ -47,11 +47,14 @@ button { border: 0; background: none; cursor: pointer; }
 .product-rail__items .icon-button { width: 48px; height: 48px; color: var(--icon-secondary); }
 .product-rail__items .icon-button.is-selected { color: var(--accent-primary); background: var(--product-rail-selected); }
 .rail-icon { display: block; width: 24px; height: 24px; }
-.product-rail__divider { width: 24px; height: 1px; margin: -4px 0; background: var(--border-tertiary); }
+.product-rail__divider { width: 24px; height: 1px; margin: -4px 0; background: var(--product-rail-divider); }
 .product-rail__bottom { margin-top: auto; display: flex; flex-direction: column; gap: 8px; align-items: center; }
 .product-rail__bottom .icon-button { width: 48px; height: 48px; }
+.product-rail__items .icon-button:not(.is-selected) .rail-icon,
+.product-rail__bottom .icon-button .rail-icon { filter: var(--product-rail-icon-filter); }
+.product-rail .icon-button:not(.is-selected):hover { background-image: linear-gradient(var(--product-rail-hover), var(--product-rail-hover)); }
 
-.chat-list-panel { min-width: 0; grid-column: 2; grid-row: 1; display: flex; flex-direction: column; overflow: hidden; }
+.chat-list-panel { min-width: 0; grid-column: 2; grid-row: 1; display: flex; flex-direction: column; overflow: hidden; border-radius: var(--chat-list-panel-radius); background: var(--chat-list-panel-background); }
 .chat-list-resizer {
   z-index: 30;
   width: 12px;
@@ -192,7 +195,7 @@ button { border: 0; background: none; cursor: pointer; }
   display: grid; grid-template-rows: 68px minmax(0,1fr) auto;
   overflow: hidden;
   border: var(--collapse-stroke-width-xthin) solid var(--border-light);
-  border-radius: var(--radius-xl);
+  border-radius: var(--chat-workspace-radius);
   background: linear-gradient(0deg, var(--surface-primary) 19.7%, var(--surface-foundation) 111.9%);
 }
 .chat-workspace--empty { display: grid; grid-template-rows: 1fr; place-items: center; }

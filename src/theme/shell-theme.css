@@ -1,0 +1,34 @@
+/*
+ * Shell themes: цвет сайдбара и общей подложки (backdrop) за панелями чатов.
+ * Тема включается атрибутом data-shell-theme на <html> (или на любом предке .chat-shell).
+ * Без атрибута действует серая тема по умолчанию — Core-токен Surface/Solid/Foundation.
+ */
+:root {
+  --shell-backdrop: var(--collapse-color-surface-solid-foundation);
+  --product-rail-icon-filter: none;
+  --product-rail-hover: var(--collapse-color-state-layer-on-base-secondary);
+  --product-rail-divider: var(--border-tertiary);
+  --chat-list-panel-background: transparent;
+  --chat-list-panel-radius: 0;
+  --chat-workspace-radius: var(--radius-xl);
+}
+
+/*
+ * Deep Violet.
+ * Источник: Figma «SideBar · Deep Violet», node 2197:25830, переменная «Custom bg sidebar».
+ * Выбранный пункт: Background/Solid/Base/LightStatic (#f7f6fb) по макету.
+ * Техническое допущение: цвет разделителя и hover в макете не заданы токеном — взяты белые 16% и 12%.
+ */
+/* :root[...] нужен для специфичности: tokens.css задаёт --product-rail-selected на :root */
+:root[data-shell-theme='deep-violet'],
+[data-shell-theme='deep-violet'] {
+  --shell-backdrop: #211a3a;
+  --product-rail-selected: #f7f6fb;
+  --product-rail-icon-filter: brightness(0) invert(1);
+  --product-rail-hover: #ffffff1f;
+  --product-rail-divider: #ffffff29;
+  /* На тёмной подложке список чатов — светлая панель (Surface), как в макете; шов со списком прямой. */
+  --chat-list-panel-background: linear-gradient(0deg, var(--surface-primary) 19.7%, var(--surface-foundation) 111.9%);
+  --chat-list-panel-radius: var(--radius-xl) 0 0 var(--radius-xl);
+  --chat-workspace-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+}

@@ -4,6 +4,7 @@
 @import "./core/dimensions.css";
 @import "./core/layouts.css";
 @import "./core/animation.css";
+@import "./shell-theme.css";
 
 :root {
   font-family: var(--collapse-font-family-base);

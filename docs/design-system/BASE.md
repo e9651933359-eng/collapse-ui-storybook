@@ -148,6 +148,16 @@
 - Общий продуктовый сайдбар использует `shell/ProductRail` во всех чат-сценариях.
 - Отдельной точки входа «Каналы» в сайдбаре нет; каналы доступны через системный фильтр общего списка чатов.
 - Storybook: `Shell/ProductRail / Default`.
+- Storybook: `Shell/ProductRail / DeepViolet`, `Shell/ShellTheme / Default`, `Shell/ShellTheme / DeepViolet`.
+
+#### Shell theme (сайдбар и общая подложка)
+
+- Тема включается атрибутом `data-shell-theme` на `<html>` или на предке `.chat-shell`; без атрибута действует серая тема по умолчанию (`Surface/Solid/Foundation`).
+- Доступные темы: `default`, `deep-violet`. Токены и источники — `src/theme/shell-theme.css`, помощники — `src/theme/shellTheme.ts`.
+- `deep-violet`: подложка и сайдбар `#211a3a` (Figma «SideBar · Deep Violet», [node 2197:25830](https://www.figma.com/design/4oIceSwgxmkADQYLhOoXF0/?node-id=2197-25830), переменная `Custom bg sidebar`); выбранный пункт `#f7f6fb` (`Background/Solid/Base/LightStatic`); иконки белые.
+- В тёмной теме список чатов — светлая панель с радиусом слева, а `chat-workspace` — с радиусом справа; шов между ними прямой.
+- Переключение: тулбар Storybook «Shell theme»; в приложении — `?shell=deep-violet` (значение запоминается в localStorage), `?shell=default` возвращает серую тему.
+- Техническое допущение: цвета разделителя (`#ffffff29`) и hover (`#ffffff1f`) в макете не заданы токенами; бейдж-счётчик на сайдбаре и аватар со статусом из макета не реализованы — в задачу входил только цвет подложки.
 
 - [Button Split, 1787:4324](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1787-4324): S/M/L, независимые действия двух частей, Default/Error/Warning/Success, hover/pressed/disabled/focus.
 - [PIN Field, 1919:4389](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1919-4389): 4/6 цифр, masked/number, active/filled/completed, ввод одной доступной native-точкой.
