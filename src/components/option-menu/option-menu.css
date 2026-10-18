@@ -78,6 +78,7 @@
 .collapse-drop-field__control:hover { background: var(--collapse-color-state-layer-on-base-tertiary); }
 .collapse-drop-field.is-active .collapse-drop-field__control { border-width: var(--collapse-stroke-width-xthick); border-color: var(--collapse-color-border-solid-accent-primary); background: var(--collapse-color-background-opacity-light-tertiary); }
 .collapse-drop-field.is-error .collapse-drop-field__control { border-color: transparent; background: var(--collapse-color-background-solid-error-tint); }
+.collapse-drop-field.is-error:not(.is-active) .collapse-drop-field__control:hover { background-image: linear-gradient(var(--collapse-color-state-layer-on-error-secondary), var(--collapse-color-state-layer-on-error-secondary)); }
 .collapse-drop-field.is-error.is-active .collapse-drop-field__control { border-color: var(--collapse-color-background-solid-error-primary); }
 .collapse-drop-field__control:focus-visible { outline: var(--collapse-stroke-width-thick) solid var(--collapse-color-border-solid-accent-primary); outline-offset: var(--collapse-spacing-horizontal-xxs); }
 .collapse-drop-field__control > span:not(.collapse-drop-field__leading):not(.collapse-drop-field__chevron) { min-width: 0; flex: 1; overflow: hidden; font-size: var(--collapse-paragraph-s-size); line-height: var(--collapse-paragraph-s-line-height); letter-spacing: var(--collapse-paragraph-s-letter-spacing); text-align: left; text-overflow: ellipsis; white-space: nowrap; }

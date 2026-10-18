@@ -17,6 +17,8 @@
 }
 .federation-notice--compact .collapse-federation-icon { flex: 0 0 auto; }
 .federation-notice--action { cursor: pointer; }
+.federation-notice--action:hover { background-image: linear-gradient(var(--collapse-color-state-layer-on-base-tertiary), var(--collapse-color-state-layer-on-base-tertiary)); }
+.federation-notice--action:active { background-image: linear-gradient(var(--collapse-color-state-layer-on-base-secondary), var(--collapse-color-state-layer-on-base-secondary)); }
 .federation-notice--action:focus-visible { outline: var(--collapse-stroke-width-thick) solid var(--collapse-color-border-solid-accent-primary); outline-offset: calc(var(--collapse-stroke-width-thick) * -1); }
 .federation-notice__copy { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-xs); white-space: nowrap; }
 .federation-notice__copy strong { color: var(--collapse-color-text-solid-federation-primary); font: inherit; }
@@ -60,6 +62,8 @@
 .federation-flow__access { width: 100%; }
 .federation-flow__organization .collapse-drop-field__control,
 .federation-flow__access .collapse-drop-field__control { width: 100%; background: var(--collapse-color-background-opacity-base-container-group); }
+.federation-flow__organization .collapse-drop-field:not(.is-active):not(.is-disabled) .collapse-drop-field__control:hover,
+.federation-flow__access .collapse-drop-field:not(.is-active):not(.is-disabled) .collapse-drop-field__control:hover { background: var(--collapse-color-state-layer-on-base-tertiary); }
 .federation-flow__list { min-height: 0; flex: 1; overflow-y: auto; scrollbar-width: none; }
 .federation-flow__list::-webkit-scrollbar { display: none; }
 .federation-flow__list .collapse-list-item { min-height: var(--collapse-size-control-l); padding-top: var(--collapse-spacing-horizontal-s); padding-bottom: var(--collapse-spacing-horizontal-s); }

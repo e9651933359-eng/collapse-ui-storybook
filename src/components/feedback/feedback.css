@@ -106,6 +106,7 @@
 .collapse-feedback-action { min-height: var(--collapse-size-control-s); padding: var(--collapse-spacing-horizontal-none) var(--collapse-spacing-horizontal-l); border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-base-secondary-tint); font-weight: var(--collapse-paragraph-s-semibold-weight); }
 .collapse-feedback-icon-button { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); display: grid; place-items: center; border-radius: var(--collapse-radius-full); }
 .collapse-feedback-icon-button svg { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
+.collapse-feedback-link:hover { text-decoration: underline; text-underline-offset: var(--collapse-spacing-horizontal-xxs); }
 .collapse-feedback-action:hover,
 .collapse-feedback-icon-button:hover { background: var(--collapse-color-state-layer-on-base-tertiary); }
 .collapse-feedback-action:active,

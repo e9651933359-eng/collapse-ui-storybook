@@ -5,6 +5,7 @@
 .disk-picker__list { min-height: 0; flex: 1; overflow-y: auto; scrollbar-width: none; }
 .disk-picker__list::-webkit-scrollbar { display: none; }
 .disk-picker__sort { display: inline-flex; align-items: center; gap: var(--collapse-spacing-horizontal-xxs); color: inherit; font: inherit; border-radius: var(--collapse-radius-small); }
+.disk-picker__sort:hover { color: var(--collapse-color-text-solid-base-primary); }
 .disk-picker__sort:focus-visible { outline: var(--collapse-stroke-width-thick) solid var(--collapse-color-border-solid-accent-primary); }
 .disk-picker__sort svg { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); }
 .disk-picker__empty { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--collapse-spacing-horizontal-xs); color: var(--collapse-color-text-opacity-base-tertiary); text-align: center; }

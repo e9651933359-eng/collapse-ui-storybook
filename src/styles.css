@@ -439,6 +439,8 @@ button { border: 0; background: none; cursor: pointer; }
 .folder-create-modal__body { min-height: 0; flex: 1; padding: var(--collapse-spacing-horizontal-l); display: flex; flex-direction: column; }
 .folder-create-modal__name { display: grid; grid-template-columns: var(--collapse-size-control-l) minmax(0, 1fr); align-items: flex-start; gap: var(--collapse-spacing-horizontal-m); }
 .folder-create-modal__folder-icon { width: var(--collapse-size-control-l); height: var(--collapse-size-control-l); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-accent-secondary); color: var(--collapse-color-icon-solid-accent-primary); }
+.folder-create-modal__folder-icon:hover { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-secondary), var(--collapse-color-state-layer-on-accent-secondary)); }
+.folder-create-modal__folder-icon:active { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-dim-secondary), var(--collapse-color-state-layer-on-accent-dim-secondary)); }
 .folder-create-modal__folder-icon svg { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); }
 .folder-create-modal__folder-icon > span { font-size: var(--collapse-size-icon-m); line-height: var(--collapse-size-icon-l); }
 .folder-create-modal .collapse-popover { border: 0; background: transparent; box-shadow: none; backdrop-filter: none; }

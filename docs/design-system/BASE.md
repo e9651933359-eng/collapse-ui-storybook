@@ -193,6 +193,22 @@
 - [ChipsField, 1114:470](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1114-470): добавление Enter/запятая, независимое удаление, Backspace, error/disabled/focus.
 - [Hyper-link, 1940:2001](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1940-2001): S/M/L, Accent/Default/Secondary, regular/medium, enabled/hovered/visited/disabled.
 
+## Hover-состояния
+
+Ревью hover в Storybook: наведение на каждый интерактивный элемент всех stories и сравнение «до/после».
+
+Правила:
+
+- Hover — state layer: `StateLayers/OnBase/Tertiary` для строк и пунктов, `OnBase/Secondary` для круглых кнопок, `OnAccent/Secondary` для accent-элементов, `OnError/Secondary` для error-состояний.
+- Если у состояния есть своя заливка (error, active, локальный override), hover накладывается слоем `background-image: linear-gradient(...)`, а не заменяет `background`; иначе локальный стиль гасит hover.
+- Неактивные элементы (`disabled`, loading) hover не получают: `:hover:where(:not(:disabled))` — `:where` не меняет специфичность, поэтому pressed (`:active`) продолжает перебивать hover.
+- Техническое допущение: у выбранных элементов (selected tab, chip, segment, NavListItem, реакция, emoji-сегмент, selected IconButton) hover вид не меняет; в Figma это не подтверждено.
+- Стиль `cursor: grab` у перетаскиваемых сегментов и чатов — намеренный.
+
+Исправлено в этом ревью: ComboBox (поле), DropField (error-состояние и локальные стили Федерации), Uploader в error, ссылка действия InfoBar, плашка `FederationNotice` с действием, иконка папки в окне создания папки, сортировка в выборе файлов Диска; hover убран у disabled/loading в Tabs, Rate, NavListItem, ChipsField, Button и IconButton.
+
+Не покрыто Storybook: кнопка профиля в шапке чата (`chat-header__identity--action`) не имеет hover и не представлена ни в одной story.
+
 ## Технические допущения
 
 - CSS-анимация Loader и indeterminate Progress используется вместо четырёх статичных фаз Figma.
