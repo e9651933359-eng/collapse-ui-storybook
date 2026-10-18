@@ -6,3 +6,4 @@ storybook-static
 *.tsbuildinfo
 *.local
 .gitlab_known_hosts.local
+dist-lib

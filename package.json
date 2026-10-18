@@ -1,5 +1,5 @@
 {
-  "name": "collapse-chat-prototype",
+  "name": "@collapse/ui",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,7 +9,9 @@
     "build:federation": "tsc -b && VITE_APP_VARIANT=federation vite build",
     "preview": "vite preview --host 0.0.0.0",
     "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "prepare": "npm run build:lib"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -24,5 +26,30 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "storybook": "10.6.0"
-  }
+  },
+  "main": "./dist-lib/index.js",
+  "module": "./dist-lib/index.js",
+  "types": "./dist-lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/types/index.d.ts",
+      "import": "./dist-lib/index.js"
+    },
+    "./style.css": "./dist-lib/style.css",
+    "./vite": {
+      "types": "./vite-plugin.d.ts",
+      "default": "./vite-plugin.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist-lib",
+    "docs",
+    "public/assets",
+    "vite-plugin.js",
+    "vite-plugin.d.ts"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ]
 }
