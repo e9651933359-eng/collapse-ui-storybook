@@ -13,7 +13,7 @@ function DismissibleModalPage() {
     <>
       <Button onClick={() => setOpen(true)}>Открыть модалку</Button>
       <ModalPage open={open} title="Новая группа" onClose={() => setOpen(false)}>
-        <div className="ui-story-field"><TextField label="Название *" /></div>
+        <div className="ui-story-modal-field"><TextField label="Название *" /></div>
       </ModalPage>
     </>
   )
@@ -23,7 +23,7 @@ const meta = {
   title: 'UI/ModalPage',
   component: ModalPage,
   parameters: { layout: 'fullscreen' },
-  args: { open: true, title: 'Новая группа', onClose: () => undefined, children: <div className="ui-story-field"><TextField label="Название *" /></div>, footer: <><Button>Отмена</Button><Button priority="accent">Создать</Button></> },
+  args: { open: true, title: 'Новая группа', onClose: () => undefined, children: <div className="ui-story-modal-field"><TextField label="Название *" /></div>, footer: <><Button>Отмена</Button><Button priority="accent">Создать</Button></> },
 } satisfies Meta<typeof ModalPage>
 
 export default meta
@@ -61,7 +61,7 @@ function KeepsFocusModalPage() {
 
   return (
     <ModalPage open title="Новая группа" onClose={() => undefined}>
-      <TextField autoFocus label="Название *" value={name} onChange={(event) => setName(event.target.value)} />
+      <div className="ui-story-modal-field"><TextField autoFocus label="Название *" value={name} onChange={(event) => setName(event.target.value)} /></div>
     </ModalPage>
   )
 }

@@ -432,6 +432,9 @@
 .ui-story-row-label { min-width: 88px; color: var(--collapse-color-text-opacity-base-tertiary); font-size: var(--collapse-caption-l-size); line-height: var(--collapse-caption-l-line-height); font-weight: var(--collapse-caption-l-medium-weight); }
 .ui-story-field { width: var(--collapse-layout-content-compact); }
 .ui-story-narrow { width: var(--collapse-layout-demo-narrow); }
+/* Тело ModalPage само без отступов: каждый реальный экран задаёт их своей обёрткой
+   (например .federation-flow__picker, .chat-profile__content). Эта обёртка — та же обёртка для демо. */
+.ui-story-modal-field { box-sizing: border-box; width: 100%; padding: var(--collapse-spacing-horizontal-l); }
 .ui-story-modal-scroll { padding: var(--collapse-spacing-horizontal-l); display: flex; flex-direction: column; gap: var(--collapse-spacing-horizontal-s); }
 .ui-story-modal-scroll__list { min-height: 0; flex: 1; overflow-y: auto; scrollbar-width: none; }
 
