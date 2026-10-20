@@ -3,7 +3,7 @@ import type { Chat } from '../../types/chat'
 const chatSeeds: Chat[] = [
   {
     id: 'design', title: 'Дизайн', subtitle: 'Ольга: передала макеты в разработку', avatar: '🎨', kind: 'channel',
-    avatarColor: 4, pinned: true, unread: 3,
+    avatarColor: 4, pinned: true, unread: 3, mentioned: true,
     messages: [
       { id: 'd1', author: 'other', sender: 'Ольга', avatar: 'ОК', text: 'Доброе утро! Обновила состояния списка чатов и собрала отдельный экран для пустой папки.', time: '09:16' },
       { id: 'd2', author: 'other', sender: 'Антон', avatar: 'АВ', text: 'Посмотрел. В узком списке длинные названия корректно уходят в многоточие 👍', time: '09:24' },
@@ -28,7 +28,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'mts', title: 'МТС', subtitle: 'Мария: презентация готова', avatar: 'М Т С', avatarColor: 7, kind: 'group', unread: 10, muted: true,
+    id: 'mts', title: 'МТС', subtitle: 'Мария: презентация готова', avatar: 'МТС', avatarColor: 7, kind: 'group', unread: 10, muted: true,
     messages: [
       { id: 'm1', author: 'other', sender: 'Мария', avatar: 'МА', text: 'Коллеги, собрала материалы к ежемесячному обзору продукта.', time: '08:42' },
       { id: 'm2', author: 'other', sender: 'Игорь', avatar: 'ИП', text: 'Добавил цифры по активным командам и использованию видеовстреч.', time: '08:55' },
@@ -50,7 +50,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'ops', title: 'Операционные вопросы', subtitle: 'Алексей: встреча в 16:00', avatar: '✏️', avatarColor: 1, kind: 'group', unread: 11,
+    id: 'ops', title: 'Операционные вопросы', subtitle: 'Алексей: встреча в 16:00', avatar: '✏️', avatarColor: 1, kind: 'group', unread: 11, mentioned: true,
     messages: [
       { id: 'o1', author: 'other', sender: 'Алексей', avatar: 'АК', text: 'Доброе утро. Сегодняшнюю рабочую встречу перенесли на 16:00.', time: '09:18', pinned: true },
       { id: 'o2', author: 'other', sender: 'Светлана', avatar: 'СН', text: 'Переговорная на пятом этаже свободна, поставила бронь на час.', time: '09:22' },

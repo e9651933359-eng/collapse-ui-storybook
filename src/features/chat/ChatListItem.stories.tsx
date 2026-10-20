@@ -71,6 +71,12 @@ export const PinnedUnread: Story = {
   render: (args) => <div className="chat-list-item-story"><ChatListItem {...args} /></div>,
 }
 
+export const Mentioned: Story = {
+  args: { chat: { ...chat, unread: 3, mentioned: true }, onSelect: () => undefined },
+  parameters: { docs: { description: { story: 'Бейдж «@» (Counter accent M) показывается перед счётчиком, пока есть непрочитанные и пользователя упомянули. Высота строки 44, аватар 36 — замер прототипа коллег, техническое допущение.' } } },
+  render: (args) => <div className="chat-list-item-story"><ChatListItem {...args} /></div>,
+}
+
 export const PinnedRead: Story = {
   args: { chat: { ...chat, pinned: true, unread: 0 }, onSelect: () => undefined },
   parameters: { docs: { description: { story: 'После прочтения каунтер исчезает, и в trailing-слоте показывается пин.' } } },

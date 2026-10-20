@@ -57,6 +57,8 @@ export type Chat = {
   avatarFilled?: boolean
   kind?: 'direct' | 'group' | 'channel'
   unread?: number
+  /** Пользователя упомянули в непрочитанных: в строке списка показывается бейдж «@». */
+  mentioned?: boolean
   pinned?: boolean
   muted?: boolean
   federation?: boolean

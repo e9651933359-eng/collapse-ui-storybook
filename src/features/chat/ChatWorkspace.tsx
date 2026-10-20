@@ -36,7 +36,7 @@ export function ChatWorkspace({ chat, composerNotice, federation = chat.federati
         tone={chat.avatarTone}
         color={chat.avatarColor}
         emoji={chat.avatar}
-        filled={chat.avatarFilled ?? true}
+        filled={chat.avatarFilled ?? false}
         shape={chat.kind === 'channel' ? 'squircle' : 'round'}
       />
       <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start">{chat.title}</FederationLabel> : chat.title}</strong><span className="chat-header__subtitle">{chat.subtitle}</span></div>

@@ -189,7 +189,7 @@ export function ChatListItem({
           tone={chat.avatarTone}
           color={chat.avatarColor}
           emoji={chat.avatar}
-          filled={chat.avatarFilled ?? true}
+          filled={chat.avatarFilled ?? false}
           shape={chat.kind === 'channel' ? 'squircle' : 'round'}
         />
         <span className="chat-row__body">
@@ -199,6 +199,7 @@ export function ChatListItem({
           </span>
         </span>
         <span className="chat-row__trailing">
+          {!!chat.unread && chat.mentioned && <Counter className="chat-row__mention" tone="accent" size="m" shape="default" aria-label="Вас упомянули">@</Counter>}
           {!!chat.unread
             ? <Counter className="chat-row__counter" tone={chat.muted ? 'default' : 'accent'} size="m" shape="default">{chat.unread}</Counter>
             : chat.pinned && <Pin className="chat-row__pin" aria-label="Закреплено" />}

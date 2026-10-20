@@ -62,6 +62,13 @@
 - Значение `Color=AI` не реализовано: Figma MCP не вернул значения градиента `LinkAI/Default`; не подставляем догадкой.
 - Storybook: `UI/Avatar / Color 1–8`, `Color 1–8 / squircle`.
 
+### ChatListItem (компактная строка)
+
+- Строка списка чатов: высота `--collapse-size-chat-row` 44, аватар `--collapse-size-chat-row-avatar` 36, padding 2/12/2/2. Источник — замер прототипа коллег (link-chats-survey); в Figma NavList строка 48/аватар 40 — **техническое допущение**, вкладки папок не затронуты.
+- Счётчик строки — Counter `size="m"` `shape="default"` (20 px высотой, как у коллег); в вкладках папок остаётся прежний.
+- Аватар в списке по умолчанию Unfilled (светлый tint), как в Storybook `Shell/ChatList` и Figma `Avatar/User Filled=false`; `avatarFilled: true` включает тёмный.
+- Бейдж «Вас упомянули»: поле `Chat.mentioned`, Counter accent M с «@» перед счётчиком непрочитанных; показывается только при `unread > 0`. Storybook: `Chat/ChatListItem / Mentioned`.
+
 ### MessageBubble media
 
 - Bubble поддерживает необязательные изображения перед текстом. Для демо используются локальные ассеты, lazy loading и размеры из `--collapse-size-message-media-*`.
