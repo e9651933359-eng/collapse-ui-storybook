@@ -29,6 +29,6 @@
   --product-rail-divider: #ffffff29;
   /* На тёмной подложке список чатов — светлая панель (Surface), как в макете; шов со списком прямой. */
   --chat-list-panel-background: linear-gradient(0deg, var(--surface-primary) 19.7%, var(--surface-foundation) 111.9%);
-  --chat-list-panel-radius: var(--radius-xl) 0 0 var(--radius-xl);
-  --chat-workspace-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  --chat-list-panel-radius: var(--radius-m) 0 0 var(--radius-m);
+  --chat-workspace-radius: 0 var(--radius-m) var(--radius-m) 0;
 }
