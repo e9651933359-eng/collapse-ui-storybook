@@ -2,6 +2,10 @@
   --collapse-motion-delay-tooltip: 1000ms;
   /* Tooltip delay is confirmed by EmojiPicker; remaining timings are centralized prototype assumptions. */
   --collapse-motion-duration-fast: 140ms;
+  /* Пружинный поворот иконок рейла. Источник: замер прототипа коллег (rotate -18deg, 442ms, spring easing) — техническое допущение. */
+  --collapse-motion-duration-icon-spring: 440ms;
+  --collapse-motion-easing-spring: linear(0, 0.17 7.4%, 0.44 14.8%, 0.672 22.2%, 0.831 29.6%, 0.925 37%, 0.975 44.4%, 0.997 51.9%, 1.005 59.3%, 1.006 70%, 1.003 85%, 1);
+  --collapse-motion-rotate-icon-hover: -18deg;
   --collapse-motion-duration-default: 160ms;
   --collapse-motion-duration-slow: 180ms;
   --collapse-motion-duration-spinner: 800ms;
@@ -14,6 +18,7 @@
 @media (prefers-reduced-motion: reduce) {
   :root {
     --collapse-motion-duration-fast: 1ms;
+    --collapse-motion-duration-icon-spring: 1ms;
     --collapse-motion-duration-default: 1ms;
     --collapse-motion-duration-slow: 1ms;
   }

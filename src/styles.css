@@ -58,6 +58,9 @@ button { border: 0; background: none; cursor: pointer; }
 .product-rail__items .icon-button:not(.is-selected) .rail-icon,
 .product-rail__bottom .icon-button .rail-icon { filter: var(--product-rail-icon-filter); }
 .product-rail__bottom .icon-button svg { color: inherit; }
+.product-rail__bottom .icon-button .rail-icon { transition: transform var(--collapse-motion-duration-icon-spring) var(--collapse-motion-easing-spring); }
+.product-rail__bottom .icon-button:hover .rail-icon,
+.product-rail__bottom .icon-button:focus-visible .rail-icon { transform: rotate(var(--collapse-motion-rotate-icon-hover)); }
 .product-rail .icon-button:not(.is-selected):hover { background-image: linear-gradient(var(--product-rail-hover), var(--product-rail-hover)); }
 .product-rail__icon-wrap { position: relative; display: inline-flex; }
 .product-rail__badge { position: absolute; top: -2px; right: -2px; pointer-events: none; }
@@ -213,7 +216,7 @@ button { border: 0; background: none; cursor: pointer; }
 }
 .chat-workspace--empty { display: grid; grid-template-rows: 1fr; place-items: center; }
 .chat-workspace-empty-state { display: flex; flex-direction: column; align-items: center; gap: var(--space-s); }
-.chat-workspace-empty-state__icon { width: 40px; height: 40px; color: var(--icon-secondary); opacity: .64; }
+.chat-workspace-empty-state__icon { width: 40px; height: 40px; background-color: var(--icon-secondary); opacity: .64; -webkit-mask: url('assets/figma/ic-chat-filled.svg') center / contain no-repeat; mask: url('assets/figma/ic-chat-filled.svg') center / contain no-repeat; }
 .chat-workspace--empty p { margin: 0; color: var(--text-tertiary); font-family: var(--collapse-font-family-base); font-size: var(--collapse-chat-empty-size); font-weight: var(--collapse-chat-empty-weight); line-height: var(--collapse-chat-empty-line-height); }
 .chat-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 8px; }
 .chat-header__identity { min-width: 0; display: flex; align-items: center; gap: 12px; }

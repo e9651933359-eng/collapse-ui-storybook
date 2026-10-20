@@ -146,7 +146,7 @@ const chatSeeds: Chat[] = [
     ],
   },
   {
-    id: 'alexey-smirnov', title: 'Алексей Смирнов', subtitle: 'Договорились созвониться после обеда', avatar: 'АС', avatarColor: 4, kind: 'direct',
+    id: 'alexey-smirnov', title: 'Алексей Смирнов', subtitle: 'Договорились созвониться после обеда', avatar: 'АС', avatarImage: 'assets/figma/message-avatar-photo.png', avatarColor: 4, kind: 'direct',
     messages: [
       { id: 'as1', author: 'other', sender: 'Алексей Смирнов', avatar: 'АС', text: 'Привет! Посмотрел прототип, есть пара вопросов по поведению каналов.', time: '10:11' },
       { id: 'as2', author: 'me', text: 'Привет! Давай разберём. Могу подключиться после 14:00.', time: '10:15' },
