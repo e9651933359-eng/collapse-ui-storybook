@@ -46,6 +46,7 @@
 - Для кликабельных строк `CheckBox visualOnly` отображает состояние без вложенного интерактивного элемента; роль и переключение принадлежат родительской строке.
 - Switch: 52×28, On/Off, Hover, Pressed через native active или демонстрационный `pressed`, Disabled, focus-visible; `role=switch`, `aria-checked`. Off использует обводку 2 и handle 12; On — accent track без обводки и handle 20 с отступом 4. Handle во всех состояниях центрируется по вертикали; Pressed — handle 24. Hover подсвечивает весь трек внешним accent state layer, но не меняет выбранное значение.
 - Серверный optimistic update и rollback принадлежат продукту и не встроены в Base.
+- ProductRail: кликабелен только раздел «Чаты» (демо-ограничение сайдбара). Остальные пункты сохраняют hover/focus-visible, но `onClick` не переключает состояние; добавлен `aria-disabled` для ассистивных технологий, кнопка остаётся не `disabled`, чтобы оставить визуальные состояния.
 
 ### Avatar
 
