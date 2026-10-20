@@ -149,9 +149,9 @@ export function Panel({ children }: { children: React.ReactNode }) {
 ### Button
 
 - Текстовые действия используют общий `Button`.
-- `Secondary / S`: высота 40 px, горизонтальные отступы 16 px, `Paragraph/S/SemiBold`.
+- `Secondary / S`: высота 40 px, горизонтальные отступы 16 px, `Paragraph/S/Regular`.
 - Surface — `Background/Opacity/Base/SecondaryTint`; hover — `StateLayers/OnBase/Tertiary`.
-- Источник: [BASE Button](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1141-249).
+- Источник: [BASE Button](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1141-249) — в Figma текст кнопки `Paragraph/S/SemiBold`. Продуктовое решение (20.10.2026): во всех экранах чатов и папок кнопка использует `Paragraph/S/Regular`, чтобы не спорить по весу с соседними элементами (например, «Выбранные чаты и каналы» в модалке создания папки). Явное отступление от исходника BASE, зафиксировано по просьбе автора.
 
 ### Строка системной папки
 

@@ -132,7 +132,7 @@
   color: var(--collapse-color-text-solid-base-primary);
   font-family: var(--collapse-paragraph-s-font);
   font-size: var(--collapse-paragraph-s-size);
-  font-weight: var(--collapse-paragraph-s-semibold-weight);
+  font-weight: var(--collapse-paragraph-s-regular-weight);
   line-height: var(--collapse-paragraph-s-line-height);
   letter-spacing: var(--collapse-paragraph-s-letter-spacing);
   backdrop-filter: blur(calc(var(--collapse-effect-blur-background-accent) / 2));
