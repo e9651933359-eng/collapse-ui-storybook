@@ -126,8 +126,8 @@ button { border: 0; background: none; cursor: pointer; }
 }
 .chat-list-panel__header h1 { margin: 0; font-size: var(--title-l-size); line-height: var(--title-l-line); font-weight: var(--collapse-title-l-semibold-weight); letter-spacing: var(--collapse-title-l-letter-spacing); }
 .search-field {
-  flex: 0 0 44px;
-  height: 44px;
+  flex: 0 0 var(--collapse-size-search-field);
+  height: var(--collapse-size-search-field);
   margin: 0 8px 16px;
   padding: 0 14px;
   display: flex;
@@ -136,11 +136,13 @@ button { border: 0; background: none; cursor: pointer; }
   border-radius: var(--radius-round);
   background: var(--background-secondary);
   color: var(--text-tertiary);
+  transition: background var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), box-shadow var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard);
 }
 .search-field svg { width: 20px; height: 20px; }
 .search-field input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text-primary); font-size: var(--paragraph-s-size); line-height: var(--paragraph-s-line); }
 .search-field input::placeholder { color: var(--text-tertiary); }
-.search-field:focus-within { box-shadow: inset 0 0 0 var(--collapse-stroke-width-thick) var(--accent-primary); background: var(--search-background-focused); }
+.search-field:hover { background: var(--surface-hover); }
+.search-field:focus-within, .search-field:focus-within:hover { box-shadow: inset 0 0 0 var(--collapse-stroke-width-thick) var(--accent-primary); background: var(--search-background-focused); }
 .chat-list-panel__main { min-width: 0; min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
 .chat-list-panel--left { flex-direction: row; }
 .chat-list-panel__main > .segment-controls { margin: var(--collapse-spacing-horizontal-none) var(--collapse-spacing-horizontal-s) var(--collapse-spacing-horizontal-s); }
@@ -180,8 +182,8 @@ button { border: 0; background: none; cursor: pointer; }
 .chat-row__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .chat-row__title { font-size: var(--paragraph-s-size); line-height: var(--paragraph-s-line); font-weight: var(--collapse-paragraph-s-medium-weight); letter-spacing: var(--collapse-paragraph-s-letter-spacing); }
 .chat-row__indicator { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); display: grid; flex: 0 0 var(--collapse-size-icon-s); place-items: center; color: var(--collapse-color-icon-solid-accent-primary); }
-.chat-row__trailing { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-s); transition: opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard); }
-.chat-row__pin { width: 16px; height: 16px; color: var(--text-tertiary); fill: currentColor; }
+.chat-row__trailing { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-l); transition: opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard); }
+.chat-row__pin { width: 16px; height: 16px; opacity: .56; }
 .chat-row .collapse-counter.chat-row__counter, .chat-row .collapse-counter.chat-row__mention { flex: 0 0 auto; min-width: 0; padding-inline: var(--collapse-spacing-horizontal-s); }
 .chat-row__menu-trigger {
   position: absolute; top: var(--collapse-spacing-horizontal-xs); right: var(--collapse-spacing-horizontal-xs);
