@@ -216,7 +216,8 @@ button { border: 0; background: none; cursor: pointer; }
 }
 .chat-workspace--empty { display: grid; grid-template-rows: 1fr; place-items: center; }
 .chat-workspace-empty-state { display: flex; flex-direction: column; align-items: center; gap: var(--space-s); }
-.chat-workspace-empty-state__icon { width: 40px; height: 40px; background-color: var(--icon-secondary); opacity: .64; -webkit-mask: url('assets/figma/ic-chat-filled.svg') center / contain no-repeat; mask: url('assets/figma/ic-chat-filled.svg') center / contain no-repeat; }
+.chat-workspace-empty-state__icon { width: var(--collapse-size-empty-state-tile); height: var(--collapse-size-empty-state-tile); display: grid; place-items: center; border-radius: var(--radius-m); background: var(--surface-hover); color: var(--icon-primary); }
+.chat-workspace-empty-state__icon svg { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); }
 .chat-workspace--empty p { margin: 0; color: var(--text-tertiary); font-family: var(--collapse-font-family-base); font-size: var(--collapse-chat-empty-size); font-weight: var(--collapse-chat-empty-weight); line-height: var(--collapse-chat-empty-line-height); }
 .chat-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 8px; }
 .chat-header__identity { min-width: 0; display: flex; align-items: center; gap: 12px; }
