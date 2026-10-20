@@ -65,7 +65,10 @@
 ### ChatListItem (компактная строка)
 
 - Строка списка чатов: высота `--collapse-size-chat-row` 44, аватар `--collapse-size-chat-row-avatar` 36, padding 2/12/2/2. Источник — замер прототипа коллег (link-chats-survey); в Figma NavList строка 48/аватар 40 — **техническое допущение**, вкладки папок не затронуты.
-- Счётчик строки — Counter `size="m"` `shape="default"` (20 px высотой, как у коллег); в вкладках папок остаётся прежний.
+- Счётчик строки — Counter `size="m"` `shape="default"`: 20 px высотой, шрифт Caption/M 12 px (как у коллег; Figma — 13). Вкладки папок используют S и не затронуты.
+- Закреплённый чат показывает пин вместе с «@» и счётчиком (порядок: пин, «@», счётчик).
+- Иконки внизу ProductRail (поиск, уведомления, помощь) при hover/focus-visible поворачиваются на −18° (токены `--collapse-motion-*-icon-spring`, `--collapse-motion-rotate-icon-hover`; замер прототипа коллег — техническое допущение), reduced motion отключает анимацию.
+- Пустое состояние чата использует иконку `ic-chat-filled` из набора рейла (maska); иконки коллег не снимались — их empty state на странице недоступен.
 - Аватар в списке по умолчанию Unfilled (светлый tint), как в Storybook `Shell/ChatList` и Figma `Avatar/User Filled=false`; `avatarFilled: true` включает тёмный.
 - Бейдж «Вас упомянули»: поле `Chat.mentioned`, Counter accent M с «@» перед счётчиком непрочитанных; показывается только при `unread > 0`. Storybook: `Chat/ChatListItem / Mentioned`.
 
