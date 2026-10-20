@@ -73,6 +73,7 @@
 - Пустое состояние чата: плитка 44 (`--collapse-size-empty-state-tile`, radius M, фон `--surface-hover`) с иконкой lucide MessagesSquare 24 — по скриншоту прототипа коллег, техническое допущение.
 - Аватар в списке по умолчанию Unfilled (светлый tint), как в Storybook `Shell/ChatList` и Figma `Avatar/User Filled=false`; `avatarFilled: true` включает тёмный.
 - Бейдж «Вас упомянули»: поле `Chat.mentioned`, Counter accent M с «@» перед счётчиком непрочитанных; показывается только при `unread > 0`. Storybook: `Chat/ChatListItem / Mentioned`.
+- Демо-данные: личные контакты с портретами (`public/assets/avatars/*.jpg`, сгенерированы Figma AI, пол соответствует имени) занимают ≈60% первого экрана списка; логотип МТС — `avatars/mts.png` с расширенными красными полями, чтобы круг аватара не срезал буквы. Портреты — 256 px эскизы генерации.
 
 ### MessageBubble media
 
