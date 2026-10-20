@@ -1,5 +1,7 @@
 import { useState, type ReactNode } from 'react'
+import { Bell, CircleHelp, Search } from 'lucide-react'
 import { Avatar } from '../ui/Avatar'
+import { Counter } from '../ui/Counter'
 import { IconButton } from '../ui/IconButton'
 
 type ProductRailItem = { id: string; label: string; icon: ReactNode }
@@ -31,6 +33,12 @@ export function ProductRail() {
         <IconButton label="Настройки" icon={<img className="rail-icon" src="assets/figma/ic-gear-filled.svg" alt="" />} />
       </div>
       <div className="product-rail__bottom">
+        <IconButton label="Поиск" icon={<Search className="rail-icon" aria-hidden="true" />} />
+        <span className="product-rail__icon-wrap">
+          <IconButton label="Уведомления" icon={<Bell className="rail-icon" aria-hidden="true" />} />
+          <Counter className="product-rail__badge" tone="accent" size="s">3</Counter>
+        </span>
+        <IconButton label="Помощь" icon={<CircleHelp className="rail-icon" aria-hidden="true" />} />
         <IconButton label="AI-помощник" icon={<img className="rail-icon" src="assets/figma/ic-ai-filled.svg" alt="" />} />
         <Avatar label="Организация" size={44} tone="var(--collapse-color-background-solid-accent-primary)" shape="squircle" />
       </div>
