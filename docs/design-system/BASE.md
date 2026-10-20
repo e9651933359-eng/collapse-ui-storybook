@@ -68,7 +68,7 @@
 - Счётчик строки — Counter `size="m"` `shape="default"`: 20 px высотой, шрифт Caption/M 12 px (как у коллег; Figma — 13). Вкладки папок используют S и не затронуты.
 - Закреплённый чат показывает пин вместе с «@» и счётчиком (порядок: пин, «@», счётчик).
 - Иконки внизу ProductRail (поиск, уведомления, помощь) при hover/focus-visible поворачиваются на −18° (токены `--collapse-motion-*-icon-spring`, `--collapse-motion-rotate-icon-hover`; замер прототипа коллег — техническое допущение), reduced motion отключает анимацию.
-- Пустое состояние чата использует иконку `ic-chat-filled` из набора рейла (maska); иконки коллег не снимались — их empty state на странице недоступен.
+- Пустое состояние чата: плитка 44 (`--collapse-size-empty-state-tile`, radius M, фон `--surface-hover`) с иконкой lucide MessagesSquare 24 — по скриншоту прототипа коллег, техническое допущение.
 - Аватар в списке по умолчанию Unfilled (светлый tint), как в Storybook `Shell/ChatList` и Figma `Avatar/User Filled=false`; `avatarFilled: true` включает тёмный.
 - Бейдж «Вас упомянули»: поле `Chat.mentioned`, Counter accent M с «@» перед счётчиком непрочитанных; показывается только при `unread > 0`. Storybook: `Chat/ChatListItem / Mentioned`.
 

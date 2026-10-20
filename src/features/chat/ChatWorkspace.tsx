@@ -1,4 +1,4 @@
-import { Phone, Search, UserPlus } from 'lucide-react'
+import { MessagesSquare, Phone, Search, UserPlus } from 'lucide-react'
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
 import type { Chat } from '../../types/chat'
 import { Avatar } from '../../components/ui/Avatar'
@@ -73,7 +73,7 @@ export function ChatWorkspaceEmpty() {
   return (
     <main className="chat-workspace chat-workspace--empty">
       <div className="chat-workspace-empty-state">
-        <span className="chat-workspace-empty-state__icon" aria-hidden="true" />
+        <span className="chat-workspace-empty-state__icon" aria-hidden="true"><MessagesSquare strokeWidth={1.75} /></span>
         <p>Выберите, с кем хотите начать разговор</p>
       </div>
     </main>
