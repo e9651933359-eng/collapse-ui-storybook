@@ -91,6 +91,8 @@
 - Контекстное меню выравнивается по левому краю вызвавшего сегмента и открывается в состоянии Enabled: hover появляется только после движения указателя или клавиатурной навигации.
 - Источник сценариев: [8318:167378](https://www.figma.com/design/XjoKr5oZ1vXrB2TuYY7ydZ/?node-id=8318-167378).
 - Storybook: `UI/SegmentControls`, `Shell/ChatList / FolderCounterRules`, `Shell/ChatList / NewFolderKeepsSelected`.
+- Расположение папок (`foldersLayout`: `top` по умолчанию / `left`) хранит экран и передаёт и в `ChatList`, и в `FolderManagementModal` (секция «Расположение папок», обычный `ComboBox`: «Над чатами» / «Слева от чатов»). В режиме `left` `SegmentControls` получает `orientation="vertical"`: колонка 88px внутри панели списка (`--collapse-size-folder-rail-width`), пункт 64×64 (`--collapse-size-folder-rail-item`), радиус `--radius-m`, отступы 12px/2px, иконка 20px над подписью Caption/M/Medium, счётчик 16px в правом верхнем углу, «+» (создание папки) 40×40 под списком, настройки прижаты к низу. Ширина списка чатов не уменьшается: панель шире на 88px. В `left` всегда показываются иконка и подпись, поэтому секция «Отображение папок» скрыта. Перестановка — drag-and-drop или `Alt + ArrowUp/ArrowDown`; контекстное меню открывается справа от пункта. Размеры сняты с референса link-chats-survey (20.10.2026); первый пункт референса («Обсуждения») сознательно не реализован — первая папка «Все». Если «Все» ещё не выбрана, в `left` она подсвечена как активная.
+- Storybook: `UI/SegmentControls / Vertical`, `Shell/ChatList / FoldersLeft`.
 
 ### Пользовательские папки
 

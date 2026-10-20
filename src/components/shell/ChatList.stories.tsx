@@ -235,3 +235,52 @@ export const NewFolderKeepsSelected: Story = {
   parameters: { docs: { description: { story: 'После открытия чат в «Новых» сразу становится прочитанным, но остаётся выбранным в папке. Он исчезает после перехода на другой чат или сегмент.' } } },
   render: () => <NewFolderKeepsSelectedStory />,
 }
+
+function FoldersLeftStory() {
+  const [segment, setSegment] = useState('all')
+  const [selectedId, setSelectedId] = useState(federationChats[0].id)
+  const [query, setQuery] = useState('')
+  const filtered = federationChats.filter((chat) => {
+    const matchesQuery = chat.title.toLocaleLowerCase('ru').includes(query.trim().toLocaleLowerCase('ru'))
+    const matchesSegment = segment === 'all' || (segment === 'channels' ? chat.kind === 'channel' : segment === 'chats' ? chat.kind !== 'channel' : Boolean(chat.unread))
+    return matchesQuery && matchesSegment
+  })
+
+  return (
+    <div style={{ width: 408, height: 720 }}>
+      <ChatList
+        chats={filtered}
+        selectedId={selectedId}
+        query={query}
+        segment={segment}
+        foldersLayout="left"
+        segments={[
+          { value: 'all', label: 'Все', icon: '🗂️', kind: 'fixed' },
+          { value: 'new', label: 'Новые', icon: '🔔', counter: 2, kind: 'system' },
+          { value: 'chats', label: 'Чаты', icon: '💬', kind: 'system' },
+          { value: 'channels', label: 'Каналы', icon: '📢', counter: 1, kind: 'system' },
+        ]}
+        onQueryChange={setQuery}
+        onSegmentChange={setSegment}
+        onCreateFolder={() => undefined}
+        onOpenFolderSettings={() => undefined}
+        onSelect={setSelectedId}
+      />
+    </div>
+  )
+}
+
+export const FoldersLeft: Story = {
+  args: {
+    chats: federationChats,
+    selectedId: federationChats[0].id,
+    query: '',
+    segment: 'all',
+    onQueryChange: () => undefined,
+    onSegmentChange: () => undefined,
+    onOpenFolderSettings: () => undefined,
+    onSelect: () => undefined,
+  },
+  parameters: { docs: { description: { story: 'Расположение папок «Слева от чатов»: вертикальная колонка 88px (пункт 64×64, иконка над подписью, счётчик в правом верхнем углу), «+» под списком, настройки внизу. Включается в «Управлении папками» → «Расположение папок».' } } },
+  render: () => <FoldersLeftStory />,
+}

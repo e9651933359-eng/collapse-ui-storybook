@@ -6,6 +6,7 @@ import { ChatListItem, type ChatFolderOption } from '../../features/chat/ChatLis
 import { IconButton } from '../ui/IconButton'
 import { SegmentControls } from '../ui/SegmentControls'
 import type { SegmentDisplayMode, SegmentOption } from '../ui/SegmentControls'
+import type { FolderLayout } from '../ui/FolderManagementModal'
 import { TextButton } from '../ui/TextButton'
 
 type ChatListProps = {
@@ -16,6 +17,8 @@ type ChatListProps = {
   segment: string
   segments?: readonly SegmentOption[]
   segmentDisplayMode?: SegmentDisplayMode
+  /** top — папки над списком (по умолчанию); left — вертикальная колонка слева от чатов. */
+  foldersLayout?: FolderLayout
   folders?: readonly ChatFolderOption[]
   onQueryChange: (value: string) => void
   onSegmentChange: (value: string) => void
@@ -62,6 +65,7 @@ export function ChatList({
   segment,
   segments = chatSegments,
   segmentDisplayMode = 'names',
+  foldersLayout = 'top',
   folders = emptyFolders,
   onCreateFolder,
   onCreateChat,
@@ -148,20 +152,12 @@ export function ChatList({
     setReorderAnnouncement(`${chats.find((chat) => chat.id === chatId)?.title}: новая позиция ${next.indexOf(chatId) + 1}`)
   }
 
-  return (
-    <aside className="chat-list-panel">
-      <header className="chat-list-panel__header">
-        <h1>{title}</h1>
-        <IconButton size="s" variant="floating" label="Создать чат" icon={<Plus />} onClick={onCreateChat} />
-      </header>
-      <label className="search-field">
-        <Search aria-hidden="true" />
-        <input value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Поиск" aria-label="Поиск по чатам" />
-      </label>
-      <SegmentControls
+  const isLeftLayout = foldersLayout === 'left'
+  const segmentControls = (
+    <SegmentControls
         tabs="dynamic"
         options={segments}
-        value={segment}
+        value={isLeftLayout ? segment || 'all' : segment}
         onValueChange={onSegmentChange}
         fixedOptionValue="all"
         getMenuItems={folderMenuItems}
@@ -170,37 +166,55 @@ export function ChatList({
         onSettingsClick={onOpenFolderSettings}
         settingsLabel="Управлять папками"
         displayMode={segmentDisplayMode}
+        orientation={isLeftLayout ? 'vertical' : 'horizontal'}
+        onAddClick={onCreateFolder ? () => onCreateFolder() : undefined}
       />
-      <div className="chat-list" role="list" aria-label="Список чатов">
-        {orderedChats.length ? orderedChats.map((chat) => (
-          <ChatListItem
-            key={chat.id}
-            chat={chat}
-            federation={chat.federation}
-            indicator={renderItemIndicator?.(chat)}
-            folders={folders}
-            dragging={draggedChatId === chat.id}
-            reorderable={canReorderPinned && Boolean(chat.pinned)}
-            selected={selectedId === chat.id}
-            onCreateFolder={onCreateFolder}
-            onMarkRead={onMarkRead}
-            onSelect={onSelect}
-            onToggleFolder={onToggleFolder}
-            onToggleNotifications={onToggleNotifications}
-            onTogglePin={onTogglePin}
-            onDragStart={startPinnedDrag}
-            onDragEnter={enterPinnedChat}
-            onDragEnd={finishPinnedDrag}
-            onDrop={finishPinnedDrag}
-            onReorderKeyDown={reorderPinnedWithKeyboard}
-          />
-        )) : isCustomFolder && !query.trim() ? (
-          <div className="chat-list__empty chat-list__empty--folder">
-            <p>Выберите чаты и каналы,<br />чтобы они появились в этой папке</p>
-            <TextButton tone="base" onClick={() => onEditFolder?.(segment)}>Выбрать чаты и каналы</TextButton>
-          </div>
-        ) : <div className="chat-list__empty">Ничего не найдено</div>}
-        <span className="visually-hidden" aria-live="polite">{reorderAnnouncement}</span>
+  )
+
+  return (
+    <aside className={`chat-list-panel${isLeftLayout ? ' chat-list-panel--left' : ''}`}>
+      {isLeftLayout && segmentControls}
+      <div className="chat-list-panel__main">
+        <header className="chat-list-panel__header">
+          <h1>{title}</h1>
+          <IconButton size="s" variant="floating" label="Создать чат" icon={<Plus />} onClick={onCreateChat} />
+        </header>
+        <label className="search-field">
+          <Search aria-hidden="true" />
+          <input value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Поиск" aria-label="Поиск по чатам" />
+        </label>
+        {!isLeftLayout && segmentControls}
+        <div className="chat-list" role="list" aria-label="Список чатов">
+          {orderedChats.length ? orderedChats.map((chat) => (
+            <ChatListItem
+              key={chat.id}
+              chat={chat}
+              federation={chat.federation}
+              indicator={renderItemIndicator?.(chat)}
+              folders={folders}
+              dragging={draggedChatId === chat.id}
+              reorderable={canReorderPinned && Boolean(chat.pinned)}
+              selected={selectedId === chat.id}
+              onCreateFolder={onCreateFolder}
+              onMarkRead={onMarkRead}
+              onSelect={onSelect}
+              onToggleFolder={onToggleFolder}
+              onToggleNotifications={onToggleNotifications}
+              onTogglePin={onTogglePin}
+              onDragStart={startPinnedDrag}
+              onDragEnter={enterPinnedChat}
+              onDragEnd={finishPinnedDrag}
+              onDrop={finishPinnedDrag}
+              onReorderKeyDown={reorderPinnedWithKeyboard}
+            />
+          )) : isCustomFolder && !query.trim() ? (
+            <div className="chat-list__empty chat-list__empty--folder">
+              <p>Выберите чаты и каналы,<br />чтобы они появились в этой папке</p>
+              <TextButton tone="base" onClick={() => onEditFolder?.(segment)}>Выбрать чаты и каналы</TextButton>
+            </div>
+          ) : <div className="chat-list__empty">Ничего не найдено</div>}
+          <span className="visually-hidden" aria-live="polite">{reorderAnnouncement}</span>
+        </div>
       </div>
     </aside>
   )

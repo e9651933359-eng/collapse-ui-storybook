@@ -36,6 +36,8 @@
   --collapse-size-avatar-m: var(--collapse-size-control-s);
   --collapse-size-avatar-l: 44px;
   --collapse-size-avatar-xs: 28px;
+  --collapse-size-folder-rail-width: 88px; /* Референс link-chats-survey (20.10.2026): колонка папок слева от списка, 12px отступы */
+  --collapse-size-folder-rail-item: 64px; /* Референс link-chats-survey: пункт папки 64×64, иконка над подписью */
   --collapse-size-avatar-profile: 124px; /* Figma 40000074:62316, аватар в профиле участника */
   --collapse-size-control-m: 48px;
   --collapse-size-control-l: 56px;

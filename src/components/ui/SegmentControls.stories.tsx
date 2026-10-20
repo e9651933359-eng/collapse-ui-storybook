@@ -162,3 +162,16 @@ export const RestoredOverflowSelection: Story = {
   },
   render: () => <HorizontalOverflowDemo initialValue="research" />,
 }
+
+export const Vertical: Story = {
+  args: {
+    options: overflowOptions,
+    value: 'all',
+    orientation: 'vertical',
+    onValueChange: () => undefined,
+    onSettingsClick: () => undefined,
+    onAddClick: () => undefined,
+  },
+  decorators: [(Story) => <div style={{ display: 'flex', width: 88, height: 560 }}><Story /></div>],
+  parameters: { docs: { description: { story: 'Вертикальная колонка папок (88px, пункт 64×64, радиус 16px): иконка над подписью, счётчик в правом верхнем углу, «+» создаёт папку, настройки прижаты к низу. Перестановка — перетаскиванием или Alt + ↑/↓.' } } },
+}

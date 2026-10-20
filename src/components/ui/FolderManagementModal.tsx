@@ -27,7 +27,13 @@ type FolderManagementModalProps = {
   onSystemFolderChange?: (folder: SystemFolder, enabled: boolean) => void
   displayMode: SegmentDisplayMode
   onDisplayModeChange: (mode: SegmentDisplayMode) => void
+  /** Текущее расположение папок; вместе с onFoldersLayoutChange включает секцию «Расположение папок». */
+  foldersLayout?: FolderLayout
+  onFoldersLayoutChange?: (layout: FolderLayout) => void
 }
+
+/** Расположение панели папок: над списком чатов или вертикальной колонкой слева от него. */
+export type FolderLayout = 'top' | 'left'
 
 export type SystemFolder = 'new' | 'chats' | 'channels'
 
@@ -63,6 +69,11 @@ const displayOptions = [
   { value: 'icons', label: 'Только иконки' },
 ]
 
+const layoutOptions = [
+  { value: 'top', label: 'Над чатами' },
+  { value: 'left', label: 'Слева от чатов' },
+]
+
 export function FolderManagementModal({
   open,
   initialView = 'manage',
@@ -78,6 +89,8 @@ export function FolderManagementModal({
   onSystemFolderChange,
   displayMode,
   onDisplayModeChange,
+  foldersLayout = 'top',
+  onFoldersLayoutChange,
 }: FolderManagementModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const [view, setView] = useState<'manage' | 'create' | 'edit'>('manage')
@@ -229,16 +242,31 @@ export function FolderManagementModal({
             </div>
           </section>
 
-          <section className="folder-modal__section" aria-labelledby="folder-display-title">
-            <h3 id="folder-display-title">Отображение папок</h3>
-            <ComboBox
-              ariaLabel="Отображение папок"
-              value={displayMode}
-              options={displayOptions}
-              placement="top"
-              onChange={(value) => onDisplayModeChange(value as SegmentDisplayMode)}
-            />
-          </section>
+          {onFoldersLayoutChange && (
+            <section className="folder-modal__section" aria-labelledby="folder-layout-title">
+              <h3 id="folder-layout-title">Расположение папок</h3>
+              <ComboBox
+                ariaLabel="Расположение папок"
+                value={foldersLayout}
+                options={layoutOptions}
+                placement="top"
+                onChange={(value) => onFoldersLayoutChange(value as FolderLayout)}
+              />
+            </section>
+          )}
+
+          {foldersLayout !== 'left' && (
+            <section className="folder-modal__section" aria-labelledby="folder-display-title">
+              <h3 id="folder-display-title">Отображение папок</h3>
+              <ComboBox
+                ariaLabel="Отображение папок"
+                value={displayMode}
+                options={displayOptions}
+                placement="top"
+                onChange={(value) => onDisplayModeChange(value as SegmentDisplayMode)}
+              />
+            </section>
+          )}
         </div>
       </section>}
     </div>
