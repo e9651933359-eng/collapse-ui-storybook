@@ -119,6 +119,9 @@
   --collapse-size-action-card-group: 404px;
   --collapse-size-pin-cell: 51px;
   --collapse-size-nav-item: 48px;
+  /* Компактная строка списка чатов. Источник: замер прототипа коллег link-chats-survey (строка 44, аватар 36) — техническое допущение, в Figma NavList 48/40. */
+  --collapse-size-chat-row: 44px;
+  --collapse-size-chat-row-avatar: 36px;
   --collapse-size-chat-list-row: 304px;
   --collapse-size-bottom-nav: 72px;
   --collapse-size-split-button-s: 60px;

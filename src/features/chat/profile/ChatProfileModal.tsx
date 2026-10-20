@@ -35,7 +35,7 @@ export function ChatProfileModal({ chat, memberCount, onClose, onOpenMembers, on
     <ModalPage open={open} title={channel ? 'Профиль канала' : 'Профиль чата'} onClose={onClose} className="chat-profile">
       <div className="chat-profile__content">
         <div className="chat-profile__identity">
-          <Avatar label={chat.title} image={chat.avatarImage} emoji={chat.avatar} tone={chat.avatarTone} color={chat.avatarColor} size={124} shape={channel ? 'squircle' : 'round'} filled={chat.avatarFilled ?? true} />
+          <Avatar label={chat.title} image={chat.avatarImage} emoji={chat.avatar} tone={chat.avatarTone} color={chat.avatarColor} size={124} shape={channel ? 'squircle' : 'round'} filled={chat.avatarFilled ?? false} />
           <div className="chat-profile__info">
             <div className="chat-profile__name"><h3>{chat.title}</h3><span>{chat.subtitle}</span></div>
             {tag}
