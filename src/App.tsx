@@ -3,7 +3,7 @@ import { Toast } from './components/feedback/Toast'
 import { ProductRail } from './components/shell/ProductRail'
 import { ChatList } from './components/shell/ChatList'
 import { FolderManagementModal } from './components/ui/FolderManagementModal'
-import type { ManagedFolder, SystemFolder } from './components/ui/FolderManagementModal'
+import type { FolderLayout, ManagedFolder, SystemFolder } from './components/ui/FolderManagementModal'
 import { ConfirmDialog } from './components/ui/ConfirmDialog'
 import type { SegmentDisplayMode, SegmentOption } from './components/ui/SegmentControls'
 import { folderEmoji, getCustomFolderEmoji } from './components/ui/folderEmoji'
@@ -81,6 +81,7 @@ export function ChatExperience({
   const [query, setQuery] = useState('')
   const [segment, setSegment] = useState('')
   const [folderDisplayMode, setFolderDisplayMode] = useState<SegmentDisplayMode>('names')
+  const [foldersLayout, setFoldersLayout] = useState<FolderLayout>('top')
   const [retainedNewChatId, setRetainedNewChatId] = useState<string | null>(null)
   const [draft, setDraft] = useState('')
   /** Профиль открытого чата: чат/канал, список участников или пользователь. `fromMembers` — «Назад» ведёт к списку. */
@@ -302,6 +303,7 @@ export function ChatExperience({
           segment={segment}
           segments={segments}
           segmentDisplayMode={folderDisplayMode}
+          foldersLayout={foldersLayout}
           folders={customFolders}
           onQueryChange={setQuery}
           onSegmentChange={selectSegment}
@@ -369,6 +371,8 @@ export function ChatExperience({
           customFolders={customFolders}
           displayMode={folderDisplayMode}
           onDisplayModeChange={setFolderDisplayMode}
+          foldersLayout={foldersLayout}
+          onFoldersLayoutChange={setFoldersLayout}
           candidates={chats.map((chat) => ({
             id: chat.id,
             label: chat.title,

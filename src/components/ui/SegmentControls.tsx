@@ -14,6 +14,7 @@ export type SegmentOption = {
 
 export type SegmentDisplayMode = 'names' | 'names-and-icons' | 'icons'
 export type SegmentTabsMode = 'fill' | 'dynamic'
+export type SegmentOrientation = 'horizontal' | 'vertical'
 
 type SegmentControlsProps = {
   options: readonly SegmentOption[]
@@ -29,6 +30,11 @@ type SegmentControlsProps = {
   displayMode?: SegmentDisplayMode
   /** Fill shares the available width; Dynamic preserves each tab's content width (Figma Hug). */
   tabs?: SegmentTabsMode
+  /** Vertical: колонка папок «иконка над подписью» слева от списка чатов (всегда с иконками и подписями). */
+  orientation?: SegmentOrientation
+  /** Кнопка «+» под списком папок; показывается только в vertical. */
+  onAddClick?: () => void
+  addLabel?: string
 }
 
 function moveOption(values: string[], movedValue: string, targetValue: string, fixedValue?: string) {
@@ -55,7 +61,11 @@ export function SegmentControls({
   settingsLabel = 'Настроить папки',
   displayMode = 'names',
   tabs = 'dynamic',
+  orientation = 'horizontal',
+  onAddClick,
+  addLabel = 'Создать папку',
 }: SegmentControlsProps) {
+  const vertical = orientation === 'vertical'
   const [dragOrder, setDragOrder] = useState<string[] | null>(null)
   const [draggedValue, setDraggedValue] = useState<string | null>(null)
   const [announcement, setAnnouncement] = useState('')
@@ -83,6 +93,10 @@ export function SegmentControls({
     const container = containerRef.current
     const item = itemRefs.current.get(optionValue)
     if (!container || !item) return
+    if (vertical) {
+      item.scrollIntoView?.({ block: 'nearest', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : behavior })
+      return
+    }
 
     const visibleStart = container.scrollLeft
     const visibleEnd = visibleStart + container.clientWidth
@@ -97,7 +111,7 @@ export function SegmentControls({
     if (nextScrollLeft === visibleStart) return
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     container.scrollTo({ left: nextScrollLeft, behavior: reducedMotion ? 'auto' : behavior })
-  }, [])
+  }, [vertical])
 
   useLayoutEffect(() => {
     let frame = requestAnimationFrame(() => scrollOptionIntoView(value))
@@ -113,12 +127,13 @@ export function SegmentControls({
       cancelAnimationFrame(frame)
       observer.disconnect()
     }
-  }, [displayMode, layoutKey, scrollOptionIntoView, tabs, value])
+  }, [displayMode, layoutKey, scrollOptionIntoView, tabs, value, vertical])
 
   useLayoutEffect(() => {
     const nextPositions = new Map<string, number>()
     itemRefs.current.forEach((element, optionValue) => {
-      const nextLeft = element.getBoundingClientRect().left
+      const rect = element.getBoundingClientRect()
+      const nextLeft = vertical ? rect.top : rect.left
       const previousLeft = previousPositions.current.get(optionValue)
       nextPositions.set(optionValue, nextLeft)
 
@@ -127,24 +142,30 @@ export function SegmentControls({
       const duration = Number.parseFloat(styles.getPropertyValue('--collapse-motion-duration-slow')) || 280
       const easing = styles.getPropertyValue('--collapse-motion-easing-standard').trim() || 'ease'
       element.animate(
-        [{ transform: `translateX(${previousLeft - nextLeft}px)` }, { transform: 'translateX(0)' }],
+        vertical
+          ? [{ transform: `translateY(${previousLeft - nextLeft}px)` }, { transform: 'translateY(0)' }]
+          : [{ transform: `translateX(${previousLeft - nextLeft}px)` }, { transform: 'translateX(0)' }],
         { duration, easing },
       )
     })
     previousPositions.current = nextPositions
-  }, [layoutKey])
+  }, [layoutKey, vertical])
 
   useLayoutEffect(() => {
     if (!menuOpen || !menuOptionValue) return
     const trigger = itemRefs.current.get(menuOptionValue)?.getBoundingClientRect()
     const menu = menuRef.current?.getBoundingClientRect()
     if (!trigger || !menu) return
-    const left = Math.max(0, Math.min(trigger.left, window.innerWidth - menu.width))
-    const top = trigger.bottom + 4 + menu.height > window.innerHeight
-      ? Math.max(0, trigger.top - menu.height - 4)
-      : trigger.bottom + 4
+    const left = vertical
+      ? Math.max(0, Math.min(trigger.right + 4, window.innerWidth - menu.width))
+      : Math.max(0, Math.min(trigger.left, window.innerWidth - menu.width))
+    const top = vertical
+      ? Math.max(0, Math.min(trigger.top, window.innerHeight - menu.height))
+      : trigger.bottom + 4 + menu.height > window.innerHeight
+        ? Math.max(0, trigger.top - menu.height - 4)
+        : trigger.bottom + 4
     setMenuPosition((current) => current.left === left && current.top === top ? current : { left, top })
-  }, [menuOpen, menuOptionValue])
+  }, [menuOpen, menuOptionValue, vertical])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -169,6 +190,7 @@ export function SegmentControls({
   const canReorder = (optionValue: string) => Boolean(onOrderChange && optionValue !== fixedOptionValue)
 
   const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    if (vertical) return
     const container = event.currentTarget
     const maxScrollLeft = container.scrollWidth - container.clientWidth
     if (maxScrollLeft <= 0) return
@@ -194,7 +216,7 @@ export function SegmentControls({
   const openMenu = (option: SegmentOption) => {
     if (!itemsForOption(option)?.length) return
     const trigger = itemRefs.current.get(option.value)?.getBoundingClientRect()
-    if (trigger) setMenuPosition({ left: trigger.left, top: trigger.bottom + 4 })
+    if (trigger) setMenuPosition(vertical ? { left: trigger.right + 4, top: trigger.top } : { left: trigger.left, top: trigger.bottom + 4 })
     setMenuOptionValue(option.value)
   }
 
@@ -221,12 +243,14 @@ export function SegmentControls({
   }
 
   const handleKeyboardReorder = (event: KeyboardEvent<HTMLButtonElement>, optionValue: string) => {
-    if (!onOrderChange || !event.altKey || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return
+    const backKey = vertical ? 'ArrowUp' : 'ArrowLeft'
+    const forwardKey = vertical ? 'ArrowDown' : 'ArrowRight'
+    if (!onOrderChange || !event.altKey || (event.key !== backKey && event.key !== forwardKey)) return
     event.preventDefault()
 
     const values = options.map((option) => option.value)
     const currentIndex = values.indexOf(optionValue)
-    const direction = event.key === 'ArrowLeft' ? -1 : 1
+    const direction = event.key === backKey ? -1 : 1
     const targetIndex = currentIndex + direction
     if (optionValue === fixedOptionValue || targetIndex < 0 || targetIndex >= values.length || values[targetIndex] === fixedOptionValue) return
 
@@ -254,16 +278,17 @@ export function SegmentControls({
   return (
     <div
       ref={containerRef}
-      className={`segment-controls segment-controls--${tabs}`}
+      className={`segment-controls segment-controls--${tabs} ${vertical ? 'segment-controls--vertical' : ''}`}
       role="tablist"
+      aria-orientation={orientation}
       aria-label="Фильтры чатов"
       onScroll={() => setMenuOptionValue(null)}
       onWheel={handleWheel}
     >
       {orderedOptions.map((option) => {
         const hasMenu = Boolean(itemsForOption(option)?.length)
-        const showIcon = displayMode !== 'names' && Boolean(option.icon)
-        const showLabel = displayMode !== 'icons' || !option.icon
+        const showIcon = (vertical || displayMode !== 'names') && Boolean(option.icon)
+        const showLabel = vertical || displayMode !== 'icons' || !option.icon
         return (
         <button
           key={option.value}
@@ -275,12 +300,12 @@ export function SegmentControls({
           type="button"
           role="tab"
           aria-label={option.label}
-          title={displayMode === 'icons' ? option.label : undefined}
+          title={!vertical && displayMode === 'icons' ? option.label : undefined}
           aria-selected={value === option.value}
           aria-haspopup={hasMenu ? 'menu' : undefined}
           aria-expanded={hasMenu ? menuOptionValue === option.value : undefined}
           aria-keyshortcuts={[
-            canReorder(option.value) ? 'Alt+ArrowLeft Alt+ArrowRight' : '',
+            canReorder(option.value) ? (vertical ? 'Alt+ArrowUp Alt+ArrowDown' : 'Alt+ArrowLeft Alt+ArrowRight') : '',
             hasMenu ? 'Shift+F10' : '',
           ].filter(Boolean).join(' ') || undefined}
           draggable={canReorder(option.value)}
@@ -298,9 +323,20 @@ export function SegmentControls({
         >
           {showIcon && <span className="segment-controls__icon" aria-hidden="true">{option.icon}</span>}
           {showLabel && <span className="segment-controls__label">{option.label}</span>}
-          {Boolean(option.counter) && <Counter tone="accent" size="m" shape="default">{option.counter}</Counter>}
+          {Boolean(option.counter) && <Counter className={vertical ? 'segment-controls__counter' : undefined} tone="accent" size={vertical ? 's' : 'm'} shape="default">{option.counter}</Counter>}
         </button>
       )})}
+      {vertical && onAddClick && (
+        <button
+          className="segment-controls__add"
+          type="button"
+          aria-label={addLabel}
+          title={addLabel}
+          onClick={(event) => { event.stopPropagation(); setMenuOptionValue(null); onAddClick() }}
+        >
+          <img src="assets/figma/ic-plus-outline.svg" alt="" aria-hidden="true" />
+        </button>
+      )}
       {onSettingsClick && (
         <button
           className="segment-controls__settings"
