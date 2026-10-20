@@ -170,7 +170,7 @@ button { border: 0; background: none; cursor: pointer; }
 .chat-row.is-dragging .chat-row__select { cursor: grabbing; }
 .chat-row.is-dragging { background: var(--collapse-color-state-layer-on-accent-secondary); }
 .chat-row__select {
-  width: 100%; height: 100%; padding: var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-xxs) var(--collapse-spacing-horizontal-xxs);
+  width: 100%; height: 100%; padding: var(--collapse-spacing-horizontal-xs) var(--collapse-spacing-horizontal-m) var(--collapse-spacing-horizontal-xs) var(--collapse-spacing-horizontal-xs);
   display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-m);
   border-radius: inherit; color: inherit; text-align: left;
 }
