@@ -92,3 +92,17 @@
 
 - `FederationIcon` теперь рисует двойной шеврон (SVG 9×8, источник — прототип коллег, заливка `#E94A24` = токен `--collapse-color-text-solid-federation-primary`). Файл остался `assets/figma/ic-federation-outline.svg`, чтобы не ломать пути в других приложениях; имя historical.
 - У личных федеративных контактов в демо-данных добавлены портреты (`assets/avatars/*.jpg`, пол соответствует имени).
+
+## Компактная (12px) иконка Федерации — A/B на согласовании (20.10.2026)
+
+Запрос: сделать индикатор Федерации в строке списка чатов (`FederationChatIndicator`) и в повторяющейся строке отправителя сообщения (`FederationLabel`) компактнее — 12px — в двух вариантах на выбор:
+
+- **A — тайл**: иконка 12px (`--collapse-size-icon-xxs`, техническое допущение) в квадрате 20×20 со скруглением `--radius-m` на фоне `--collapse-color-background-solid-federation-tint` (`#fbe3da`, техническое допущение — светлый тон от `#E94A24`).
+- **B — без фона**: та же иконка 12px без тайла.
+
+Реализация:
+- Общий компонент `FederationBadge` (`src/components/ui/FederationBadge.tsx`) — тайл с иконкой `xxs`, используется и в `ChatListItem`/`FederationChatIndicator` (сайдбар), и в `FederationLabel` через новый проп `compact` (строка отправителя).
+- Переключение A/B — CSS-атрибут `data-fed-icon-variant` (`tile` | `bare`) на `<html>`: `.collapse-federation-tile { background: var(--collapse-color-background-solid-federation-tint) }`, при `data-fed-icon-variant="bare"` фон становится `transparent`.
+- Временный UI-переключатель `FederationIconVariantToggle` (`src/components/dev/`) подключён в `App()` поверх обоих маршрутов (`/chats`, `/federation`) — плавающая кнопка внизу справа, сохраняет выбор в `localStorage`. **Удалить после выбора варианта вместе с этим разделом**, оставив только выбранный CSS-правило.
+
+До финального решения постоянного значения по умолчанию нет — обе ветки валидны, выбор за пользователем.

@@ -477,10 +477,15 @@
 .ui-story-modal-scroll__list { min-height: 0; flex: 1; overflow-y: auto; scrollbar-width: none; }
 
 .collapse-federation-icon { display: block; flex: 0 0 auto; object-fit: contain; }
+.collapse-federation-icon--xxs { width: var(--collapse-size-icon-xxs); height: var(--collapse-size-icon-xxs); }
 .collapse-federation-icon--xs { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); }
 .collapse-federation-icon--s { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
 .collapse-federation-icon--m { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); }
 .collapse-federation-label { min-width: 0; display: inline-flex; align-items: center; gap: var(--collapse-spacing-horizontal-xs); vertical-align: bottom; }
+/* Два варианта компактной плашки Федерации на согласование (20.10.2026): A — светлый оранжевый тайл 20×20, B — просто иконка без фона. */
+.collapse-federation-tile { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); flex: 0 0 var(--collapse-size-icon-s); display: grid; place-items: center; border-radius: var(--radius-m); background: var(--collapse-color-background-solid-federation-tint); }
+/* Вариант B сравнения (20.10.2026): иконка без фона-плашки. Переключается FederationIconVariantToggle. */
+:root[data-fed-icon-variant='bare'] .collapse-federation-tile { background: transparent; }
 .collapse-federation-label--start { flex-direction: row; }
 .collapse-federation-label--end { flex-direction: row; }
 .collapse-federation-label__text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

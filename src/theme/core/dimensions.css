@@ -28,6 +28,8 @@
   --collapse-radius-full: 9999px;
 
   /* Base component dimensions confirmed in the matching Figma component sets. */
+  /* 12px — запрос на компактную иконку Федерации в строках/заголовках сообщений (20.10.2026), техническое допущение. */
+  --collapse-size-icon-xxs: 12px;
   --collapse-size-icon-xs: 16px;
   --collapse-size-icon-s: 20px;
   --collapse-size-icon-m: 24px;
