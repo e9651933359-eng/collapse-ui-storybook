@@ -204,7 +204,7 @@ button { border: 0; background: none; cursor: pointer; }
   overflow: hidden;
   border: var(--collapse-stroke-width-xthin) solid var(--border-light);
   border-radius: var(--chat-workspace-radius);
-  background: linear-gradient(0deg, var(--surface-primary) 19.7%, var(--surface-foundation) 111.9%);
+  background: var(--chat-workspace-background);
 }
 .chat-workspace--empty { display: grid; grid-template-rows: 1fr; place-items: center; }
 .chat-workspace-empty-state { display: flex; flex-direction: column; align-items: center; gap: var(--space-s); }

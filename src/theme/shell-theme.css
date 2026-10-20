@@ -11,6 +11,7 @@
   --chat-list-panel-background: transparent;
   --chat-list-panel-radius: 0;
   --chat-workspace-radius: var(--radius-xl);
+  --chat-workspace-background: linear-gradient(0deg, var(--surface-primary) 19.7%, var(--surface-foundation) 111.9%);
 }
 
 /*
@@ -31,4 +32,6 @@
   --chat-list-panel-background: linear-gradient(0deg, var(--surface-primary) 19.7%, var(--surface-foundation) 111.9%);
   --chat-list-panel-radius: var(--radius-m) 0 0 var(--radius-m);
   --chat-workspace-radius: 0 var(--radius-m) var(--radius-m) 0;
+  /* Область чата — плоский surface-primary (почти белый), чтобы читался стык со списком; список не трогаем — его градиент из Figma-источника. */
+  --chat-workspace-background: var(--surface-primary);
 }
