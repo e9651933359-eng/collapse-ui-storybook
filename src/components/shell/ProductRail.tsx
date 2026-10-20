@@ -25,9 +25,16 @@ export function ProductRail() {
       <div className="product-rail__profile"><Avatar label="Вячеслав" image="assets/figma/avatar-user.png" /></div>
       <div className="product-rail__items">
         {items.map(({ id, label, icon }) => (
-          <IconButton key={id} label={label} icon={icon} selected={active === id} onClick={() => {
-            setActive(id)
-          }} />
+          <IconButton
+            key={id}
+            label={label}
+            icon={icon}
+            selected={active === id}
+            aria-disabled={id !== 'chats' ? true : undefined}
+            onClick={() => {
+              if (id === 'chats') setActive(id)
+            }}
+          />
         ))}
         <span className="product-rail__divider" />
         <IconButton label="Настройки" icon={<img className="rail-icon" src="assets/figma/ic-gear-filled.svg" alt="" />} />
