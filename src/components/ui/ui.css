@@ -554,6 +554,8 @@
 .collapse-counter--secondary { background-color: var(--collapse-color-background-opacity-base-secondary-tint); }
 .collapse-counter--tertiary { background-color: var(--collapse-color-background-opacity-base-container-group); }
 .collapse-counter--default.collapse-counter--shape-expressive { border-radius: var(--collapse-radius-small); }
+/* Глиф «@» в большинстве шрифтов оптически смещён вниз относительно цифр — поправка по замеру, техническое допущение. */
+.collapse-counter[data-content='at'] { line-height: 1; padding-bottom: 1px; }
 
 .collapse-spinner { display: inline-block; border: var(--collapse-stroke-width-thick) solid currentColor; border-right-color: transparent; border-radius: var(--collapse-radius-full); color: var(--collapse-color-border-solid-accent-primary); animation: collapse-spin var(--collapse-motion-duration-spinner) linear infinite; }
 .collapse-spinner--small { width: var(--collapse-size-icon-xs); height: var(--collapse-size-icon-xs); }

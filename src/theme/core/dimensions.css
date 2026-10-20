@@ -192,5 +192,6 @@
   --collapse-size-disk-picker-time: 152px;
   --collapse-size-modal-page-max-height: var(--collapse-size-modal-max-height);
   --collapse-size-modal-page-uploader: 112px;
-  --collapse-size-search-field: 44px;
+  /* Высота поля поиска в списке чатов — замер прототипа коллег, было 44. Техническое допущение. */
+  --collapse-size-search-field: 36px;
 }
