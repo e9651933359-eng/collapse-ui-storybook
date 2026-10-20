@@ -199,7 +199,7 @@ export function ChatListItem({
           </span>
         </span>
         <span className="chat-row__trailing">
-          {chat.pinned && <Pin className="chat-row__pin" aria-label="Закреплено" />}
+          {chat.pinned && !chat.unread && <Pin className="chat-row__pin" aria-label="Закреплено" />}
           {!!chat.unread && chat.mentioned && <Counter className="chat-row__mention" tone="accent" size="m" shape="default" aria-label="Вас упомянули">@</Counter>}
           {!!chat.unread && <Counter className="chat-row__counter" tone={chat.muted ? 'default' : 'accent'} size="m" shape="default">{chat.unread}</Counter>}
         </span>
