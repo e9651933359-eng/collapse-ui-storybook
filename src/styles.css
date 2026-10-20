@@ -182,8 +182,7 @@ button { border: 0; background: none; cursor: pointer; }
 .chat-row__indicator { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); display: grid; flex: 0 0 var(--collapse-size-icon-s); place-items: center; color: var(--collapse-color-icon-solid-accent-primary); }
 .chat-row__trailing { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-s); transition: opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard); }
 .chat-row__pin { width: 16px; height: 16px; color: var(--text-tertiary); fill: currentColor; }
-.chat-row__counter { flex: 0 0 auto; }
-.chat-row__mention { flex: 0 0 auto; }
+.chat-row .collapse-counter.chat-row__counter, .chat-row .collapse-counter.chat-row__mention { flex: 0 0 auto; min-width: 0; padding-inline: var(--collapse-spacing-horizontal-s); }
 .chat-row__menu-trigger {
   position: absolute; top: var(--collapse-spacing-horizontal-xs); right: var(--collapse-spacing-horizontal-xs);
   opacity: 0; pointer-events: none;

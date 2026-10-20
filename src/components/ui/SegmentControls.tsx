@@ -323,7 +323,7 @@ export function SegmentControls({
         >
           {showIcon && <span className="segment-controls__icon" aria-hidden="true">{option.icon}</span>}
           {showLabel && <span className="segment-controls__label">{option.label}</span>}
-          {Boolean(option.counter) && <Counter className={vertical ? 'segment-controls__counter' : undefined} tone="accent" size={vertical ? 's' : 'm'} shape="default">{option.counter}</Counter>}
+          {Boolean(option.counter) && <Counter className={vertical ? 'segment-controls__counter' : undefined} tone="accent" size="s" shape="default">{option.counter}</Counter>}
         </button>
       )})}
       {vertical && onAddClick && (
