@@ -8,7 +8,8 @@
   align-items: center;
   gap: var(--collapse-spacing-horizontal-s-nudge);
   border-radius: var(--collapse-radius-control) var(--collapse-radius-control) var(--collapse-spacing-horizontal-none) var(--collapse-spacing-horizontal-none);
-  background: var(--collapse-color-background-opacity-warning-secondary);
+  /* Плоский light-orange вместо opacity-подложки — на тёмной поверхности композитный полупрозрачный цвет выглядел грязным (фидбек 21.10.2026). */
+  background: var(--collapse-color-background-solid-warning-tint);
   color: var(--collapse-color-text-opacity-base-secondary);
   font-size: var(--collapse-caption-m-size);
   font-weight: var(--collapse-caption-m-regular-weight);

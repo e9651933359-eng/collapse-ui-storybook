@@ -67,6 +67,11 @@ export const federationChatMetadata: FederationChatMeta[] = [
   { chatId: 'customer-research', organizations: ['MTS Link', 'VK'], externalParticipantCount: 2, externalParticipants: [{ id: 'maria', name: 'Мария Лебедева', organization: 'VK' }, { id: 'irina', name: 'Ирина Смирнова', organization: 'VK' }] },
   { chatId: 'partner-onboarding', organizations: ['MTS Link', 'VK'], externalParticipantCount: 2, externalParticipants: [{ id: 'irina', name: 'Ирина Смирнова', organization: 'VK' }, { id: 'maria', name: 'Мария Лебедева', organization: 'VK' }] },
   { chatId: 'boris-direct', organizations: ['MTS Link', 'Альфа-Банк'], externalParticipantCount: 1, externalParticipants: [{ id: 'boris', name: 'Борис Агафонов', organization: 'Альфа-Банк' }] },
+  { chatId: 'anton-shats-direct', organizations: ['MTS Link', 'Альфа-Банк'], externalParticipantCount: 1, externalParticipants: [{ id: 'shats', name: 'Антон Шац', organization: 'Альфа-Банк' }] },
+  { chatId: 'stepan-direct', organizations: ['MTS Link', 'Альфа-Банк'], externalParticipantCount: 1, externalParticipants: [{ id: 'stepan', name: 'Степан Васта', organization: 'Альфа-Банк' }] },
+  { chatId: 'boris-b-direct', organizations: ['MTS Link', 'Альфа-Банк'], externalParticipantCount: 1, externalParticipants: [{ id: 'bulychev', name: 'Борис Булычев', organization: 'Альфа-Банк' }] },
+  { chatId: 'ira-direct', organizations: ['MTS Link', 'Ozon'], externalParticipantCount: 1, externalParticipants: [{ id: 'ira', name: 'Ирина Волкова', organization: 'Ozon' }] },
+  { chatId: 'anton-b-direct', organizations: ['MTS Link', 'Ozon'], externalParticipantCount: 1, externalParticipants: [{ id: 'anton-ozon', name: 'Антон Беляев', organization: 'Ozon' }] },
 ]
 
 export const federationOrganizations: FederationOrganization[] = [

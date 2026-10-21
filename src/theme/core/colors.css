@@ -59,6 +59,8 @@
   --collapse-color-background-solid-error-tint: #fff3f3;
   --collapse-color-background-solid-success-primary: #0dc268;
   --collapse-color-background-solid-warning-primary: #ff914c;
+  /* Плоский light-orange для баннера «Участник из другой организации» в Message Editor: замена opacity-подложке (21.10.2026) — на тёмной поверхности прозрачный warning-secondary давал грязный оттенок. Техническое допущение: оттенок посчитан по аналогии с error-tint (та же пропорция осветления к своему solid-primary), источника в Figma для tint нет. */
+  --collapse-color-background-solid-warning-tint: #fef1e6;
   --collapse-color-background-opacity-base-light-accent: #fffffff5;
   --collapse-color-background-opacity-base-light-primary: #ffffffa3;
   --collapse-color-background-opacity-base-light-primary-dim: #ffffffe0;
