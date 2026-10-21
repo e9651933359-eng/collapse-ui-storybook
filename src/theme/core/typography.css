@@ -58,8 +58,11 @@
   --collapse-caption-m-semibold-weight: 600; /* Figma 19261:27095 «Poll», Caption/M/SemiBold */
   /* Кегль счётчика S: замер прототипа коллег (10px/500) — техническое допущение; Figma задаёт только line-height 12. */
   --collapse-counter-font-size-s: 10px;
-  --collapse-counter-line-height-s: 12px;
+  /* Плотный line-height S — замер прототипа коллег (21.10.2026): line-height практически равен кеглю, без доп. высоты. Техническое допущение, расходится с line-height 12 из Figma. */
+  --collapse-counter-line-height-s: 10px;
   --collapse-counter-line-height-m: 16px;
+  /* Межбуквенный интервал каунтера (оба размера) — замер прототипа коллег (21.10.2026): -0.084px, плотнее базового caption. Техническое допущение. */
+  --collapse-counter-letter-spacing: -0.084px;
 
   /* Product chat empty state, confirmed by the designer comment. */
   --collapse-chat-empty-size: 14px;
