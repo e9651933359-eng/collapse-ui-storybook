@@ -39,7 +39,7 @@ export function ChatWorkspace({ chat, composerNotice, federation = chat.federati
         filled={chat.avatarFilled ?? false}
         shape={chat.kind === 'channel' ? 'squircle' : 'round'}
       />
-      <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start">{chat.title}</FederationLabel> : chat.title}</strong><span className="chat-header__subtitle">{chat.subtitle}</span></div>
+      <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start" compact>{chat.title}</FederationLabel> : chat.title}</strong><span className="chat-header__subtitle">{chat.subtitle}</span></div>
     </>
   )
 

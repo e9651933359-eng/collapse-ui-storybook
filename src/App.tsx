@@ -31,7 +31,6 @@ import { ChatProfileModal } from './features/chat/profile/ChatProfileModal'
 import { UserProfile } from './features/chat/profile/UserProfile'
 import { getChatMembers } from './features/chat/profile/members'
 import { FederationTag } from './components/ui/FederationTag'
-import { FederationIconVariantToggle } from './components/dev/FederationIconVariantToggle'
 import type { Chat, ChatMember } from './types/chat'
 
 const CHAT_LIST_DEFAULT_WIDTH = 320
@@ -512,18 +511,8 @@ export function App() {
   const federationAvailability = getFederationAvailability(federationDemoContext)
 
   if (route === '/federation' && federationAvailability.visible) {
-    return (
-      <>
-        <FederationPage canCreateChat={federationAvailability.canCreateChat} />
-        <FederationIconVariantToggle />
-      </>
-    )
+    return <FederationPage canCreateChat={federationAvailability.canCreateChat} />
   }
 
-  return (
-    <>
-      <ChatExperience />
-      <FederationIconVariantToggle />
-    </>
-  )
+  return <ChatExperience />
 }

@@ -181,7 +181,8 @@ button { border: 0; background: none; cursor: pointer; }
 .chat-row__heading { min-width: 0; display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-s); }
 .chat-row__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .chat-row__title { font-size: var(--paragraph-s-size); line-height: var(--paragraph-s-line); font-weight: var(--collapse-paragraph-s-medium-weight); letter-spacing: var(--collapse-paragraph-s-letter-spacing); }
-.chat-row__indicator { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); display: grid; flex: 0 0 var(--collapse-size-icon-s); place-items: center; color: var(--collapse-color-icon-solid-accent-primary); }
+/* Индикатор Федерации в строке списка — компактная иконка (12px), бокс по размеру содержимого, без лишних полей вокруг. */
+.chat-row__indicator { display: inline-flex; flex: 0 0 auto; align-items: center; color: var(--collapse-color-icon-solid-accent-primary); }
 .chat-row__trailing { display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-l); transition: opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard); }
 .chat-row__pin { width: 16px; height: 16px; opacity: .56; }
 .chat-row .collapse-counter.chat-row__counter, .chat-row .collapse-counter.chat-row__mention { flex: 0 0 auto; min-width: 0; padding-inline: var(--collapse-spacing-horizontal-s); }

@@ -13,8 +13,6 @@
   --collapse-color-text-solid-warning-accent: #3d200f;
   /* Federation participant count, Figma 6932:43530. */
   --collapse-color-text-solid-federation-primary: #e94a24;
-  /* Светлый тинт для плашки Федерации — по аналогии с avatar tint-палитрой, точного значения в Figma нет. Техническое допущение. */
-  --collapse-color-background-solid-federation-tint: #fbe3da;
   --collapse-color-text-opacity-base-primary: #282635f5;
   --collapse-color-text-opacity-base-secondary: #282635b8;
   --collapse-color-text-opacity-base-tertiary: #2826358f;
