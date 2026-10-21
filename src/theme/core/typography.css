@@ -41,6 +41,8 @@
   --collapse-paragraph-s-regular-weight: 400;
   --collapse-paragraph-s-medium-weight: 500;
   --collapse-paragraph-s-semibold-weight: 600;
+  /* Название чата в строке списка: замер прототипа коллег (21.10.2026) — 14px вместо общего Paragraph/S (15px). Вес (500) совпадал изначально, не менялся. Точечный токен, чтобы не трогать Paragraph/S в остальном ките. */
+  --collapse-chat-row-title-size: 14px;
 
   --collapse-caption-l-font: var(--collapse-font-family-base);
   --collapse-caption-l-size: 13px;
