@@ -1,7 +1,7 @@
 import type { ImgHTMLAttributes } from 'react'
 
 type FederationIconProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> & {
-  size?: 'xs' | 's' | 'm'
+  size?: 'xxs' | 'xs' | 's' | 'm'
 }
 
 export function FederationIcon({ alt = '', className = '', size = 'm', ...props }: FederationIconProps) {

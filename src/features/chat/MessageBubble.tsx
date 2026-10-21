@@ -110,7 +110,7 @@ export function MessageBubble({ message, onReply, onMore, onReactionChange, onRe
         )}
         <div className={`message__stack ${hasComments ? 'has-comments' : ''}`}>
           <div className="message__bubble">
-            {!mine && message.sender && <div className="message__sender">{federation ? <FederationLabel iconPosition="start">{message.sender}</FederationLabel> : message.sender}</div>}
+            {!mine && message.sender && <div className="message__sender">{federation ? <FederationLabel iconPosition="start" compact>{message.sender}</FederationLabel> : message.sender}</div>}
             {message.reply && (
               <div className="message__reply">
                 <strong>{message.reply.sender}</strong>

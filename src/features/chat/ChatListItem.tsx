@@ -6,7 +6,7 @@ import { Menu, type OptionMenuItem } from '../../components/option-menu/Menu'
 import { Avatar } from '../../components/ui/Avatar'
 import { Counter } from '../../components/ui/Counter'
 import { IconButton } from '../../components/ui/IconButton'
-import { FederationIcon } from '../../components/ui/FederationIcon'
+import { FederationBadge } from '../../components/ui/FederationBadge'
 
 export type ChatFolderOption = {
   chatIds: string[]
@@ -194,7 +194,7 @@ export function ChatListItem({
         />
         <span className="chat-row__body">
           <span className="chat-row__heading">
-            {(indicator || federation) && <span className="chat-row__indicator">{indicator ?? <FederationIcon size="s" aria-label="Федеративный чат" />}</span>}
+            {(indicator || federation) && <span className="chat-row__indicator">{indicator ?? <FederationBadge />}</span>}
             <span className="chat-row__title">{chat.title}</span>
           </span>
         </span>

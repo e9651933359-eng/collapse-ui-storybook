@@ -1,4 +1,5 @@
 import { FederationIcon } from '../../components/ui/FederationIcon'
+import { FederationBadge } from '../../components/ui/FederationBadge'
 import type { Chat } from '../../types/chat'
 import { getParticipantWord } from './model'
 import './federation.css'
@@ -17,5 +18,5 @@ export function FederationNotice({ externalParticipantCount = 1, onOpenParticipa
 }
 
 export function FederationChatIndicator({ chat }: { chat: Chat }) {
-  return <FederationIcon size="s" aria-label={`Федеративный чат: ${chat.title}`} />
+  return <FederationBadge label={`Федеративный чат: ${chat.title}`} />
 }
