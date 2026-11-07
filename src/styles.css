@@ -335,7 +335,6 @@ button { border: 0; background: none; cursor: pointer; }
 }
 .folder-modal {
   width: var(--collapse-size-folder-modal-width);
-  height: var(--collapse-size-folder-management-height);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -343,6 +342,11 @@ button { border: 0; background: none; cursor: pointer; }
   border-radius: var(--radius-modal);
   background: var(--surface-primary);
   box-shadow: var(--shadow-modal);
+}
+/* Высота по содержимому: пустое состояние остаётся компактным как есть, разросшийся контент (много папок + оба select) упирается в отступ 64px от края вьюпорта и прокручивается внутри .folder-modal__body. Двойной класс поднимает специфичность выше общего .collapse-modal-surface (max-height: min(700px, 100%)) из ui.css. */
+.collapse-modal-surface.folder-modal {
+  max-height: calc(100vh - var(--collapse-size-modal-viewport-gap) * 2);
+  max-height: calc(100dvh - var(--collapse-size-modal-viewport-gap) * 2);
 }
 .folder-modal__body {
   flex: 1;

@@ -249,24 +249,20 @@ export function FolderManagementModal({
                 ariaLabel="Расположение папок"
                 value={foldersLayout}
                 options={layoutOptions}
-                placement="top"
                 onChange={(value) => onFoldersLayoutChange(value as FolderLayout)}
               />
             </section>
           )}
 
-          {foldersLayout !== 'left' && (
-            <section className="folder-modal__section" aria-labelledby="folder-display-title">
-              <h3 id="folder-display-title">Отображение папок</h3>
-              <ComboBox
-                ariaLabel="Отображение папок"
-                value={displayMode}
-                options={displayOptions}
-                placement="top"
-                onChange={(value) => onDisplayModeChange(value as SegmentDisplayMode)}
-              />
-            </section>
-          )}
+          <section className="folder-modal__section" aria-labelledby="folder-display-title">
+            <h3 id="folder-display-title">Отображение папок</h3>
+            <ComboBox
+              ariaLabel="Отображение папок"
+              value={displayMode}
+              options={displayOptions}
+              onChange={(value) => onDisplayModeChange(value as SegmentDisplayMode)}
+            />
+          </section>
         </div>
       </section>}
     </div>

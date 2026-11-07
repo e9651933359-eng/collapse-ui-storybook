@@ -175,7 +175,6 @@
   --collapse-size-story-width: 640px;
   --collapse-size-story-height: 360px;
   --collapse-size-folder-modal-width: 460px;
-  --collapse-size-folder-management-height: 568px;
   --collapse-size-folder-create-width: 456px;
   --collapse-size-folder-create-min-height: 466px;
   --collapse-size-modal-header: 56px;
@@ -186,6 +185,8 @@
   --collapse-size-confirm-dialog-width: 320px;
   /* Product requirement from the modal-height review, 2026-09-29. */
   --collapse-size-modal-max-height: 700px;
+  /* Product requirement, ревью «Управление папками», 2026-11-07: модалка не ближе 64px к верхнему/нижнему краю вьюпорта; при нехватке места — внутренний скролл тела. */
+  --collapse-size-modal-viewport-gap: 64px;
   /* Federation desktop flows, Figma Desktop 6747:20952. */
   --collapse-size-modal-page-width: 460px;
   /* Technical demo assumption: Disk picker width is not in Base; wide enough for a three-column table. */

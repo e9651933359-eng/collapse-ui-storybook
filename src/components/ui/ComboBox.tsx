@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 
 export type ComboBoxOption = {
@@ -13,6 +13,7 @@ type ComboBoxProps = {
   defaultOpen?: boolean
   onChange?: (value: string) => void
   options: ComboBoxOption[]
+  /** Без этого пропа ориентация меню определяется автоматически по месту во вьюпорте при каждом открытии (вниз по умолчанию, вверх — только если снизу не хватает места). Передавайте явное значение только когда нужно принудительно закрепить сторону. */
   placement?: 'top' | 'bottom'
   value: string
 }
@@ -23,13 +24,16 @@ export function ComboBox({
   defaultOpen = false,
   onChange,
   options,
-  placement = 'bottom',
+  placement,
   value,
 }: ComboBoxProps) {
   const listboxId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(defaultOpen)
   const [highlightedIndex, setHighlightedIndex] = useState(0)
+  const [autoPlacement, setAutoPlacement] = useState<'top' | 'bottom'>('bottom')
+  const resolvedPlacement = placement ?? autoPlacement
   const selected = options.find((option) => option.value === value) ?? options[0]
 
   useEffect(() => {
@@ -42,6 +46,16 @@ export function ComboBox({
     document.addEventListener('pointerdown', closeOnOutsideClick)
     return () => document.removeEventListener('pointerdown', closeOnOutsideClick)
   }, [open])
+
+  // Автоориентация меню: вниз по умолчанию, вверх — только если снизу во вьюпорте не хватает места под уже отрисованное меню.
+  useLayoutEffect(() => {
+    if (!open || placement || !rootRef.current || !menuRef.current) return
+    const fieldRect = rootRef.current.getBoundingClientRect()
+    const menuHeight = menuRef.current.offsetHeight
+    const spaceBelow = window.innerHeight - fieldRect.bottom
+    const spaceAbove = fieldRect.top
+    setAutoPlacement(spaceBelow >= menuHeight || spaceBelow >= spaceAbove ? 'bottom' : 'top')
+  }, [open, placement, options.length])
 
   const selectOption = (option: ComboBoxOption) => {
     onChange?.(option.value)
@@ -89,7 +103,7 @@ export function ComboBox({
       </button>
 
       {open && (
-        <div id={listboxId} className={`combo-box__menu combo-box__menu--${placement}`} role="listbox" aria-label={ariaLabel}>
+        <div ref={menuRef} id={listboxId} className={`combo-box__menu combo-box__menu--${resolvedPlacement}`} role="listbox" aria-label={ariaLabel}>
           {options.map((option, index) => (
             <button
               key={option.value}
