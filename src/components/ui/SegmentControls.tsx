@@ -30,7 +30,7 @@ type SegmentControlsProps = {
   displayMode?: SegmentDisplayMode
   /** Fill shares the available width; Dynamic preserves each tab's content width (Figma Hug). */
   tabs?: SegmentTabsMode
-  /** Vertical: колонка папок «иконка над подписью» слева от списка чатов (всегда с иконками и подписями). */
+  /** Vertical: колонка папок «иконка над подписью» слева от списка чатов; видимость иконки/подписи задаёт displayMode — так же, как в horizontal. */
   orientation?: SegmentOrientation
   /** Кнопка «+» под списком папок; показывается только в vertical. */
   onAddClick?: () => void
@@ -287,8 +287,9 @@ export function SegmentControls({
     >
       {orderedOptions.map((option) => {
         const hasMenu = Boolean(itemsForOption(option)?.length)
-        const showIcon = (vertical || displayMode !== 'names') && Boolean(option.icon)
-        const showLabel = vertical || displayMode !== 'icons' || !option.icon
+        // displayMode управляет видимостью иконки/подписи одинаково в обеих ориентациях — ревью 09.11.2026.
+        const showIcon = displayMode !== 'names' && Boolean(option.icon)
+        const showLabel = displayMode !== 'icons' || !option.icon
         return (
         <button
           key={option.value}
