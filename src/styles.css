@@ -408,6 +408,12 @@ button { border: 0; background: none; cursor: pointer; }
   height: 1px;
   background: var(--background-secondary-tint);
 }
+/* Включённая системная папка — перетаскиваемая строка, визуальный паритет с .folder-modal__custom-row. Ревью 09.11.2026. */
+.folder-modal__folder-row--draggable {
+  cursor: grab;
+  transition: background var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), transform var(--collapse-motion-duration-slow) var(--collapse-motion-easing-standard);
+}
+.folder-modal__folder-row.is-dragging { opacity: .56; transform: scale(.99); box-shadow: var(--collapse-effect-shadow-02-compact); }
 .folder-modal__folder-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; font-size: var(--collapse-size-icon-m); line-height: 1; }
 .folder-modal__folder-copy { min-width: 0; min-height: 40px; flex: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
 .folder-modal__folder-copy > span {
@@ -484,7 +490,8 @@ button { border: 0; background: none; cursor: pointer; }
 .folder-picker__search:focus-within { box-shadow: inset 0 0 0 var(--collapse-stroke-width-thick) var(--collapse-color-border-solid-accent-primary); }
 .folder-picker__search svg { width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
 .folder-picker__search input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--collapse-color-text-solid-base-primary); font: inherit; }
-.folder-picker__list { min-height: 0; max-height: var(--collapse-size-folder-picker-list-max); flex: 1; overflow: auto; scrollbar-width: none; }
+/* Ревью 09.11.2026: раньше здесь был фиксированный max-height токена, из-за которого список не дорастал до высоты модалки — под ним оставался пустой белый блок. Список должен занимать всё доступное место (ограничение по высоте уже даёт сама модалка — 64px от края вьюпорта). */
+.folder-picker__list { min-height: 0; flex: 1; overflow: auto; scrollbar-width: none; }
 .folder-picker__list::-webkit-scrollbar { display: none; }
 .folder-picker__row { min-height: var(--collapse-size-folder-list-row); padding: var(--collapse-spacing-horizontal-s) var(--collapse-spacing-horizontal-xs); display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-m); border-radius: var(--collapse-radius-squircle); cursor: pointer; }
 .folder-picker__row:hover { background: var(--collapse-color-state-layer-on-base-tertiary); }

@@ -14,7 +14,7 @@ const candidates = [
 
 function ModalDemo() {
   const [open, setOpen] = useState(true)
-  const [enabledFolders, setEnabledFolders] = useState<SystemFolder[]>(['new'])
+  const [enabledFolders, setEnabledFolders] = useState<SystemFolder[]>(['new', 'channels'])
   const [displayMode, setDisplayMode] = useState<SegmentDisplayMode>('names')
   const [customFolders, setCustomFolders] = useState<ManagedFolder[]>([
     { id: 'folder-product', label: 'Продукт', emoji: '🔥', chatIds: ['design', 'updates'] },
@@ -40,6 +40,7 @@ function ModalDemo() {
         onReorderCustomFolders={(ids) => setCustomFolders((current) => ids.flatMap((id) => current.find((folder) => folder.id === id) ?? []))}
         onUpdateFolder={(id, folder) => setCustomFolders((current) => current.map((item) => item.id === id ? { ...item, ...folder } : item))}
         onSystemFolderChange={(folder, enabled) => setEnabledFolders((current) => enabled ? [...current, folder] : current.filter((item) => item !== folder))}
+        onReorderSystemFolders={(ids) => setEnabledFolders(ids)}
         onClose={() => setOpen(false)}
       />
     </div>

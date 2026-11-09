@@ -393,6 +393,13 @@ export function ChatExperience({
             })
           }}
           enabledSystemFolders={folderOrder.filter((id): id is SystemFolder => ['new', 'chats', 'channels'].includes(id))}
+          onReorderSystemFolders={(folderIds) => {
+            setFolderOrder((current) => {
+              let systemIndex = 0
+              const systemIds = new Set(folderIds)
+              return current.map((id) => systemIds.has(id as SystemFolder) ? folderIds[systemIndex++] : id)
+            })
+          }}
           onSystemFolderChange={(folder, enabled) => {
             setFolderOrder((current) => enabled
               ? (current.includes(folder) ? current : [...current, folder])
