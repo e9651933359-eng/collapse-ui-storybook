@@ -146,7 +146,7 @@ button { border: 0; background: none; cursor: pointer; }
 .chat-list-panel__main { min-width: 0; min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; overflow: hidden; }
 .chat-list-panel--left { flex-direction: row; }
 /* Разделитель между вертикальной колонкой папок и списком чатов — по референсу link-chats-survey (ревью 09.11.2026). Без него отступ поиска и шапки визуально «плавает» без якоря. */
-.chat-list-panel--left > .segment-controls { border-right: var(--collapse-stroke-width-xthin) solid var(--border-tertiary); }
+.chat-list-panel--left > .segment-controls { border-right: var(--collapse-stroke-width-xthin) solid var(--border-tertiary-tint); }
 .chat-list-panel__main > .segment-controls { margin: var(--collapse-spacing-horizontal-none) var(--collapse-spacing-horizontal-s) var(--collapse-spacing-horizontal-s); }
 .chat-shell:has(.chat-list-panel--left) { --chat-list-width: calc(var(--chat-list-resizable-width, 320px) + var(--collapse-size-folder-rail-width)); }
 .visually-hidden { position: absolute; width: var(--collapse-stroke-width-xthin); height: var(--collapse-stroke-width-xthin); padding: var(--collapse-spacing-horizontal-none); overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
