@@ -416,8 +416,8 @@ button { border: 0; background: none; cursor: pointer; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* Радио-группа «Расположение папок» вместо дропдауна. Ревью 09.11.2026. */
-.folder-modal__radio-list { display: flex; flex-direction: column; gap: var(--space-m); padding: 0 var(--space-l); }
+/* Радио-группа «Расположение папок»: строки той же карточки, что «Системные папки» (.folder-modal__folder-list/__folder-row), радио справа. Ревью 09.11.2026. */
+.folder-modal__folder-list[role="radiogroup"] > .folder-modal__folder-row { cursor: pointer; }
 .folder-modal__section-header { min-height: var(--collapse-size-control-s); display: flex; align-items: center; justify-content: space-between; }
 .folder-modal__section-header h3 { flex: 1; }
 .folder-modal__custom-list { max-height: calc(var(--collapse-size-nav-item) * 3); overflow-y: auto; scrollbar-width: none; }

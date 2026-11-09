@@ -265,16 +265,22 @@ export function FolderManagementModal({
           {onFoldersLayoutChange && (
             <section className="folder-modal__section" aria-labelledby="folder-layout-title">
               <h3 id="folder-layout-title">Расположение папок</h3>
-              {/* Бинарный выбор — радио-кнопки вместо дропдауна, по образцу коллег. Ревью 09.11.2026. */}
-              <div className="folder-modal__radio-list" role="radiogroup" aria-labelledby="folder-layout-title">
+              {/* Бинарный выбор — строки в карточке, как «Системные папки», радио справа. Ревью 09.11.2026. */}
+              <div className="folder-modal__folder-list" role="radiogroup" aria-labelledby="folder-layout-title">
                 {layoutOptions.map((option) => (
-                  <Radio
+                  <div
+                    className="folder-modal__folder-row"
                     key={option.value}
-                    name="folder-layout"
-                    label={option.label}
-                    checked={foldersLayout === option.value}
-                    onChange={() => onFoldersLayoutChange(option.value as FolderLayout)}
-                  />
+                    onClick={() => onFoldersLayoutChange(option.value as FolderLayout)}
+                  >
+                    <span className="folder-modal__folder-copy"><span>{option.label}</span></span>
+                    <Radio
+                      name="folder-layout"
+                      checked={foldersLayout === option.value}
+                      onChange={() => onFoldersLayoutChange(option.value as FolderLayout)}
+                      aria-label={option.label}
+                    />
+                  </div>
                 ))}
               </div>
             </section>
