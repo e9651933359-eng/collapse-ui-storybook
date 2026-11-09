@@ -50,6 +50,7 @@
   --accent-primary: var(--collapse-color-background-solid-accent-primary);
   --accent-secondary: var(--collapse-color-state-layer-on-accent-secondary);
   --border-tertiary: var(--collapse-color-border-opacity-base-tertiary-dim);
+  --border-tertiary-tint: var(--collapse-color-border-opacity-base-tertiary-tint);
   --border-base-tertiary: var(--collapse-color-border-opacity-base-tertiary);
   --border-light: var(--collapse-color-border-opacity-base-light-secondary);
   --border-light-tertiary: var(--collapse-color-border-opacity-base-light-tertiary-tint);
