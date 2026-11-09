@@ -18,6 +18,22 @@ export function sortMembersByName(members: ChatMember[]) {
   return [...members].sort((a, b) => a.name.localeCompare(b.name, 'ru'))
 }
 
+/** Склонение слова «участник» под число. Общая утилита для обычных чатов и Федерации. */
+export function getParticipantWord(count: number) {
+  if (count % 10 === 1 && count % 100 !== 11) return 'участник'
+  if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) return 'участника'
+  return 'участников'
+}
+
+/**
+ * Подпись второй строки под названием чата (шапка открытого чата). Правило ревью 07.11.2026:
+ * групповой чат или канал — количество участников; личная переписка 1 на 1 — ничего.
+ */
+export function getChatSubtitle(chat: Chat, memberCount: number) {
+  if (chat.kind === 'direct') return ''
+  return `${memberCount} ${getParticipantWord(memberCount)}`
+}
+
 /**
  * Демо-участники обычных чатов. Допущение прототипа: в данных чатов нет списка участников,
  * поэтому состав детерминированно берётся из общего пула; число — из подзаголовка «N участников».

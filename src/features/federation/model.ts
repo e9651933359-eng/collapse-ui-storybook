@@ -1,4 +1,5 @@
 import type { AvatarColor } from '../../components/ui/Avatar'
+export { getParticipantWord } from '../chat/profile/members'
 
 export type FederationAvailabilityContext = {
   featureEnabled: boolean
@@ -38,12 +39,6 @@ export type FederationParticipant = {
   image?: string
   phone?: string
   role?: string
-}
-
-export function getParticipantWord(count: number) {
-  if (count % 10 === 1 && count % 100 !== 11) return 'участник'
-  if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) return 'участника'
-  return 'участников'
 }
 
 export const federationDemoContext: FederationAvailabilityContext = {

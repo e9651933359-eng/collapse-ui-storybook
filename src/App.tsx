@@ -343,6 +343,7 @@ export function ChatExperience({
         {selected ? <ChatWorkspace
           chat={selected}
           federation={selected.federation}
+          memberCount={getMembers(selected).length}
           composerNotice={renderComposerNotice?.(selected)}
           draft={draft}
           onAddParticipants={onAddParticipants && selected.kind !== 'direct' ? () => onAddParticipants(selected) : undefined}

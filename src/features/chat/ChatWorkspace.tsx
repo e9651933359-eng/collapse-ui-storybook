@@ -8,11 +8,14 @@ import { MessageEditor } from './MessageEditor'
 import type { MessageEditorPayload } from './MessageEditor'
 import { FederationLabel } from '../../components/ui/FederationLabel'
 import { DiskToastHost } from '../disk/DiskToastHost'
+import { getChatMembers, getChatSubtitle } from './profile/members'
 
 type ChatWorkspaceProps = {
   chat: Chat
   composerNotice?: ReactNode
   federation?: boolean
+  /** Количество участников для подписи в шапке (группа/канал). Источник: тот же `getMembers`, что и у профиля чата. */
+  memberCount?: number
   draft: string
   onDraftChange: (value: string) => void
   onAddParticipants?: () => void
@@ -21,7 +24,7 @@ type ChatWorkspaceProps = {
   onSend: (payload: MessageEditorPayload) => void
 }
 
-export function ChatWorkspace({ chat, composerNotice, federation = chat.federation ?? false, draft, onAddParticipants, onDraftChange, onOpenProfile, onRemoveMessageItem, onSend }: ChatWorkspaceProps) {
+export function ChatWorkspace({ chat, composerNotice, federation = chat.federation ?? false, memberCount = getChatMembers(chat).length, draft, onAddParticipants, onDraftChange, onOpenProfile, onRemoveMessageItem, onSend }: ChatWorkspaceProps) {
   const scroller = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
@@ -39,7 +42,7 @@ export function ChatWorkspace({ chat, composerNotice, federation = chat.federati
         filled={chat.avatarFilled ?? false}
         shape={chat.kind === 'channel' ? 'squircle' : 'round'}
       />
-      <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start" compact>{chat.title}</FederationLabel> : chat.title}</strong><span className="chat-header__subtitle">{chat.subtitle}</span></div>
+      <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start" compact>{chat.title}</FederationLabel> : chat.title}</strong>{chat.kind !== 'direct' && <span className="chat-header__subtitle">{getChatSubtitle(chat, memberCount)}</span>}</div>
     </>
   )
 
