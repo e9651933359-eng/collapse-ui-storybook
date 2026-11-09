@@ -1,4 +1,4 @@
-import { Plus, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Popover } from '../feedback/Popover'
 import { Avatar, type AvatarColor } from './Avatar'
@@ -166,7 +166,7 @@ export function CreateFolderModal({ candidates, initialFolder, initialSelectedId
         ) : (
           <div className="folder-create-modal__empty">
             <p>Выберите чаты и каналы в папку.<br />Можно пропустить и сделать это позже</p>
-            <Button leadingIcon={<Plus />} onClick={openPicker}>Выбрать чаты и каналы</Button>
+            <Button onClick={openPicker}>Выбрать чаты и каналы</Button>
           </div>
         )}
       </div>
