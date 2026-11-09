@@ -384,13 +384,11 @@ export function ChatExperience({
             shape: chat.kind === 'channel' ? 'squircle' : 'round',
           }))}
           onClose={() => setFolderModalOpen(false)}
-          onReorderCustomFolders={(folderIds) => {
-            setCustomFolders((current) => folderIds.flatMap((id) => current.find((folder) => folder.id === id) ?? []))
-            setFolderOrder((current) => {
-              let customIndex = 0
-              const customIds = new Set(folderIds)
-              return current.map((id) => customIds.has(id) ? folderIds[customIndex++] : id)
-            })
+          folderOrder={folderOrder}
+          onReorderFolders={(folderIds) => {
+            setFolderOrder(folderIds)
+            const customIds = new Set(customFolders.map((folder) => folder.id))
+            setCustomFolders((current) => folderIds.filter((id) => customIds.has(id)).flatMap((id) => current.find((folder) => folder.id === id) ?? []))
           }}
           enabledSystemFolders={folderOrder.filter((id): id is SystemFolder => ['new', 'chats', 'channels'].includes(id))}
           onSystemFolderChange={(folder, enabled) => {

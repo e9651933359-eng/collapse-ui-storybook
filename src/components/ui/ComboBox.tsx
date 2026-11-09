@@ -1,5 +1,6 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
+import { createPortal } from 'react-dom'
 
 export type ComboBoxOption = {
   value: string
@@ -18,6 +19,9 @@ type ComboBoxProps = {
   value: string
 }
 
+/** Зазор между полем и меню — паритет с --collapse-spacing-horizontal-xs (4px), которым раньше задавался top/bottom в CSS. */
+const menuGap = 4
+
 export function ComboBox({
   ariaLabel,
   className = '',
@@ -35,27 +39,62 @@ export function ComboBox({
   const [autoPlacement, setAutoPlacement] = useState<'top' | 'bottom'>('bottom')
   const resolvedPlacement = placement ?? autoPlacement
   const selected = options.find((option) => option.value === value) ?? options[0]
+  // Меню рендерится через портал в document.body и позиционируется как fixed — иначе его обрезает
+  // overflow: hidden и скролл родительской модалки (например, FolderManagementModal). Ревью 09.11.2026.
+  const [menuPosition, setMenuPosition] = useState<{ top: number; left: number; width: number } | null>(null)
 
   useEffect(() => {
     if (!open) return
 
     const closeOnOutsideClick = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false)
+      const target = event.target as Node
+      // Меню теперь в портале (document.body), а не внутри rootRef — проверяем оба узла.
+      if (!rootRef.current?.contains(target) && !menuRef.current?.contains(target)) setOpen(false)
     }
 
     document.addEventListener('pointerdown', closeOnOutsideClick)
     return () => document.removeEventListener('pointerdown', closeOnOutsideClick)
   }, [open])
 
-  // Автоориентация меню: вниз по умолчанию, вверх — только если снизу во вьюпорте не хватает места под уже отрисованное меню.
+  // Проход 1: пока высота меню не известна, ставим его временно под полем во viewport-координатах
+  // (портал рендерит его в document.body, поэтому position: fixed по getBoundingClientRect).
   useLayoutEffect(() => {
-    if (!open || placement || !rootRef.current || !menuRef.current) return
+    if (!open) { setMenuPosition(null); return }
+    if (!rootRef.current) return
     const fieldRect = rootRef.current.getBoundingClientRect()
-    const menuHeight = menuRef.current.offsetHeight
-    const spaceBelow = window.innerHeight - fieldRect.bottom
-    const spaceAbove = fieldRect.top
-    setAutoPlacement(spaceBelow >= menuHeight || spaceBelow >= spaceAbove ? 'bottom' : 'top')
-  }, [open, placement, options.length])
+    setMenuPosition((prev) => prev ?? { top: fieldRect.bottom + menuGap, left: fieldRect.left, width: fieldRect.width })
+  }, [open])
+
+  // Проход 2: меню уже отрисовано на временной позиции — меряем его реальную высоту и выбираем
+  // ориентацию (вниз по умолчанию, вверх — только если снизу во viewport не хватает места), затем
+  // пересчитываем точную позицию. Повторяется при скролле/ресайзе, пока меню открыто — это и снимает
+  // обрезание выпадающего списка краем модалки (ревью 09.11.2026, см. docs/design-system/BASE.md).
+  useEffect(() => {
+    if (!open || !menuPosition) return
+    const updatePosition = () => {
+      if (!rootRef.current || !menuRef.current) return
+      const fieldRect = rootRef.current.getBoundingClientRect()
+      const menuHeight = menuRef.current.offsetHeight
+      let vertical: 'top' | 'bottom' = placement ?? 'bottom'
+      if (!placement) {
+        const spaceBelow = window.innerHeight - fieldRect.bottom
+        const spaceAbove = fieldRect.top
+        vertical = spaceBelow >= menuHeight || spaceBelow >= spaceAbove ? 'bottom' : 'top'
+        setAutoPlacement(vertical)
+      }
+      const nextTop = vertical === 'bottom' ? fieldRect.bottom + menuGap : fieldRect.top - menuHeight - menuGap
+      setMenuPosition((prev) => (prev && prev.top === nextTop && prev.left === fieldRect.left && prev.width === fieldRect.width
+        ? prev
+        : { top: nextTop, left: fieldRect.left, width: fieldRect.width }))
+    }
+    updatePosition()
+    window.addEventListener('scroll', updatePosition, true)
+    window.addEventListener('resize', updatePosition)
+    return () => {
+      window.removeEventListener('scroll', updatePosition, true)
+      window.removeEventListener('resize', updatePosition)
+    }
+  }, [open, placement, options.length, Boolean(menuPosition)])
 
   const selectOption = (option: ComboBoxOption) => {
     onChange?.(option.value)
@@ -102,8 +141,15 @@ export function ComboBox({
         </span>
       </button>
 
-      {open && (
-        <div ref={menuRef} id={listboxId} className={`combo-box__menu combo-box__menu--${resolvedPlacement}`} role="listbox" aria-label={ariaLabel}>
+      {open && menuPosition && createPortal(
+        <div
+          ref={menuRef}
+          id={listboxId}
+          className={`combo-box__menu combo-box__menu--${resolvedPlacement}`}
+          role="listbox"
+          aria-label={ariaLabel}
+          style={{ position: 'fixed', top: menuPosition.top, left: menuPosition.left, width: menuPosition.width }}
+        >
           {options.map((option, index) => (
             <button
               key={option.value}
@@ -120,7 +166,8 @@ export function ComboBox({
               </span>
             </button>
           ))}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   )
