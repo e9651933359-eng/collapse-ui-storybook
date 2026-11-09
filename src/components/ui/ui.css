@@ -115,7 +115,9 @@
 .combo-box.is-active .combo-box__field { border: var(--collapse-stroke-width-xthick) solid var(--collapse-color-border-solid-accent-primary); background: transparent; }
 .combo-box__value { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .combo-box__action { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; border-radius: var(--collapse-radius-full); }
-.combo-box__action img { display: block; width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); }
+.combo-box__action img { display: block; width: var(--collapse-size-icon-s); height: var(--collapse-size-icon-s); transition: transform var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard); }
+/* Шеврон разворачивается при открытии — паритет с .collapse-drop-field__chevron (option-menu.css); раньше состояние is-active не затрагивало иконку. */
+.combo-box.is-active .combo-box__action img { transform: rotate(180deg); }
 .combo-box__menu { position: absolute; left: 0; z-index: 30; width: 100%; min-width: var(--collapse-size-menu-min); max-height: var(--collapse-size-menu-max); padding: var(--collapse-spacing-horizontal-xs); display: flex; flex-direction: column; gap: var(--collapse-spacing-horizontal-xxs); overflow: auto; border: var(--collapse-stroke-width-xthin) solid var(--collapse-color-border-opacity-base-light-tertiary); border-radius: var(--collapse-radius-control); background: var(--collapse-color-background-opacity-light-secondary); box-shadow: var(--collapse-effect-shadow-02); backdrop-filter: blur(calc(var(--collapse-effect-blur-background-default) / 2)); }
 .combo-box__menu--bottom { top: calc(100% + var(--collapse-spacing-horizontal-xs)); }
 .combo-box__menu--top { bottom: calc(100% + var(--collapse-spacing-horizontal-xs)); }
@@ -494,6 +496,7 @@
   .choice-control.is-loading .choice-control__indicator { animation-duration: calc(var(--collapse-motion-duration-slow) * 4); }
   .collapse-switch,
   .collapse-switch > span { transition: none; }
+  .combo-box__action img { transition: none; }
 }
 
 .collapse-chip {
