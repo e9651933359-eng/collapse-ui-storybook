@@ -2,15 +2,18 @@ export const shellThemes = ['default', 'deep-violet'] as const
 export type ShellTheme = (typeof shellThemes)[number]
 
 export const shellThemeLabels: Record<ShellTheme, string> = {
-  default: 'Серый (по умолчанию)',
-  'deep-violet': 'Deep Violet',
+  default: 'Серый',
+  'deep-violet': 'Deep Violet (по умолчанию)',
 }
 
 const storageKey = 'collapse-shell-theme'
 
 const isShellTheme = (value: unknown): value is ShellTheme => shellThemes.includes(value as ShellTheme)
 
-/** Тема из ?shell=..., затем из localStorage; иначе серая по умолчанию. */
+/**
+ * Тема из ?shell=..., затем из localStorage; иначе Deep Violet по умолчанию (ревью 09.11.2026).
+ * Серая тема (`default`) остаётся доступна явно — `?shell=default`.
+ */
 export function readShellTheme(): ShellTheme {
   try {
     const fromQuery = new URLSearchParams(window.location.search).get('shell')
@@ -23,7 +26,7 @@ export function readShellTheme(): ShellTheme {
   } catch {
     // localStorage может быть недоступен — остаётся тема по умолчанию
   }
-  return 'default'
+  return 'deep-violet'
 }
 
 /** Ставит data-shell-theme на <html>: тема действует на сайдбар и подложку сразу. */
