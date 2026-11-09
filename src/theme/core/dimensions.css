@@ -57,6 +57,19 @@
   --collapse-size-switch-thumb-on: 20px;
   --collapse-size-switch-thumb-pressed: 24px;
   --collapse-size-switch-state-layer: 36px;
+  /* Switch, размер s — в Figma (1114:400) описан только один размер 52×28; масштаб ~0.77 — техническое допущение, ревью 09.11.2026. */
+  --collapse-size-switch-s-width: 40px;
+  --collapse-size-switch-s-height: 22px;
+  --collapse-size-switch-s-thumb-off: 10px;
+  --collapse-size-switch-s-thumb-on: 16px;
+  --collapse-size-switch-s-thumb-pressed: 18px;
+  --collapse-size-switch-s-state-layer: 28px;
+  --collapse-size-switch-s-pad-off: 6px;
+  --collapse-size-switch-s-pad-on: 3px;
+  --collapse-size-switch-s-pad-pressed: 3px;
+  --collapse-size-switch-s-pad-pressed-on: 2px;
+  --collapse-size-switch-s-state-layer-off-offset: 3px;
+  --collapse-size-switch-s-state-layer-on-offset: 5px;
   --collapse-size-status-dot: 8px;
   --collapse-size-chip-xs: 30px;
   --collapse-size-chip-s: 32px;

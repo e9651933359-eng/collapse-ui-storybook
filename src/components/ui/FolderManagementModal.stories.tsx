@@ -15,6 +15,7 @@ const candidates = [
 function ModalDemo() {
   const [open, setOpen] = useState(true)
   const [displayMode, setDisplayMode] = useState<SegmentDisplayMode>('names')
+  const [foldersLayout, setFoldersLayout] = useState<'top' | 'left'>('top')
   const [customFolders, setCustomFolders] = useState<ManagedFolder[]>([
     { id: 'folder-product', label: 'Продукт', emoji: '🔥', chatIds: ['design', 'updates'] },
     { id: 'folder-team', label: 'Команда', emoji: '💚', chatIds: ['team'] },
@@ -39,6 +40,8 @@ function ModalDemo() {
         folderOrder={folderOrder}
         displayMode={displayMode}
         onDisplayModeChange={setDisplayMode}
+        foldersLayout={foldersLayout}
+        onFoldersLayoutChange={setFoldersLayout}
         onCreateFolder={(folder) => {
           const id = `folder-${customFolders.length + 1}`
           setCustomFolders((current) => [...current, { ...folder, id }])

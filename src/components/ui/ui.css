@@ -400,6 +400,19 @@
 .collapse-switch:disabled { border-color: transparent; background: var(--collapse-color-background-opacity-base-secondary-dim); cursor: default; }
 .collapse-switch:disabled > span { background: var(--collapse-color-background-opacity-base-primary-dim); opacity: 1; }
 
+/* Switch size=s — ревью 09.11.2026, см. dimensions.css. */
+.collapse-switch--s { width: var(--collapse-size-switch-s-width); height: var(--collapse-size-switch-s-height); }
+.collapse-switch--s > span { left: var(--collapse-size-switch-s-pad-off); width: var(--collapse-size-switch-s-thumb-off); height: var(--collapse-size-switch-s-thumb-off); }
+.collapse-switch--s.is-on > span { right: var(--collapse-size-switch-s-pad-on); width: var(--collapse-size-switch-s-thumb-on); height: var(--collapse-size-switch-s-thumb-on); }
+.collapse-switch--s:active:not(:disabled)::after,
+.collapse-switch--s.is-pressed:not(:disabled)::after { left: calc(var(--collapse-size-switch-s-state-layer-off-offset) * -1); width: var(--collapse-size-switch-s-state-layer); height: var(--collapse-size-switch-s-state-layer); }
+.collapse-switch--s.is-on:active:not(:disabled)::after,
+.collapse-switch--s.is-on.is-pressed:not(:disabled)::after { right: calc(var(--collapse-size-switch-s-state-layer-on-offset) * -1); }
+.collapse-switch--s:active:not(:disabled) > span,
+.collapse-switch--s.is-pressed:not(:disabled) > span { left: var(--collapse-size-switch-s-pad-pressed); width: var(--collapse-size-switch-s-thumb-pressed); height: var(--collapse-size-switch-s-thumb-pressed); }
+.collapse-switch--s.is-on:active:not(:disabled) > span,
+.collapse-switch--s.is-on.is-pressed:not(:disabled) > span { right: var(--collapse-size-switch-s-pad-pressed-on); }
+
 .avatar { position: relative; width: var(--collapse-size-avatar-m); height: var(--collapse-size-avatar-m); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: visible; border: 0; font-family: var(--collapse-paragraph-m-font); font-size: var(--collapse-paragraph-m-size); font-weight: var(--collapse-paragraph-m-medium-weight); line-height: var(--collapse-paragraph-m-line-height); letter-spacing: var(--collapse-paragraph-m-letter-spacing); }
 .avatar--filled { background: var(--avatar-tone, var(--avatar-color-solid, var(--collapse-color-background-solid-accent-primary))); color: var(--collapse-color-text-solid-base-light-full-static); }
 .avatar--unfilled { background: var(--avatar-tone, var(--avatar-color-tint, var(--collapse-color-background-solid-accent-tint-dim))); color: var(--collapse-color-text-solid-accent-accent); }
