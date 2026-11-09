@@ -429,7 +429,8 @@ button { border: 0; background: none; cursor: pointer; }
 /* «Все» — первой строкой общего списка «Папки», не перетаскивается и не кликается. Ревью 09.11.2026. */
 .folder-modal__custom-row--fixed { cursor: default; }
 .folder-modal__custom-row--fixed:hover, .folder-modal__custom-row--fixed:focus-visible { background: transparent; }
-.folder-modal__custom-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-accent-secondary); font-size: var(--collapse-size-icon-m); }
+/* Серый бейдж вместо акцентного сиреневого — мягче на фоне спискa, акцент остаётся только за реальными действиями (кнопки, счётчики). Токен тот же, что у Button priority="secondary". Ревью 09.11.2026. */
+.folder-modal__custom-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--background-secondary-tint); font-size: var(--collapse-size-icon-m); }
 .folder-modal__custom-label { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .folder-modal__custom-drag { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); flex: 0 0 var(--collapse-size-icon-m); }
 .folder-modal__custom-drag img { display: block; width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); }
@@ -452,9 +453,10 @@ button { border: 0; background: none; cursor: pointer; }
 .folder-create-modal--picker { height: 100%; }
 .folder-create-modal__body { min-height: 0; flex: 1; padding: var(--collapse-spacing-horizontal-l); display: flex; flex-direction: column; }
 .folder-create-modal__name { display: grid; grid-template-columns: var(--collapse-size-control-l) minmax(0, 1fr); align-items: flex-start; gap: var(--collapse-spacing-horizontal-m); }
-.folder-create-modal__folder-icon { width: var(--collapse-size-control-l); height: var(--collapse-size-control-l); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-accent-secondary); color: var(--collapse-color-icon-solid-accent-primary); }
-.folder-create-modal__folder-icon:hover { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-secondary), var(--collapse-color-state-layer-on-accent-secondary)); }
-.folder-create-modal__folder-icon:active { background-image: linear-gradient(var(--collapse-color-state-layer-on-accent-dim-secondary), var(--collapse-color-state-layer-on-accent-dim-secondary)); }
+/* Серый бейдж вместо акцентного сиреневого, тот же токен, что у Button priority="secondary"; hover/active — по общей схеме base-tertiary/base-secondary. Ревью 09.11.2026. */
+.folder-create-modal__folder-icon { width: var(--collapse-size-control-l); height: var(--collapse-size-control-l); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--background-secondary-tint); color: var(--collapse-color-icon-solid-accent-primary); }
+.folder-create-modal__folder-icon:hover { background-image: linear-gradient(var(--collapse-color-state-layer-on-base-tertiary), var(--collapse-color-state-layer-on-base-tertiary)); }
+.folder-create-modal__folder-icon:active { background-image: linear-gradient(var(--collapse-color-state-layer-on-base-secondary), var(--collapse-color-state-layer-on-base-secondary)); }
 .folder-create-modal__folder-icon svg { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); }
 .folder-create-modal__folder-icon > span { font-size: var(--collapse-size-icon-m); line-height: var(--collapse-size-icon-l); }
 .folder-create-modal .collapse-popover { border: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
