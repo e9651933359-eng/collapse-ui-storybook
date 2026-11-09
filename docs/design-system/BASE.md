@@ -184,11 +184,12 @@
 
 #### Shell theme (сайдбар и общая подложка)
 
-- Тема включается атрибутом `data-shell-theme` на `<html>` или на предке `.chat-shell`; без атрибута действует серая тема по умолчанию (`Surface/Solid/Foundation`).
+- Тема включается атрибутом `data-shell-theme` на `<html>` или на предке `.chat-shell`; без атрибута действует серая тема (`Surface/Solid/Foundation`). **С 09.11.2026 продуктовый дефолт приложения — `deep-violet`** (см. ниже), серая остаётся доступна явно.
 - Доступные темы: `default`, `deep-violet`. Токены и источники — `src/theme/shell-theme.css`, помощники — `src/theme/shellTheme.ts`.
 - `deep-violet`: подложка и сайдбар `#211a3a` (Figma «SideBar · Deep Violet», [node 2197:25830](https://www.figma.com/design/4oIceSwgxmkADQYLhOoXF0/?node-id=2197-25830), переменная `Custom bg sidebar`); выбранный пункт `#f7f6fb` (`Background/Solid/Base/LightStatic`); иконки белые.
 - В тёмной теме список чатов — светлая панель с радиусом слева, а `chat-workspace` — с радиусом справа; шов между ними прямой.
-- Переключение: тулбар Storybook «Shell theme»; в приложении — `?shell=deep-violet` (значение запоминается в localStorage), `?shell=default` возвращает серую тему.
+- Переключение: тулбар Storybook «Shell theme»; в приложении — `?shell=deep-violet` / `?shell=default` (значение запоминается в localStorage и дальше используется без параметра в адресе).
+- **Дефолт — ревью 09.11.2026**: `readShellTheme()` (`src/theme/shellTheme.ts`) при пустых query и localStorage раньше возвращал `'default'` (серая), теперь — `'deep-violet'`. Продуктовое решение: тёмная подложка — целевой вид и для `/chats`, и для `/federation`; серая остаётся доступна по `?shell=default`. До этого тёмная тема была видна только тем, кто уже открывал ссылку с `?shell=deep-violet` (значение оседало в их localStorage) — у всех остальных, включая свежую публикацию на GitHub Pages, по умолчанию была серая. Это не регрессия и не «лишняя ветка» — просто опциональный переключатель, который не был включён по умолчанию до этого ревью.
 - Техническое допущение: цвета разделителя (`#ffffff29`) и hover (`#ffffff1f`) в макете не заданы токенами; бейдж-счётчик на сайдбаре и аватар со статусом из макета не реализованы — в задачу входил только цвет подложки.
 
 - [Button Split, 1787:4324](https://www.figma.com/design/2XiluT9TBfe4yvP4GXTqUp/my-Base?node-id=1787-4324): S/M/L, независимые действия двух частей, Default/Error/Warning/Success, hover/pressed/disabled/focus.
