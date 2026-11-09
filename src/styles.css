@@ -416,8 +416,10 @@ button { border: 0; background: none; cursor: pointer; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* Радио-группа «Расположение папок»: строки той же карточки, что «Системные папки» (.folder-modal__folder-list/__folder-row), радио справа. Ревью 09.11.2026. */
+/* Радио-группа «Расположение папок»: строки той же карточки, что «Системные папки» (.folder-modal__folder-list/__folder-row), радио справа. Строка кликабельна — добавлен ховер/active по системной паре токенов ListItem (.collapse-list-item), которой самим строкам не хватало. Ревью 09.11.2026. */
 .folder-modal__folder-list[role="radiogroup"] > .folder-modal__folder-row { cursor: pointer; }
+.folder-modal__folder-list[role="radiogroup"] > .folder-modal__folder-row:hover { background: var(--collapse-color-state-layer-on-base-tertiary); }
+.folder-modal__folder-list[role="radiogroup"] > .folder-modal__folder-row:active { background: var(--collapse-color-state-layer-on-base-secondary); }
 .folder-modal__section-header { min-height: var(--collapse-size-control-s); display: flex; align-items: center; justify-content: space-between; }
 .folder-modal__section-header h3 { flex: 1; }
 .folder-modal__custom-list { max-height: calc(var(--collapse-size-nav-item) * 3); overflow-y: auto; scrollbar-width: none; }
