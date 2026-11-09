@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import type { DragEvent, KeyboardEvent as ReactKeyboardEvent } from 'react'
-import { Button } from './Button'
 import { ComboBox } from './ComboBox'
 import { CreateFolderModal } from './CreateFolderModal'
 import type { CreatedFolder, FolderCandidate } from './CreateFolderModal'
@@ -21,12 +20,17 @@ type FolderManagementModalProps = {
   candidates?: FolderCandidate[]
   customFolders?: readonly ManagedFolder[]
   onCreateFolder?: (folder: CreatedFolder) => void
-  onReorderCustomFolders?: (folderIds: string[]) => void
   onUpdateFolder?: (folderId: string, folder: CreatedFolder) => void
   enabledSystemFolders?: readonly SystemFolder[]
   onSystemFolderChange?: (folder: SystemFolder, enabled: boolean) => void
-  /** Порядок включённых системных папок между собой (сами папки включаются через onSystemFolderChange). Без этого пропа включённые папки не перетаскиваются — ревью 09.11.2026. */
-  onReorderSystemFolders?: (folderIds: SystemFolder[]) => void
+  /**
+   * Единый порядок включённых папок — системных и пользовательских вперемешку, как они идут
+   * в самом списке чатов (ChatList/SegmentControls). Без 'all': она всегда первая и не перетаскивается.
+   * Используется для общего списка «Папки» в этой модалке — ревью 09.11.2026.
+   */
+  folderOrder?: readonly string[]
+  /** Перетаскивание внутри общего списка «Папки» (системные и пользовательские папки вместе). */
+  onReorderFolders?: (folderIds: string[]) => void
   displayMode: SegmentDisplayMode
   onDisplayModeChange: (mode: SegmentDisplayMode) => void
   /** Текущее расположение папок; вместе с onFoldersLayoutChange включает секцию «Расположение папок». */
@@ -85,11 +89,11 @@ export function FolderManagementModal({
   candidates = [],
   customFolders = [],
   onCreateFolder,
-  onReorderCustomFolders,
   onUpdateFolder,
   enabledSystemFolders = ['new'],
   onSystemFolderChange,
-  onReorderSystemFolders,
+  folderOrder = [],
+  onReorderFolders,
   displayMode,
   onDisplayModeChange,
   foldersLayout = 'top',
@@ -99,7 +103,6 @@ export function FolderManagementModal({
   const [view, setView] = useState<'manage' | 'create' | 'edit'>('manage')
   const [editingFolderId, setEditingFolderId] = useState<string | undefined>(initialFolderId)
   const [draggedFolderId, setDraggedFolderId] = useState<string | null>(null)
-  const [draggedSystemFolderId, setDraggedSystemFolderId] = useState<SystemFolder | null>(null)
   const [reorderAnnouncement, setReorderAnnouncement] = useState('')
 
   useEffect(() => {
@@ -126,56 +129,38 @@ export function FolderManagementModal({
     onSystemFolderChange?.(id, !enabledSystemFolders.includes(id))
   }
 
-  const moveCustomFolder = (movedId: string, targetId: string) => {
-    const ids = customFolders.map((folder) => folder.id)
-    const from = ids.indexOf(movedId)
-    const to = ids.indexOf(targetId)
-    if (from < 0 || to < 0 || from === to) return
-    ids.splice(from, 1)
-    ids.splice(to, 0, movedId)
-    onReorderCustomFolders?.(ids)
-    setReorderAnnouncement(`${customFolders.find((folder) => folder.id === movedId)?.label}: новая позиция ${to + 1}`)
-  }
-
-  const handleCustomFolderKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>, folderId: string) => {
-    if (!event.altKey || (event.key !== 'ArrowUp' && event.key !== 'ArrowDown')) return
-    event.preventDefault()
-    const ids = customFolders.map((folder) => folder.id)
-    const index = ids.indexOf(folderId)
-    const target = ids[index + (event.key === 'ArrowUp' ? -1 : 1)]
-    if (target) moveCustomFolder(folderId, target)
-  }
-
-  // Перетаскивание работает только между уже включёнными системными папками — выключенная строка не валидная цель
-  // (у неё нет позиции в порядке), так что перетаскивание на неё игнорируется.
-  const moveSystemFolder = (movedId: SystemFolder, targetId: SystemFolder) => {
-    if (!enabledSystemFolders.includes(targetId)) return
-    const ids = [...enabledSystemFolders]
-    const from = ids.indexOf(movedId)
-    const to = ids.indexOf(targetId)
-    if (from < 0 || to < 0 || from === to) return
-    ids.splice(from, 1)
-    ids.splice(to, 0, movedId)
-    onReorderSystemFolders?.(ids)
-    setReorderAnnouncement(`${folderItems.find((folder) => folder.id === movedId)?.label}: новая позиция ${to + 1}`)
-  }
-
-  const handleSystemFolderKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>, folderId: SystemFolder) => {
-    if (!event.altKey || (event.key !== 'ArrowUp' && event.key !== 'ArrowDown')) return
-    if (!enabledSystemFolders.includes(folderId)) return
-    event.preventDefault()
-    const ids = [...enabledSystemFolders]
-    const index = ids.indexOf(folderId)
-    const target = ids[index + (event.key === 'ArrowUp' ? -1 : 1)]
-    if (target) moveSystemFolder(folderId, target)
-  }
-
   const editingFolder = customFolders.find((folder) => folder.id === editingFolderId)
-  // Включённые — первыми и в их текущем порядке (перетаскиваемые), выключенные — следом в исходном порядке.
-  const orderedSystemFolders = [
-    ...enabledSystemFolders.flatMap((id) => folderItems.find((item) => item.id === id) ?? []),
-    ...folderItems.filter((item) => !enabledSystemFolders.includes(item.id)),
-  ]
+
+  // Единый список «Папки»: включённые системные и пользовательские папки вперемешку, в порядке folderOrder —
+  // как в самом списке чатов. «Все» в folderOrder не входит, добавляется отдельно и не перетаскивается — ревью 09.11.2026.
+  type CombinedFolderEntry = { id: string; kind: 'system' | 'custom'; label: string; icon: string }
+  const combinedFolders: CombinedFolderEntry[] = folderOrder.flatMap((id): CombinedFolderEntry[] => {
+    const systemItem = folderItems.find((item) => item.id === id)
+    if (systemItem) return [{ id, kind: 'system', label: systemItem.label, icon: systemItem.icon }]
+    const customItem = customFolders.find((item) => item.id === id)
+    if (customItem) return [{ id, kind: 'custom', label: customItem.label, icon: getCustomFolderEmoji(customItem.emoji) }]
+    return []
+  })
+
+  const moveFolder = (movedId: string, targetId: string) => {
+    const ids = combinedFolders.map((entry) => entry.id)
+    const from = ids.indexOf(movedId)
+    const to = ids.indexOf(targetId)
+    if (from < 0 || to < 0 || from === to) return
+    ids.splice(from, 1)
+    ids.splice(to, 0, movedId)
+    onReorderFolders?.(ids)
+    setReorderAnnouncement(`${combinedFolders.find((entry) => entry.id === movedId)?.label}: новая позиция ${to + 1}`)
+  }
+
+  const handleFolderKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>, folderId: string) => {
+    if (!event.altKey || (event.key !== 'ArrowUp' && event.key !== 'ArrowDown')) return
+    event.preventDefault()
+    const ids = combinedFolders.map((entry) => entry.id)
+    const index = ids.indexOf(folderId)
+    const target = ids[index + (event.key === 'ArrowUp' ? -1 : 1)]
+    if (target) moveFolder(folderId, target)
+  }
 
   return (
     <div
@@ -214,62 +199,49 @@ export function FolderManagementModal({
         />
 
         <div className="folder-modal__body">
-          {customFolders.length ? (
-            <section className="folder-modal__section folder-modal__custom-section" aria-labelledby="custom-folders-title">
-              <header className="folder-modal__section-header">
-                <h3 id="custom-folders-title">Пользовательские папки</h3>
-                <TextButton onClick={() => { setEditingFolderId(undefined); setView('create') }}>Создать папку</TextButton>
-              </header>
-              <div className="folder-modal__folder-list folder-modal__custom-list" role="list">
-                {customFolders.map((folder) => (
-                  <div
-                    className={`folder-modal__custom-row ${draggedFolderId === folder.id ? 'is-dragging' : ''}`}
-                    draggable
-                    key={folder.id}
-                    role="listitem"
-                    tabIndex={0}
-                    aria-label={`${folder.label}. Перетащите или нажмите Alt со стрелкой, чтобы изменить порядок`}
-                    onClick={() => { setEditingFolderId(folder.id); setView('edit') }}
-                    onDragStart={(event: DragEvent<HTMLDivElement>) => { event.dataTransfer.effectAllowed = 'move'; setDraggedFolderId(folder.id) }}
-                    onDragEnter={() => { if (draggedFolderId) moveCustomFolder(draggedFolderId, folder.id) }}
-                    onDragOver={(event) => event.preventDefault()}
-                    onDragEnd={() => setDraggedFolderId(null)}
-                    onKeyDown={(event) => handleCustomFolderKeyDown(event, folder.id)}
-                  >
-                    <span className="folder-modal__custom-icon" aria-hidden="true">{getCustomFolderEmoji(folder.emoji)}</span>
-                    <span className="folder-modal__custom-label">{folder.label}</span>
-                    <span className="folder-modal__custom-drag" aria-hidden="true">
-                      <img src="assets/figma/ic-drag-indicator-filled.svg" alt="" aria-hidden="true" />
-                    </span>
-                  </div>
-                ))}
+          <section className="folder-modal__section folder-modal__custom-section" aria-labelledby="folders-title">
+            <header className="folder-modal__section-header">
+              <h3 id="folders-title">Папки</h3>
+              <TextButton onClick={() => { setEditingFolderId(undefined); setView('create') }}>Создать папку</TextButton>
+            </header>
+            <div className="folder-modal__folder-list folder-modal__custom-list" role="list">
+              <div className="folder-modal__custom-row folder-modal__custom-row--fixed" role="listitem" aria-label="Все">
+                <span className="folder-modal__custom-icon" aria-hidden="true">{folderEmoji.all}</span>
+                <span className="folder-modal__custom-label">Все</span>
               </div>
-            </section>
-          ) : (
-            <div className="folder-modal__create">
-              <p>Создавайте папки, чтобы группировать чаты<br />и каналы по темам</p>
-              <Button type="button" onClick={() => { setEditingFolderId(undefined); setView('create') }}>Создать папку</Button>
+              {combinedFolders.map((entry) => (
+                <div
+                  className={`folder-modal__custom-row ${draggedFolderId === entry.id ? 'is-dragging' : ''}`}
+                  draggable
+                  key={entry.id}
+                  role="listitem"
+                  tabIndex={0}
+                  aria-label={`${entry.label}. Перетащите или нажмите Alt со стрелкой, чтобы изменить порядок`}
+                  onClick={entry.kind === 'custom' ? () => { setEditingFolderId(entry.id); setView('edit') } : undefined}
+                  onDragStart={(event: DragEvent<HTMLDivElement>) => { event.dataTransfer.effectAllowed = 'move'; setDraggedFolderId(entry.id) }}
+                  onDragEnter={() => { if (draggedFolderId) moveFolder(draggedFolderId, entry.id) }}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDragEnd={() => setDraggedFolderId(null)}
+                  onKeyDown={(event) => handleFolderKeyDown(event, entry.id)}
+                >
+                  <span className="folder-modal__custom-icon" aria-hidden="true">{entry.icon}</span>
+                  <span className="folder-modal__custom-label">{entry.label}</span>
+                  <span className="folder-modal__custom-drag" aria-hidden="true">
+                    <img src="assets/figma/ic-drag-indicator-filled.svg" alt="" aria-hidden="true" />
+                  </span>
+                </div>
+              ))}
             </div>
-          )}
+            <span className="visually-hidden" aria-live="polite">{reorderAnnouncement}</span>
+          </section>
 
           <section className="folder-modal__section" aria-labelledby="system-folders-title">
             <h3 id="system-folders-title">Системные папки</h3>
             <div className="folder-modal__folder-list">
-              {orderedSystemFolders.map((folder) => {
+              {folderItems.map((folder) => {
                 const isEnabled = enabledSystemFolders.includes(folder.id)
                 return (
-                  <div
-                    className={`folder-modal__folder-row ${isEnabled ? 'folder-modal__folder-row--draggable' : ''} ${draggedSystemFolderId === folder.id ? 'is-dragging' : ''}`}
-                    key={folder.id}
-                    draggable={isEnabled}
-                    tabIndex={isEnabled ? 0 : undefined}
-                    aria-label={isEnabled ? `${folder.label}. Перетащите или нажмите Alt со стрелкой, чтобы изменить порядок` : undefined}
-                    onDragStart={isEnabled ? (event: DragEvent<HTMLDivElement>) => { event.dataTransfer.effectAllowed = 'move'; setDraggedSystemFolderId(folder.id) } : undefined}
-                    onDragEnter={isEnabled ? () => { if (draggedSystemFolderId) moveSystemFolder(draggedSystemFolderId, folder.id) } : undefined}
-                    onDragOver={isEnabled ? (event) => event.preventDefault() : undefined}
-                    onDragEnd={isEnabled ? () => setDraggedSystemFolderId(null) : undefined}
-                    onKeyDown={isEnabled ? (event) => handleSystemFolderKeyDown(event, folder.id) : undefined}
-                  >
+                  <div className="folder-modal__folder-row" key={folder.id}>
                     <span className="folder-modal__folder-icon" aria-hidden="true">
                       {folder.icon}
                     </span>
@@ -282,16 +254,10 @@ export function FolderManagementModal({
                       label={`${folder.label}: ${isEnabled ? 'показывать' : 'скрыть'}`}
                       onChange={() => toggleFolder(folder.id)}
                     />
-                    {isEnabled && (
-                      <span className="folder-modal__custom-drag" aria-hidden="true">
-                        <img src="assets/figma/ic-drag-indicator-filled.svg" alt="" aria-hidden="true" />
-                      </span>
-                    )}
                   </div>
                 )
               })}
             </div>
-            <span className="visually-hidden" aria-live="polite">{reorderAnnouncement}</span>
           </section>
 
           {onFoldersLayoutChange && (

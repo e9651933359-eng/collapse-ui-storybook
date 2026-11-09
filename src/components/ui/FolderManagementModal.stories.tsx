@@ -14,13 +14,15 @@ const candidates = [
 
 function ModalDemo() {
   const [open, setOpen] = useState(true)
-  const [enabledFolders, setEnabledFolders] = useState<SystemFolder[]>(['new', 'channels'])
   const [displayMode, setDisplayMode] = useState<SegmentDisplayMode>('names')
   const [customFolders, setCustomFolders] = useState<ManagedFolder[]>([
     { id: 'folder-product', label: 'Продукт', emoji: '🔥', chatIds: ['design', 'updates'] },
     { id: 'folder-team', label: 'Команда', emoji: '💚', chatIds: ['team'] },
     { id: 'folder-default', label: 'Без эмодзи', chatIds: [] },
   ])
+  // Единый порядок включённых папок — системных и пользовательских вперемешку, как в App.tsx.
+  const [folderOrder, setFolderOrder] = useState<string[]>(['new', 'folder-product', 'channels', 'folder-team', 'folder-default'])
+  const enabledFolders = folderOrder.filter((id): id is SystemFolder => (['new', 'chats', 'channels'] as string[]).includes(id))
 
   return (
     <div className="folder-modal-story-canvas">
@@ -34,13 +36,23 @@ function ModalDemo() {
         candidates={candidates}
         customFolders={customFolders}
         enabledSystemFolders={enabledFolders}
+        folderOrder={folderOrder}
         displayMode={displayMode}
         onDisplayModeChange={setDisplayMode}
-        onCreateFolder={(folder) => setCustomFolders((current) => [...current, { ...folder, id: `folder-${current.length + 1}` }])}
-        onReorderCustomFolders={(ids) => setCustomFolders((current) => ids.flatMap((id) => current.find((folder) => folder.id === id) ?? []))}
+        onCreateFolder={(folder) => {
+          const id = `folder-${customFolders.length + 1}`
+          setCustomFolders((current) => [...current, { ...folder, id }])
+          setFolderOrder((current) => [...current, id])
+        }}
+        onReorderFolders={(ids) => {
+          setFolderOrder(ids)
+          const customIds = new Set(customFolders.map((folder) => folder.id))
+          setCustomFolders((current) => ids.filter((id) => customIds.has(id)).flatMap((id) => current.find((folder) => folder.id === id) ?? []))
+        }}
         onUpdateFolder={(id, folder) => setCustomFolders((current) => current.map((item) => item.id === id ? { ...item, ...folder } : item))}
-        onSystemFolderChange={(folder, enabled) => setEnabledFolders((current) => enabled ? [...current, folder] : current.filter((item) => item !== folder))}
-        onReorderSystemFolders={(ids) => setEnabledFolders(ids)}
+        onSystemFolderChange={(folder, enabled) => setFolderOrder((current) => enabled
+          ? (current.includes(folder) ? current : [...current, folder])
+          : current.filter((id) => id !== folder))}
         onClose={() => setOpen(false)}
       />
     </div>

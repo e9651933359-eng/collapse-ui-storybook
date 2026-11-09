@@ -359,23 +359,6 @@ button { border: 0; background: none; cursor: pointer; }
   scrollbar-width: none;
 }
 .folder-modal__body::-webkit-scrollbar { display: none; }
-.folder-modal__create {
-  height: 156px;
-  flex: 0 0 156px;
-  padding: 32px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-m);
-  text-align: center;
-}
-.folder-modal__create p {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: var(--paragraph-s-size);
-  line-height: var(--paragraph-s-line);
-  letter-spacing: var(--collapse-paragraph-s-letter-spacing);
-}
 .folder-modal__section { display: flex; flex-direction: column; gap: var(--space-s-nudge); }
 .folder-modal__section h3 {
   margin: 0;
@@ -408,12 +391,6 @@ button { border: 0; background: none; cursor: pointer; }
   height: 1px;
   background: var(--background-secondary-tint);
 }
-/* Включённая системная папка — перетаскиваемая строка, визуальный паритет с .folder-modal__custom-row. Ревью 09.11.2026. */
-.folder-modal__folder-row--draggable {
-  cursor: grab;
-  transition: background var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), transform var(--collapse-motion-duration-slow) var(--collapse-motion-easing-standard);
-}
-.folder-modal__folder-row.is-dragging { opacity: .56; transform: scale(.99); box-shadow: var(--collapse-effect-shadow-02-compact); }
 .folder-modal__folder-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; font-size: var(--collapse-size-icon-m); line-height: 1; }
 .folder-modal__folder-copy { min-width: 0; min-height: 40px; flex: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
 .folder-modal__folder-copy > span {
@@ -445,6 +422,9 @@ button { border: 0; background: none; cursor: pointer; }
 .folder-modal__custom-row:hover,
 .folder-modal__custom-row:focus-visible { background: var(--collapse-color-state-layer-on-base-tertiary); outline: none; }
 .folder-modal__custom-row.is-dragging { opacity: .56; transform: scale(.99); box-shadow: var(--collapse-effect-shadow-02-compact); }
+/* «Все» — первой строкой общего списка «Папки», не перетаскивается и не кликается. Ревью 09.11.2026. */
+.folder-modal__custom-row--fixed { cursor: default; }
+.folder-modal__custom-row--fixed:hover, .folder-modal__custom-row--fixed:focus-visible { background: transparent; }
 .folder-modal__custom-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--collapse-color-background-opacity-accent-secondary); font-size: var(--collapse-size-icon-m); }
 .folder-modal__custom-label { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .folder-modal__custom-drag { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); flex: 0 0 var(--collapse-size-icon-m); }
