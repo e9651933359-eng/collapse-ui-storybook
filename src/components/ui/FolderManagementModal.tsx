@@ -4,6 +4,7 @@ import { ComboBox } from './ComboBox'
 import { CreateFolderModal } from './CreateFolderModal'
 import type { CreatedFolder, FolderCandidate } from './CreateFolderModal'
 import { ModalHeader } from './ModalHeader'
+import { Radio } from './Radio'
 import { Switch } from './Switch'
 import { TextButton } from './TextButton'
 import type { SegmentDisplayMode } from './SegmentControls'
@@ -250,6 +251,7 @@ export function FolderManagementModal({
                       <small>{folder.description}</small>
                     </span>
                     <Switch
+                      size="s"
                       selected={isEnabled}
                       label={`${folder.label}: ${isEnabled ? 'показывать' : 'скрыть'}`}
                       onChange={() => toggleFolder(folder.id)}
@@ -263,12 +265,18 @@ export function FolderManagementModal({
           {onFoldersLayoutChange && (
             <section className="folder-modal__section" aria-labelledby="folder-layout-title">
               <h3 id="folder-layout-title">Расположение папок</h3>
-              <ComboBox
-                ariaLabel="Расположение папок"
-                value={foldersLayout}
-                options={layoutOptions}
-                onChange={(value) => onFoldersLayoutChange(value as FolderLayout)}
-              />
+              {/* Бинарный выбор — радио-кнопки вместо дропдауна, по образцу коллег. Ревью 09.11.2026. */}
+              <div className="folder-modal__radio-list" role="radiogroup" aria-labelledby="folder-layout-title">
+                {layoutOptions.map((option) => (
+                  <Radio
+                    key={option.value}
+                    name="folder-layout"
+                    label={option.label}
+                    checked={foldersLayout === option.value}
+                    onChange={() => onFoldersLayoutChange(option.value as FolderLayout)}
+                  />
+                ))}
+              </div>
             </section>
           )}
 
