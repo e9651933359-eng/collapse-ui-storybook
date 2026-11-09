@@ -355,3 +355,8 @@
 ## Разделитель вертикальной колонки папок — ревью 09.11.2026
 
 - Добавлен вертикальный разделитель между колонкой папок (`foldersLayout="left"`) и списком чатов — по референсу [link-chats-survey](https://link-chats-survey.pages.dev/#chat?variant=1), тому же, что уже задокументирован у токена `--collapse-size-folder-rail-width`. Без него отступ поля поиска визуально «плавал», не имея якоря. `.chat-list-panel--left > .segment-controls { border-right: 1px solid var(--border-tertiary) }` — тот же нейтральный токен, что у `.product-rail__divider`. На верхнем расположении (`foldersLayout="top"`) ничего не меняется — разделитель есть только у вертикальной колонки. Storybook: `Shell/ChatList / FoldersLeft`.
+
+## Счётчик непрочитанных в вертикальной колонке папок поднят к углу иконки — ревью 09.11.2026
+
+- По скриншоту пользователя бейдж `Counter` в `.segment-controls--vertical` лежал вровень с серединой/низом иконки, перекрывая её, а не на верхнем правом углу, как в референсе (бейдж «выглядывает» над иконкой). Причина: `top: var(--collapse-spacing-horizontal-m)` (12px от верхней границы плитки 64×64), а иконка внутри плитки центрируется по вертикали (flex `justify-content: center` у `.segment-controls__item`) и фактически начинается на той же ~12px — бейдж совпадал по высоте с иконкой, а не выступал над ней.
+- Подняли до `top: var(--collapse-spacing-horizontal-xs)` (4px) — бейдж теперь примерно на 8px выше верхнего края иконки, с небольшим перекрытием её нижней частью, как в референсе. Горизонтальное положение (`right: var(--collapse-spacing-horizontal-m-nudge)`) не трогали — оно уже совпадало. Горизонтальное расположение (`displayMode`/`orientation="horizontal"`) не затронуто — правка только в `.segment-controls--vertical .segment-controls__counter`.
