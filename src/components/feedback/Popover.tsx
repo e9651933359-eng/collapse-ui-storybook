@@ -1,8 +1,15 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import './feedback.css'
 
-export type PopoverPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end'
+/**
+ * `top-*`/`bottom-*` — направление зафиксировано вызывающим кодом (например, панель у нижнего края
+ * композера всегда открывается вверх). `auto-*` — вертикаль подбирается по месту во вьюпорте
+ * (вниз по умолчанию, вверх только если снизу не хватает места); горизонтальное выравнивание (`start`/`end`)
+ * остаётся фиксированным. Используй `auto-*` там, где элемент-триггер может оказаться у любого края
+ * прокручиваемого списка (строка файла в ленте сообщений и т.п.).
+ */
+export type PopoverPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end' | 'auto-start' | 'auto-end'
 
 type PopoverProps = {
   children: ReactNode
@@ -20,7 +27,10 @@ export function Popover({ children, contentClassName = '', content, defaultOpen 
   const rootRef = useRef<HTMLSpanElement>(null)
   const panelRef = useRef<HTMLDivElement>(null)
   const [internalOpen, setInternalOpen] = useState(defaultOpen)
+  const [autoVertical, setAutoVertical] = useState<'top' | 'bottom'>('bottom')
   const isOpen = open ?? internalOpen
+  const isAuto = placement === 'auto-start' || placement === 'auto-end'
+  const resolvedPlacement = isAuto ? `${autoVertical}-${placement === 'auto-start' ? 'start' : 'end'}` : placement
 
   const setOpen = (next: boolean) => {
     if (open === undefined) setInternalOpen(next)
@@ -35,6 +45,15 @@ export function Popover({ children, contentClassName = '', content, defaultOpen 
     document.addEventListener('pointerdown', closeOutside)
     return () => document.removeEventListener('pointerdown', closeOutside)
   }, [isOpen])
+
+  useLayoutEffect(() => {
+    if (!isOpen || !isAuto || !rootRef.current || !panelRef.current) return
+    const triggerRect = rootRef.current.getBoundingClientRect()
+    const panelHeight = panelRef.current.offsetHeight
+    const spaceBelow = window.innerHeight - triggerRect.bottom
+    const spaceAbove = triggerRect.top
+    setAutoVertical(spaceBelow >= panelHeight || spaceBelow >= spaceAbove ? 'bottom' : 'top')
+  }, [isOpen, isAuto])
 
   return (
     <span ref={rootRef} className="collapse-popover-trigger">
@@ -56,7 +75,7 @@ export function Popover({ children, contentClassName = '', content, defaultOpen 
         <div
           ref={panelRef}
           id={id}
-          className={`collapse-popover collapse-popover--${placement} collapse-popover--gap-${gap} ${contentClassName}`}
+          className={`collapse-popover collapse-popover--${resolvedPlacement} collapse-popover--gap-${gap} ${contentClassName}`}
           role="dialog"
           tabIndex={-1}
           onKeyDown={(event) => {

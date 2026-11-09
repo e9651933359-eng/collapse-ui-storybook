@@ -17,7 +17,11 @@ type RowProps = {
   onRemove?: (id: string) => void
 }
 
-/** Строка файла в отправленном сообщении: меню «Скопировать ссылку / Удалить из чата». */
+/**
+ * Строка файла в отправленном сообщении: меню «Скопировать ссылку / Удалить из чата».
+ * Всегда без превью (`ListItemFile`): ревью 09.11.2026 — миниатюра в ленте сообщений не нужна,
+ * достаточно иконки расширения; заодно убирает лишнюю высоту строки в ленте.
+ */
 export function DiskAttachmentRow({ attachment, onRemove }: RowProps) {
   const [confirming, setConfirming] = useState(false)
   const url = attachment.disk?.url ?? ''
@@ -29,28 +33,17 @@ export function DiskAttachmentRow({ attachment, onRemove }: RowProps) {
       onSelect={(item) => { if (item.id === 'copy') void copyLink(url, notify); else setConfirming(true) }}
     />
   )
-  const extension = isFolder ? 'folder' : extensionOf(attachment.name)
-  const withThumbnail = !isFolder && THUMBNAIL_EXTENSIONS.has(extension)
   return (
     <>
-      {withThumbnail ? (
-        <FileCard
-          title={attachment.name}
-          meta={<DiskStoredMeta />}
-          extension={extension}
-          moreContent={menu}
-          morePlacement="top-end"
-          onOpen={() => notify('Открываем файл на Диске')}
-        />
-      ) : <ListItemFile
+      <ListItemFile
         size="s"
         fileName={attachment.name}
         extension={isFolder ? 'folder' : extensionOf(attachment.name)}
         meta={<DiskStoredMeta label={isFolder ? 'Папка на МТС Диске' : undefined} />}
         moreContent={menu}
-        morePlacement="top-end"
+        morePlacement="auto-end"
         onClick={(event) => { if (!(event.target as HTMLElement).closest('.collapse-file-item__actions')) notify(isFolder ? 'Открываем папку на Диске' : 'Открываем файл на Диске') }}
-      />}
+      />
       {confirming && createPortal(
         <ConfirmDialog
           open
@@ -65,9 +58,6 @@ export function DiskAttachmentRow({ attachment, onRemove }: RowProps) {
     </>
   )
 }
-
-/** Форматы с миниатюрой после отправки (Teams: word, excel, ppt, pdf). */
-const THUMBNAIL_EXTENSIONS = new Set(['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf'])
 
 const hostOf = (url: string) => { try { return new URL(url).hostname } catch { return url } }
 
@@ -92,7 +82,7 @@ export function LinkPreviewCard({ preview, onRemove }: CardProps) {
         extension={preview.extension}
         state={forbidden ? 'forbidden' : 'enabled'}
         moreContent={menu}
-        morePlacement="top-end"
+        morePlacement="auto-end"
         onOpen={() => (forbidden ? setRequesting(true) : notify(preview.status === 'external' ? 'Открываем ссылку' : 'Открываем файл на Диске'))}
       />
       {requesting && createPortal(<DiskRedirectModal open onClose={() => setRequesting(false)} />, document.body)}
