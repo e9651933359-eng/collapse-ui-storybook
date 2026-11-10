@@ -53,7 +53,7 @@ const folderItems: Array<{
   {
     id: 'new',
     label: 'Новые',
-    description: 'Чаты и каналы с непрочитанными сообщениями',
+    description: 'Непрочитанные чаты и каналы',
     icon: folderEmoji.new,
   },
   {
