@@ -35,7 +35,7 @@ export function FederationParticipantsModal({ onClose, onParticipantSelect, open
   return (
     <ModalPage className="federation-participants-modal" open={open} title={`${count} ${getParticipantWord(count)} из другой организации`} onClose={onClose}>
       <div className="federation-participants-modal__content">
-        <SearchField autoFocus value={query} onChange={(event) => setQuery(event.target.value)} />
+        <SearchField value={query} onChange={(event) => setQuery(event.target.value)} />
         <div className="federation-participants-modal__list" aria-label="Участники из других организаций">
           {items.map((participant) => (
             <ListItem
