@@ -27,11 +27,19 @@ export function getParticipantWord(count: number) {
 
 /**
  * Подпись второй строки под названием чата (шапка открытого чата). Правило ревью 07.11.2026:
- * групповой чат или канал — количество участников; личная переписка 1 на 1 — ничего.
+ * групповой чат или канал — количество участников; личная переписка 1 на 1 — присутствие
+ * собеседника, если оно задано (`chat.presence`), иначе ничего (дополнено ревью 10.11.2026).
  */
 export function getChatSubtitle(chat: Chat, memberCount: number) {
-  if (chat.kind === 'direct') return ''
+  if (chat.kind === 'direct') return getPresenceLabel(chat.presence)
   return `${memberCount} ${getParticipantWord(memberCount)}`
+}
+
+/** Текст статуса присутствия для шапки/списка личных чатов. */
+export function getPresenceLabel(presence?: Chat['presence']) {
+  if (presence === 'online') return 'В сети'
+  if (presence === 'busy') return 'Не беспокоить'
+  return ''
 }
 
 /**
