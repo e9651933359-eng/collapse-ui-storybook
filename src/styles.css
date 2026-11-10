@@ -422,8 +422,7 @@ button { border: 0; background: none; cursor: pointer; }
 .folder-modal__folder-list[role="radiogroup"] > .folder-modal__folder-row:active { background: var(--collapse-color-state-layer-on-base-secondary); }
 .folder-modal__section-header { min-height: var(--collapse-size-control-s); display: flex; align-items: center; justify-content: space-between; }
 .folder-modal__section-header h3 { flex: 1; }
-.folder-modal__custom-list { max-height: calc(var(--collapse-size-nav-item) * 3); overflow-y: auto; scrollbar-width: none; }
-.folder-modal__custom-list::-webkit-scrollbar { display: none; }
+/* Ревью 10.11.2026: был фиксированный max-height на 3 строки (включая «Все») со своим внутренним скроллом (+ скрытым скроллбаром) — при «Все» + 2 включённые системные + 1 своя папка (4 строки) верх списка («Все») обрезался и прокручивался отдельно от модалки, хотя у .folder-modal__body уже есть свой скролл на весь контент. Двойной вложенный скролл убран: список растёт по контенту, переполнение модалки целиком обрабатывает внешний .folder-modal__body — тот же фикс, что раньше делали для .folder-picker__list. */
 .folder-modal__custom-row { min-height: var(--collapse-size-nav-item); padding: var(--collapse-spacing-horizontal-xs) var(--collapse-spacing-horizontal-l); display: flex; align-items: center; gap: var(--collapse-spacing-horizontal-m); cursor: grab; transition: background var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), opacity var(--collapse-motion-duration-fast) var(--collapse-motion-easing-standard), transform var(--collapse-motion-duration-slow) var(--collapse-motion-easing-standard); }
 .folder-modal__custom-row:hover,
 .folder-modal__custom-row:focus-visible { background: var(--collapse-color-state-layer-on-base-tertiary); outline: none; }
