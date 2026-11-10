@@ -393,7 +393,7 @@ button { border: 0; background: none; cursor: pointer; }
   height: 1px;
   background: var(--background-secondary-tint);
 }
-.folder-modal__folder-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; font-size: var(--collapse-size-icon-m); line-height: 1; }
+.folder-modal__folder-icon { width: var(--collapse-size-control-xs); height: var(--collapse-size-control-xs); flex: 0 0 var(--collapse-size-control-xs); display: grid; place-items: center; font-size: var(--collapse-size-icon-s); line-height: 1; }
 .folder-modal__folder-copy { min-width: 0; min-height: 40px; flex: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
 .folder-modal__folder-copy > span {
   overflow: hidden;
@@ -431,7 +431,7 @@ button { border: 0; background: none; cursor: pointer; }
 .folder-modal__custom-row--fixed { cursor: default; }
 .folder-modal__custom-row--fixed:hover, .folder-modal__custom-row--fixed:focus-visible { background: transparent; }
 /* Серый бейдж вместо акцентного сиреневого — мягче на фоне спискa, акцент остаётся только за реальными действиями (кнопки, счётчики). Токен тот же, что у Button priority="secondary". Ревью 09.11.2026. */
-.folder-modal__custom-icon { width: var(--collapse-size-control-s); height: var(--collapse-size-control-s); flex: 0 0 var(--collapse-size-control-s); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--background-secondary-tint); font-size: var(--collapse-size-icon-m); }
+.folder-modal__custom-icon { width: var(--collapse-size-control-xs); height: var(--collapse-size-control-xs); flex: 0 0 var(--collapse-size-control-xs); display: grid; place-items: center; border-radius: var(--collapse-radius-full); background: var(--background-secondary-tint); font-size: var(--collapse-size-icon-s); }
 .folder-modal__custom-label { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .folder-modal__custom-drag { width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); flex: 0 0 var(--collapse-size-icon-m); }
 .folder-modal__custom-drag img { display: block; width: var(--collapse-size-icon-m); height: var(--collapse-size-icon-m); }

@@ -34,6 +34,8 @@
   --collapse-size-icon-s: 20px;
   --collapse-size-icon-m: 24px;
   --collapse-size-icon-l: 28px;
+  /* Продолжает шкалу control-s/m/l (40/48/56) вниз. Product requirement, ревью «Управление папками» 10.11.2026: кружки-иконки в списках «Папки»/«Системные папки» уменьшены с 40 до 32 — меньше визуального веса в компактном списке. */
+  --collapse-size-control-xs: 32px;
   --collapse-size-control-s: 40px;
   --collapse-size-avatar-m: var(--collapse-size-control-s);
   --collapse-size-avatar-l: 44px;
