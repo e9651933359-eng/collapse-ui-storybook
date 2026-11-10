@@ -108,7 +108,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'mc-1', author: 'other', sender: 'Светлана', avatar: 'СВ', text: 'Обновила медиаплан и сроки запуска.', time: 'Пн' }],
   },
   {
-    id: 'andrey-direct', title: 'Андрей Звонов 📈', subtitle: 'Альфа-Банк', avatar: 'АЗ', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, unread: 2,
+    id: 'andrey-direct', title: 'Андрей Звонов 📈', subtitle: 'Альфа-Банк', avatar: 'АЗ', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, presence: 'online', unread: 2,
     messages: [{ id: 'az-1', author: 'other', sender: 'Андрей Звонов', avatar: 'АЗ', federation: true, text: 'Подтвердили состав рабочей группы со своей стороны.', time: 'Пн' }],
   },
   {
@@ -124,7 +124,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'bg-1', author: 'other', sender: 'Роман', avatar: 'РО', text: 'Следующий технический разбор проведём во вторник.', time: 'Пт' }],
   },
   {
-    id: 'marina-direct', title: 'Марина Кузнецова 🍀', subtitle: 'Личный чат', avatar: 'МК', avatarImage: 'assets/avatars/marina-kuznetsova.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', unread: 1,
+    id: 'marina-direct', title: 'Марина Кузнецова 🍀', subtitle: 'Личный чат', avatar: 'МК', avatarImage: 'assets/avatars/marina-kuznetsova.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', presence: 'online', unread: 1,
     messages: [{ id: 'md-1', author: 'other', sender: 'Марина Кузнецова', avatar: 'МК', text: 'Собрала вопросы к завтрашнему созвону.', time: 'Чт' }],
   },
   {
@@ -164,7 +164,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'ansh-1', author: 'other', sender: 'Антон Шац', avatar: 'АШ', federation: true, text: 'Поправил баг в выгрузке, жду проверки с вашей стороны.', time: 'Пн' }],
   },
   {
-    id: 'stepan-direct', title: 'Степан Васта', subtitle: 'Альфа-Банк', avatar: 'СВ', avatarImage: 'assets/avatars/people/stepan.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true,
+    id: 'stepan-direct', title: 'Степан Васта', subtitle: 'Альфа-Банк', avatar: 'СВ', avatarImage: 'assets/avatars/people/stepan.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, presence: 'online',
     messages: [{ id: 'stv-1', author: 'other', sender: 'Степан Васта', avatar: 'СВ', federation: true, text: 'Собрал промежуточные итоги по запуску, отправлю сегодня.', time: 'Чт' }],
   },
   {

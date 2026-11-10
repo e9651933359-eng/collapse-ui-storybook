@@ -56,6 +56,8 @@ export type Chat = {
   avatarColor?: AvatarColor
   avatarFilled?: boolean
   kind?: 'direct' | 'group' | 'channel'
+  /** Присутствие собеседника — только для личных чатов (`kind: 'direct'`); бейдж на аватаре в списке и шапке. */
+  presence?: 'online' | 'offline' | 'busy'
   unread?: number
   /** Пользователя упомянули в непрочитанных: в строке списка показывается бейдж «@». */
   mentioned?: boolean

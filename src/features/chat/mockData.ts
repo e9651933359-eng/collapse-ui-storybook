@@ -344,14 +344,14 @@ const contextFor = (chat: Chat) => chat.kind === 'channel'
 
 const directSeeds: Chat[] = [
   {
-    id: 'marina-kuznetsova', title: 'Марина Кузнецова', subtitle: 'Скинула итоги ретро', avatar: 'МК', avatarImage: 'assets/avatars/marina-kuznetsova.jpg', avatarColor: 1, kind: 'direct', unread: 5,
+    id: 'marina-kuznetsova', title: 'Марина Кузнецова', subtitle: 'Скинула итоги ретро', avatar: 'МК', avatarImage: 'assets/avatars/marina-kuznetsova.jpg', avatarColor: 1, kind: 'direct', presence: 'online', unread: 5,
     messages: [
       { id: 'marina-kuznetsova-1', author: 'other', sender: 'Марина Кузнецова', avatar: 'МК', avatarImage: 'assets/avatars/marina-kuznetsova.jpg', text: 'Привет! Скинула итоги ретро в общую папку.', time: '09:10' },
       { id: 'marina-kuznetsova-2', author: 'me', text: 'Спасибо, посмотрю после обеда.', time: '09:12' },
     ],
   },
   {
-    id: 'mikhail-orlov', title: 'Михаил Орлов', subtitle: 'Созвон перенесли на 16:00', avatar: 'МО', avatarImage: 'assets/avatars/mikhail-orlov.jpg', avatarColor: 2, kind: 'direct',
+    id: 'mikhail-orlov', title: 'Михаил Орлов', subtitle: 'Созвон перенесли на 16:00', avatar: 'МО', avatarImage: 'assets/avatars/mikhail-orlov.jpg', avatarColor: 2, kind: 'direct', presence: 'online',
     messages: [
       { id: 'mikhail-orlov-1', author: 'other', sender: 'Михаил Орлов', avatar: 'МО', avatarImage: 'assets/avatars/mikhail-orlov.jpg', text: 'Михаил, можем сдвинуть созвон на 16:00?', time: '09:13' },
       { id: 'mikhail-orlov-2', author: 'me', text: 'Да, подходит. Пришли ссылку заранее.', time: '09:15' },
@@ -372,7 +372,7 @@ const directSeeds: Chat[] = [
     ],
   },
   {
-    id: 'anna-fomina', title: 'Анна Фомина', subtitle: 'Нужен ваш комментарий по тексту', avatar: 'АФ', avatarImage: 'assets/avatars/anna-fomina.jpg', avatarColor: 5, kind: 'direct', unread: 3,
+    id: 'anna-fomina', title: 'Анна Фомина', subtitle: 'Нужен ваш комментарий по тексту', avatar: 'АФ', avatarImage: 'assets/avatars/anna-fomina.jpg', avatarColor: 5, kind: 'direct', presence: 'busy', unread: 3,
     messages: [
       { id: 'anna-fomina-1', author: 'other', sender: 'Анна Фомина', avatar: 'АФ', avatarImage: 'assets/avatars/anna-fomina.jpg', text: 'Анна, посмотри формулировки в онбординге?', time: '09:22' },
       { id: 'anna-fomina-2', author: 'me', text: 'Посмотрела, оставила правки в документе.', time: '09:24' },

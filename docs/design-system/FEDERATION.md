@@ -136,3 +136,10 @@
 - По аналогии с более ранним прецедентом (см. выше в файле, запись про 20.10.2026 — «пять фотографий, не подходивших к именам, убраны из данных», монограмма как запасной вариант): у всех восьми `image: photo(id)` убран из `federationParticipants` в `model.ts`, у `mockData.ts` синхронно убран `avatarImage` для `andrey-direct`, `boris-direct`, `igor-smirnov-direct`. Везде, где раньше показывалось несоответствующее фото, теперь — цветная монограмма инициалов (стандартный fallback `Avatar`).
 - Файлы `igor.jpg`/`boris.jpg`/`andrey.jpg`/`maxim.jpg`/`makarov.jpg`/`romanov.jpg`/`volkov.jpg`/`zaytsev.jpg` в `public/assets/avatars/people/` оставлены на диске неиспользуемыми (на случай, если потребуется другой персонаж) — не удалены из репозитория в этом ревью.
 - Остальные 29 фото пула визуально не вызывают вопросов, не менялись.
+
+## Статус присутствия («В сети») для личных чатов 1-на-1 — ревью 10.11.2026
+
+- Та же фича, что и в обычных чатах (см. запись в `BASE.md` от 10.11.2026) — переиспользует общее ядро (`Avatar.status`, `Chat.presence`, `getChatSubtitle`/`getPresenceLabel` из `src/features/chat/profile/members.ts`), код не дублировался.
+- Для федеративного варианта подключение то же: `ChatListItem` и `ChatWorkspace` используются оба в обоих вариантах сборки, отдельных федеративных копий компонентов нет.
+- Демо-данные федерации (`src/features/federation/mockData.ts`): добавлено `presence: 'online'` для `andrey-direct`, `stepan-direct`, `marina-direct` — только личные чаты, групповые/канальные федеративные чаты не затронуты.
+- Проверено: `npm run build:federation` проходит без ошибок TypeScript.

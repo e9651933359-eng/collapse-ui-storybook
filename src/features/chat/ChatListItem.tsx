@@ -191,6 +191,7 @@ export function ChatListItem({
           emoji={chat.avatar}
           filled={chat.avatarFilled ?? false}
           shape={chat.kind === 'channel' ? 'squircle' : 'round'}
+          status={chat.kind === 'direct' ? chat.presence : undefined}
         />
         <span className="chat-row__body">
           <span className="chat-row__heading">
