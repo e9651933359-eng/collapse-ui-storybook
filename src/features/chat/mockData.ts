@@ -146,7 +146,7 @@ const baseSeeds: Chat[] = [
     ],
   },
   {
-    id: 'alexey-smirnov', title: 'Алексей Смирнов', subtitle: 'Договорились созвониться после обеда', avatar: 'АС', avatarImage: 'assets/avatars/alexey-smirnov.jpg', avatarColor: 4, kind: 'direct',
+    id: 'alexey-smirnov', title: 'Алексей Смирнов', subtitle: 'Договорились созвониться после обеда', avatar: 'АС', avatarImage: 'assets/avatars/alexey-smirnov.jpg', avatarColor: 4, kind: 'direct', presence: 'online',
     messages: [
       { id: 'as1', author: 'other', sender: 'Алексей Смирнов', avatar: 'АС', text: 'Привет! Посмотрел прототип, есть пара вопросов по поведению каналов.', time: '10:11' },
       { id: 'as2', author: 'me', text: 'Привет! Давай разберём. Могу подключиться после 14:00.', time: '10:15' },
@@ -209,7 +209,7 @@ const baseSeeds: Chat[] = [
     ],
   },
   {
-    id: 'daria-petrova', title: 'Дарья Петрова', subtitle: 'Дарья: спасибо за помощь!', avatar: 'ДП', avatarImage: 'assets/avatars/daria-petrova.jpg', avatarColor: 8, kind: 'direct',
+    id: 'daria-petrova', title: 'Дарья Петрова', subtitle: 'Дарья: спасибо за помощь!', avatar: 'ДП', avatarImage: 'assets/avatars/daria-petrova.jpg', avatarColor: 8, kind: 'direct', presence: 'offline',
     messages: [
       { id: 'dp1', author: 'other', sender: 'Дарья Петрова', avatar: 'ДП', text: 'Привет! Подскажи, как вернуть папку «Новые», если я её скрыла?', time: '13:03' },
       { id: 'dp2', author: 'me', text: 'Открой настройки папок через иконку рядом с сегментами и включи «Новые».', time: '13:06' },
@@ -358,14 +358,14 @@ const directSeeds: Chat[] = [
     ],
   },
   {
-    id: 'olga-smirnova', title: 'Ольга Смирнова', subtitle: 'Макеты готовы к проверке', avatar: 'ОС', avatarImage: 'assets/avatars/olga-smirnova.jpg', avatarColor: 3, kind: 'direct', pinned: true, unread: 2,
+    id: 'olga-smirnova', title: 'Ольга Смирнова', subtitle: 'Макеты готовы к проверке', avatar: 'ОС', avatarImage: 'assets/avatars/olga-smirnova.jpg', avatarColor: 3, kind: 'direct', presence: 'busy', pinned: true, unread: 2,
     messages: [
       { id: 'olga-smirnova-1', author: 'other', sender: 'Ольга Смирнова', avatar: 'ОС', avatarImage: 'assets/avatars/olga-smirnova.jpg', text: 'Макеты экрана папок готовы, глянешь?', time: '09:16' },
       { id: 'olga-smirnova-2', author: 'me', text: 'Конечно, сейчас открою Figma.', time: '09:18' },
     ],
   },
   {
-    id: 'evgeny-popov', title: 'Евгений Попов', subtitle: 'Ок, договорились', avatar: 'ЕП', avatarImage: 'assets/avatars/evgeny-popov.jpg', avatarColor: 4, kind: 'direct',
+    id: 'evgeny-popov', title: 'Евгений Попов', subtitle: 'Ок, договорились', avatar: 'ЕП', avatarImage: 'assets/avatars/evgeny-popov.jpg', avatarColor: 4, kind: 'direct', presence: 'offline',
     messages: [
       { id: 'evgeny-popov-1', author: 'other', sender: 'Евгений Попов', avatar: 'ЕП', avatarImage: 'assets/avatars/evgeny-popov.jpg', text: 'Договорились, завтра в 11:00 по стендапу.', time: '09:19' },
       { id: 'evgeny-popov-2', author: 'me', text: 'Отлично, до завтра!', time: '09:21' },
@@ -379,35 +379,35 @@ const directSeeds: Chat[] = [
     ],
   },
   {
-    id: 'anton-krylov', title: 'Антон Крылов', subtitle: 'Релиз прошёл без ошибок', avatar: 'АК', avatarImage: 'assets/avatars/anton-krylov.jpg', avatarColor: 6, kind: 'direct',
+    id: 'anton-krylov', title: 'Антон Крылов', subtitle: 'Релиз прошёл без ошибок', avatar: 'АК', avatarImage: 'assets/avatars/anton-krylov.jpg', avatarColor: 6, kind: 'direct', presence: 'online',
     messages: [
       { id: 'anton-krylov-1', author: 'other', sender: 'Антон Крылов', avatar: 'АК', avatarImage: 'assets/avatars/anton-krylov.jpg', text: 'Релиз выкатили, критичных ошибок нет.', time: '09:25' },
       { id: 'anton-krylov-2', author: 'me', text: 'Отличная новость, спасибо!', time: '09:27' },
     ],
   },
   {
-    id: 'ekaterina-lebedeva', title: 'Екатерина Лебедева', subtitle: 'Поделилась доской с исследованием', avatar: 'ЕЛ', avatarImage: 'assets/avatars/ekaterina-lebedeva.jpg', avatarColor: 7, kind: 'direct', unread: 8, mentioned: true,
+    id: 'ekaterina-lebedeva', title: 'Екатерина Лебедева', subtitle: 'Поделилась доской с исследованием', avatar: 'ЕЛ', avatarImage: 'assets/avatars/ekaterina-lebedeva.jpg', avatarColor: 7, kind: 'direct', presence: 'offline', unread: 8, mentioned: true,
     messages: [
       { id: 'ekaterina-lebedeva-1', author: 'other', sender: 'Екатерина Лебедева', avatar: 'ЕЛ', avatarImage: 'assets/avatars/ekaterina-lebedeva.jpg', text: 'Катя, поделись, пожалуйста, доской с интервью.', time: '09:28' },
       { id: 'ekaterina-lebedeva-2', author: 'me', text: 'Уже отправила ссылку на доску.', time: '09:30' },
     ],
   },
   {
-    id: 'sergey-volkov', title: 'Сергей Волков', subtitle: 'Починил сборку, проверь', avatar: 'СВ', avatarImage: 'assets/avatars/sergey-volkov.jpg', avatarColor: 8, kind: 'direct', pinned: true,
+    id: 'sergey-volkov', title: 'Сергей Волков', subtitle: 'Починил сборку, проверь', avatar: 'СВ', avatarImage: 'assets/avatars/sergey-volkov.jpg', avatarColor: 8, kind: 'direct', presence: 'online', pinned: true,
     messages: [
       { id: 'sergey-volkov-1', author: 'other', sender: 'Сергей Волков', avatar: 'СВ', avatarImage: 'assets/avatars/sergey-volkov.jpg', text: 'Сборку починил, можно проверять.', time: '09:31' },
       { id: 'sergey-volkov-2', author: 'me', text: 'Проверю в течение часа.', time: '09:33' },
     ],
   },
   {
-    id: 'polina-orlova', title: 'Полина Орлова', subtitle: 'Ждём вас на демо в пятницу', avatar: 'ПО', avatarImage: 'assets/avatars/polina-orlova.jpg', avatarColor: 1, kind: 'direct', unread: 1,
+    id: 'polina-orlova', title: 'Полина Орлова', subtitle: 'Ждём вас на демо в пятницу', avatar: 'ПО', avatarImage: 'assets/avatars/polina-orlova.jpg', avatarColor: 1, kind: 'direct', presence: 'busy', unread: 1,
     messages: [
       { id: 'polina-orlova-1', author: 'other', sender: 'Полина Орлова', avatar: 'ПО', avatarImage: 'assets/avatars/polina-orlova.jpg', text: 'Полина, ты будешь на демо в пятницу?', time: '09:34' },
       { id: 'polina-orlova-2', author: 'me', text: 'Да, подключусь к началу.', time: '09:36' },
     ],
   },
   {
-    id: 'igor-novikov', title: 'Игорь Новиков', subtitle: 'Отправил смету по проекту', avatar: 'ИН', avatarImage: 'assets/avatars/igor-novikov.jpg', avatarColor: 2, kind: 'direct',
+    id: 'igor-novikov', title: 'Игорь Новиков', subtitle: 'Отправил смету по проекту', avatar: 'ИН', avatarImage: 'assets/avatars/igor-novikov.jpg', avatarColor: 2, kind: 'direct', presence: 'offline',
     messages: [
       { id: 'igor-novikov-1', author: 'other', sender: 'Игорь Новиков', avatar: 'ИН', avatarImage: 'assets/avatars/igor-novikov.jpg', text: 'Отправил смету, глянь, пожалуйста.', time: '09:37' },
       { id: 'igor-novikov-2', author: 'me', text: 'Получил, отвечу сегодня.', time: '09:39' },

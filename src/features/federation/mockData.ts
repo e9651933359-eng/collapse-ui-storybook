@@ -11,6 +11,7 @@ const federationChatSeeds: Chat[] = [
     avatarFilled: false,
     kind: 'direct',
     federation: true,
+    presence: 'online',
     unread: 1,
     messages: [
       { id: 'fa-1', author: 'other', sender: 'Альбина Бахматулина', avatar: 'АБ', avatarImage: 'assets/avatars/albina.png', federation: true, text: 'Добрый день! Отправила финальную версию документов для согласования.', time: '12:06' },
@@ -68,7 +69,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'rs-1', author: 'other', sender: 'Мария Лебедева · VK', avatar: 'МЛ', federation: true, text: 'Собрала выводы по интервью и добавила их в общий документ.', time: '09:42' }],
   },
   {
-    id: 'anton-direct', title: 'Антон Крылов 😶', subtitle: 'Личный чат', avatar: 'АК', avatarImage: 'assets/avatars/anton-krylov.jpg', avatarColor: 1, avatarFilled: false, kind: 'direct',
+    id: 'anton-direct', title: 'Антон Крылов 😶', subtitle: 'Личный чат', avatar: 'АК', avatarImage: 'assets/avatars/anton-krylov.jpg', avatarColor: 1, avatarFilled: false, kind: 'direct', presence: 'offline',
     messages: [{ id: 'ad-1', author: 'other', sender: 'Антон Крылов', avatar: 'АК', text: 'Посмотри, пожалуйста, обновлённый план встречи.', time: '09:30' }],
   },
   {
@@ -80,7 +81,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'mt-1', author: 'other', sender: 'Евгения', avatar: 'ЕВ', text: 'Новая сборка готова для внутреннего тестирования.', time: '09:05' }],
   },
   {
-    id: 'elena-direct', title: 'Елена Левина 🔥', subtitle: 'Ozon', avatar: 'ЕЛ', avatarImage: 'assets/avatars/people/elena.jpg', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true,
+    id: 'elena-direct', title: 'Елена Левина 🔥', subtitle: 'Ozon', avatar: 'ЕЛ', avatarImage: 'assets/avatars/people/elena.jpg', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true, presence: 'busy',
     messages: [{ id: 'ed-1', author: 'other', sender: 'Елена Левина', avatar: 'ЕЛ', federation: true, text: 'Отправила варианты экранов для совместного сценария.', time: 'Вчера' }],
   },
   {
@@ -92,7 +93,7 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'rt-1', author: 'other', sender: 'Николай', avatar: 'НИ', text: 'Релизное окно подтверждено на четверг.', time: 'Вчера' }],
   },
   {
-    id: 'irina-direct', title: 'Ирина Воронова ☕️', subtitle: 'Личный чат', avatar: 'ИВ', avatarImage: 'assets/avatars/polina-orlova.jpg', avatarColor: 2, avatarFilled: false, kind: 'direct', unread: 1,
+    id: 'irina-direct', title: 'Ирина Воронова ☕️', subtitle: 'Личный чат', avatar: 'ИВ', avatarImage: 'assets/avatars/polina-orlova.jpg', avatarColor: 2, avatarFilled: false, kind: 'direct', presence: 'online', unread: 1,
     messages: [{ id: 'id-1', author: 'other', sender: 'Ирина Воронова', avatar: 'ИВ', text: 'Можно перенести нашу встречу на вторую половину дня?', time: 'Вчера' }],
   },
   {
@@ -140,27 +141,27 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'qt-1', author: 'other', sender: 'Ольга', avatar: 'ОЛ', text: 'Регресс завершён, критичных ошибок не найдено.', time: 'Ср' }],
   },
   {
-    id: 'boris-direct', title: 'Борис Агафонов 💻', subtitle: 'Альфа-Банк', avatar: 'БА', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true, unread: 1,
+    id: 'boris-direct', title: 'Борис Агафонов 💻', subtitle: 'Альфа-Банк', avatar: 'БА', avatarColor: 5, avatarFilled: false, kind: 'direct', federation: true, presence: 'offline', unread: 1,
     messages: [{ id: 'bd-1', author: 'other', sender: 'Борис Агафонов', avatar: 'БА', federation: true, text: 'Готов обсудить результаты пилота сегодня после трёх.', time: 'Ср' }],
   },
   {
-    id: 'igor-smirnov-direct', title: 'Игорь Смирнов', subtitle: 'Личный чат', avatar: 'ИС', avatarColor: 2, avatarFilled: false, kind: 'direct', unread: 2,
+    id: 'igor-smirnov-direct', title: 'Игорь Смирнов', subtitle: 'Личный чат', avatar: 'ИС', avatarColor: 2, avatarFilled: false, kind: 'direct', presence: 'busy', unread: 2,
     messages: [{ id: 'igsm-1', author: 'other', sender: 'Игорь Смирнов', avatar: 'ИС', text: 'Готов провести демо для новых пользователей в четверг.', time: 'Вт' }],
   },
   {
-    id: 'anna-f-direct', title: 'Анна Фамильевна', subtitle: 'Личный чат', avatar: 'АФ', avatarImage: 'assets/avatars/people/anna.jpg', avatarColor: 3, avatarFilled: false, kind: 'direct', unread: 1,
+    id: 'anna-f-direct', title: 'Анна Фамильевна', subtitle: 'Личный чат', avatar: 'АФ', avatarImage: 'assets/avatars/people/anna.jpg', avatarColor: 3, avatarFilled: false, kind: 'direct', presence: 'online', unread: 1,
     messages: [{ id: 'anf-1', author: 'other', sender: 'Анна Фамильевна', avatar: 'АФ', text: 'Закинула макеты в Figma, глянь на досуге.', time: 'Вт' }],
   },
   {
-    id: 'darya-direct', title: 'Дарья Соколова 🌴', subtitle: 'Личный чат', avatar: 'ДС', avatarImage: 'assets/avatars/people/sokolova.jpg', avatarColor: 8, avatarFilled: false, kind: 'direct', unread: 1,
+    id: 'darya-direct', title: 'Дарья Соколова 🌴', subtitle: 'Личный чат', avatar: 'ДС', avatarImage: 'assets/avatars/people/sokolova.jpg', avatarColor: 8, avatarFilled: false, kind: 'direct', presence: 'offline', unread: 1,
     messages: [{ id: 'dasok-1', author: 'other', sender: 'Дарья Соколова', avatar: 'ДС', text: 'Собрала результаты последнего исследования.', time: 'Пн' }],
   },
   {
-    id: 'tatyana-direct', title: 'Татьяна Фёдорова', subtitle: 'Личный чат', avatar: 'ТФ', avatarImage: 'assets/avatars/people/fedorova.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct',
+    id: 'tatyana-direct', title: 'Татьяна Фёдорова', subtitle: 'Личный чат', avatar: 'ТФ', avatarImage: 'assets/avatars/people/fedorova.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', presence: 'online',
     messages: [{ id: 'tf-1', author: 'other', sender: 'Татьяна Фёдорова', avatar: 'ТФ', text: 'Проверила договор, можно подписывать.', time: 'Пн' }],
   },
   {
-    id: 'anton-shats-direct', title: 'Антон Шац 🔥', subtitle: 'Альфа-Банк', avatar: 'АШ', avatarImage: 'assets/avatars/people/shats.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, unread: 2,
+    id: 'anton-shats-direct', title: 'Антон Шац 🔥', subtitle: 'Альфа-Банк', avatar: 'АШ', avatarImage: 'assets/avatars/people/shats.jpg', avatarColor: 'default', avatarFilled: false, kind: 'direct', federation: true, presence: 'busy', unread: 2,
     messages: [{ id: 'ansh-1', author: 'other', sender: 'Антон Шац', avatar: 'АШ', federation: true, text: 'Поправил баг в выгрузке, жду проверки с вашей стороны.', time: 'Пн' }],
   },
   {
@@ -168,19 +169,19 @@ const federationChatSeeds: Chat[] = [
     messages: [{ id: 'stv-1', author: 'other', sender: 'Степан Васта', avatar: 'СВ', federation: true, text: 'Собрал промежуточные итоги по запуску, отправлю сегодня.', time: 'Чт' }],
   },
   {
-    id: 'boris-b-direct', title: 'Борис Булычев', subtitle: 'Альфа-Банк', avatar: 'ББ', avatarImage: 'assets/avatars/people/bulychev.jpg', avatarColor: 1, avatarFilled: false, kind: 'direct', federation: true, unread: 1,
+    id: 'boris-b-direct', title: 'Борис Булычев', subtitle: 'Альфа-Банк', avatar: 'ББ', avatarImage: 'assets/avatars/people/bulychev.jpg', avatarColor: 1, avatarFilled: false, kind: 'direct', federation: true, presence: 'offline', unread: 1,
     messages: [{ id: 'bbu-1', author: 'other', sender: 'Борис Булычев', avatar: 'ББ', federation: true, text: 'Подключил вашу команду к тестовому контуру.', time: 'Чт' }],
   },
   {
-    id: 'ira-direct', title: 'Ирина Волкова 🍕', subtitle: 'Ozon', avatar: 'ИВ', avatarImage: 'assets/avatars/people/ira.jpg', avatarColor: 8, avatarFilled: false, kind: 'direct', federation: true,
+    id: 'ira-direct', title: 'Ирина Волкова 🍕', subtitle: 'Ozon', avatar: 'ИВ', avatarImage: 'assets/avatars/people/ira.jpg', avatarColor: 8, avatarFilled: false, kind: 'direct', federation: true, presence: 'online',
     messages: [{ id: 'irv-1', author: 'other', sender: 'Ирина Волкова', avatar: 'ИВ', federation: true, text: 'Сверила цифры по воронке, расхождений нет.', time: 'Пт' }],
   },
   {
-    id: 'anton-b-direct', title: 'Антон Беляев', subtitle: 'Ozon', avatar: 'АБ', avatarColor: 3, avatarFilled: false, kind: 'direct', federation: true, unread: 3,
+    id: 'anton-b-direct', title: 'Антон Беляев', subtitle: 'Ozon', avatar: 'АБ', avatarColor: 3, avatarFilled: false, kind: 'direct', federation: true, presence: 'offline', unread: 3,
     messages: [{ id: 'anbe-1', author: 'other', sender: 'Антон Беляев', avatar: 'АБ', federation: true, text: 'Запустили A/B тест на новой витрине.', time: 'Пт' }],
   },
   {
-    id: 'dmitry-k-direct', title: 'Дмитрий Козлов', subtitle: 'Личный чат', avatar: 'ДК', avatarImage: 'assets/avatars/people/kozlov.jpg', avatarColor: 1, avatarFilled: false, kind: 'direct',
+    id: 'dmitry-k-direct', title: 'Дмитрий Козлов', subtitle: 'Личный чат', avatar: 'ДК', avatarImage: 'assets/avatars/people/kozlov.jpg', avatarColor: 1, avatarFilled: false, kind: 'direct', presence: 'online',
     messages: [{ id: 'dmk-1', author: 'other', sender: 'Дмитрий Козлов', avatar: 'ДК', text: 'Выкатил хотфикс, можно проверять на стейдже.', time: 'Пт' }],
   },
 ]
