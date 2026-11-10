@@ -41,9 +41,8 @@ export function ChatWorkspace({ chat, composerNotice, federation = chat.federati
         emoji={chat.avatar}
         filled={chat.avatarFilled ?? false}
         shape={chat.kind === 'channel' ? 'squircle' : 'round'}
-        status={chat.kind === 'direct' ? chat.presence : undefined}
       />
-      <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start" compact>{chat.title}</FederationLabel> : chat.title}</strong>{getChatSubtitle(chat, memberCount) && <span className="chat-header__subtitle">{getChatSubtitle(chat, memberCount)}</span>}</div>
+      <div><strong className="chat-header__title">{federation ? <FederationLabel iconLabel="Федеративный чат" iconPosition="start" compact>{chat.title}</FederationLabel> : chat.title}</strong>{chat.kind !== 'direct' && <span className="chat-header__subtitle">{getChatSubtitle(chat, memberCount)}</span>}</div>
     </>
   )
 
