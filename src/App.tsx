@@ -37,6 +37,12 @@ const CHAT_LIST_DEFAULT_WIDTH = 320
 const CHAT_LIST_MIN_WIDTH = 240
 const CHAT_LIST_MAX_WIDTH = 480
 
+/** Дефолтный вид отображения папок по расположению — ревью 10.11.2026. */
+const FOLDER_DISPLAY_MODE_DEFAULTS: Record<FolderLayout, SegmentDisplayMode> = {
+  top: 'names',
+  left: 'names-and-icons',
+}
+
 type ChatExperienceProps = {
   chatsSource?: Chat[]
   initialSelectedId?: string
@@ -80,8 +86,17 @@ export function ChatExperience({
   const [draftChat, setDraftChat] = useState<Chat>()
   const [query, setQuery] = useState('')
   const [segment, setSegment] = useState('')
-  const [folderDisplayMode, setFolderDisplayMode] = useState<SegmentDisplayMode>('names')
   const [foldersLayout, setFoldersLayout] = useState<FolderLayout>('top')
+  /**
+   * Вид отображения папок (название / название+иконки / иконки) запоминается отдельно для
+   * каждого расположения папок («над чатами» / «слева от чатов») — ревью 10.11.2026. Пока
+   * пользователь не менял вид вручную для данного расположения, используется дефолт этого
+   * расположения (`FOLDER_DISPLAY_MODE_DEFAULTS`); как только меняет — выбор запоминается
+   * и восстанавливается при повторном переключении на это расположение.
+   */
+  const [folderDisplayModeOverrides, setFolderDisplayModeOverrides] = useState<Partial<Record<FolderLayout, SegmentDisplayMode>>>({})
+  const folderDisplayMode = folderDisplayModeOverrides[foldersLayout] ?? FOLDER_DISPLAY_MODE_DEFAULTS[foldersLayout]
+  const setFolderDisplayMode = (mode: SegmentDisplayMode) => setFolderDisplayModeOverrides((prev) => ({ ...prev, [foldersLayout]: mode }))
   const [retainedNewChatId, setRetainedNewChatId] = useState<string | null>(null)
   const [draft, setDraft] = useState('')
   /** Профиль открытого чата: чат/канал, список участников или пользователь. `fromMembers` — «Назад» ведёт к списку. */
